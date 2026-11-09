@@ -1,0 +1,7882 @@
+{
+"term_code": "WI27",
+"courses": [
+{
+"term_code": "WI27",
+"subject_code": "AIP",
+"course_code": "197",
+"module_code": "AIP-197",
+"module_name": "Design Lab Intern",
+"course_title": "Design Lab Intern",
+"subject_name": "Academic Internship Program",
+"academic_level": "UD",
+"section_count": 1,
+"matching_section_count": 1,
+"complete_package_count": 1,
+"open_package_count": 1,
+"waitlist_package_count": 0,
+"open_section_count": 1,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"it"
+],
+"instructors": [
+"Nadir Weibel"
+],
+"is_topic_course": true,
+"section_family": null,
+"units_display": "2 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [
+"Limited to class level: Junior, Senior"
+],
+"sections": [
+{
+"section_id": "EL00004766",
+"section_ref": "WI27:EL00004766",
+"section_code": "001-000-IT",
+"instruction_type_name": "it",
+"event_package_ids": [],
+"capacity": 12,
+"enrolled": 0,
+"seats_available": 12,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Nadir Weibel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "ANAR",
+"course_code": "167",
+"module_code": "ANAR-167",
+"module_name": "Geoarchaeology",
+"course_title": null,
+"subject_name": "Anthropological Archaeology",
+"academic_level": "UD",
+"section_count": 3,
+"matching_section_count": 3,
+"complete_package_count": 1,
+"open_package_count": 1,
+"waitlist_package_count": 0,
+"open_section_count": 3,
+"open_seat_count": 8,
+"waitlist_available_count": 0,
+"instruction_types": [
+"fw",
+"lab",
+"lecture"
+],
+"instructors": [
+"Zachary Dunseth"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "6 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [
+"Limited to academic level: Undergraduate, Graduate",
+"Not open to class level: Freshman, Sophomore"
+],
+"sections": [
+{
+"section_id": "E 00006854",
+"section_ref": "WI27:E 00006854",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"161648",
+"167065"
+],
+"capacity": 8,
+"enrolled": 0,
+"seats_available": 8,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Zachary Dunseth"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-18",
+"start_minutes": 900,
+"end_minutes": 1079,
+"start_time_display": "3:00pm",
+"end_time_display": "5:59pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00005667",
+"section_ref": "WI27:EL00005667",
+"section_code": "001-001-FW",
+"instruction_type_name": "fw",
+"event_package_ids": [],
+"capacity": 8,
+"enrolled": 0,
+"seats_available": 8,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Zachary Dunseth"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00006856",
+"section_ref": "WI27:E 00006856",
+"section_code": "001-001-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [
+"161648",
+"167069"
+],
+"capacity": 8,
+"enrolled": 0,
+"seats_available": 8,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Zachary Dunseth"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 950,
+"start_time_display": "12:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "ANTH",
+"course_code": "212",
+"module_code": "ANTH-212",
+"module_name": "Human Neuroanatomy",
+"course_title": "Human Neuroanatomy",
+"subject_name": "Anthropology",
+"academic_level": "GR",
+"section_count": 1,
+"matching_section_count": 1,
+"complete_package_count": 2,
+"open_package_count": 2,
+"waitlist_package_count": 0,
+"open_section_count": 1,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"se"
+],
+"instructors": [
+"Ekaterini Semendeferi"
+],
+"is_topic_course": true,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [
+"Limited to academic level: Graduate",
+"Limited to major: Anthropology"
+],
+"sections": [
+{
+"section_id": "E 00006204",
+"section_ref": "WI27:E 00006204",
+"section_code": "002-000-SE",
+"instruction_type_name": "se",
+"event_package_ids": [
+"161653",
+"166941"
+],
+"capacity": 10,
+"enrolled": 0,
+"seats_available": 10,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Ekaterini Semendeferi"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1190,
+"start_time_display": "5:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "ANTH",
+"course_code": "212",
+"module_code": "ANTH-212",
+"module_name": "Stem Cells and Neuroscience",
+"course_title": "Stem Cells and Neuroscience",
+"subject_name": "Anthropology",
+"academic_level": "GR",
+"section_count": 1,
+"matching_section_count": 1,
+"complete_package_count": 10,
+"open_package_count": 10,
+"waitlist_package_count": 0,
+"open_section_count": 1,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"se"
+],
+"instructors": [
+"Maria Marchetto"
+],
+"is_topic_course": true,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [
+"Limited to academic level: Graduate",
+"Limited to major: Anthropology"
+],
+"sections": [
+{
+"section_id": "E 00006203",
+"section_ref": "WI27:E 00006203",
+"section_code": "001-000-SE",
+"instruction_type_name": "se",
+"event_package_ids": [
+"150784",
+"153548",
+"161652",
+"164279",
+"164280",
+"166940",
+"167970",
+"5078",
+"5079",
+"5080"
+],
+"capacity": 10,
+"enrolled": 0,
+"seats_available": 10,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Maria Marchetto"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 770,
+"start_time_display": "10:00am",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "AUD",
+"course_code": "284",
+"module_code": "AUD-284",
+"module_name": "Clin Practice in Audiology II",
+"course_title": null,
+"subject_name": "Audiology",
+"academic_level": "GR",
+"section_count": 4,
+"matching_section_count": 4,
+"complete_package_count": 2,
+"open_package_count": 2,
+"waitlist_package_count": 0,
+"open_section_count": 4,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"pr",
+"se"
+],
+"instructors": [
+"Erika Zettner",
+"Madeline Gibson"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "1 unit",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [
+"Limited to academic level: Graduate",
+"Limited to major: Audiology (Jnt. Doc SDSU)"
+],
+"sections": [
+{
+"section_id": "EL00009058",
+"section_ref": "WI27:EL00009058",
+"section_code": "001-000-PR",
+"instruction_type_name": "pr",
+"event_package_ids": [],
+"capacity": 20,
+"enrolled": 1,
+"seats_available": 19,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Erika Zettner"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00009037",
+"section_ref": "WI27:EL00009037",
+"section_code": "001-001-SE",
+"instruction_type_name": "se",
+"event_package_ids": [],
+"capacity": 20,
+"enrolled": 1,
+"seats_available": 19,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Erika Zettner"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00009039",
+"section_ref": "WI27:EL00009039",
+"section_code": "002-000-PR",
+"instruction_type_name": "pr",
+"event_package_ids": [],
+"capacity": 20,
+"enrolled": 0,
+"seats_available": 20,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Madeline Gibson"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00009040",
+"section_ref": "WI27:EL00009040",
+"section_code": "002-001-SE",
+"instruction_type_name": "se",
+"event_package_ids": [],
+"capacity": 20,
+"enrolled": 0,
+"seats_available": 20,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Madeline Gibson"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "BIOM",
+"course_code": "202",
+"module_code": "BIOM-202",
+"module_name": "Biomed Sci Research Rotation",
+"course_title": null,
+"subject_name": "Biomedical Sciences",
+"academic_level": "GR",
+"section_count": 3,
+"matching_section_count": 3,
+"complete_package_count": 1,
+"open_package_count": 1,
+"waitlist_package_count": 0,
+"open_section_count": 3,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lab",
+"se"
+],
+"instructors": [
+"Farah Sheikh"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [
+"Limited to academic level: Graduate",
+"Limited to major: Biomedical Sciences"
+],
+"sections": [
+{
+"section_id": "EL00007527",
+"section_ref": "WI27:EL00007527",
+"section_code": "001-000-SE",
+"instruction_type_name": "se",
+"event_package_ids": [],
+"capacity": 25,
+"enrolled": 0,
+"seats_available": 25,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Farah Sheikh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00007526",
+"section_ref": "WI27:EL00007526",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [],
+"capacity": 25,
+"enrolled": 0,
+"seats_available": 25,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Farah Sheikh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00007497",
+"section_ref": "WI27:EL00007497",
+"section_code": "001-001-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [],
+"capacity": 25,
+"enrolled": 0,
+"seats_available": 25,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Farah Sheikh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "CHEM",
+"course_code": "006B",
+"module_code": "CHEM-006B",
+"module_name": "General Chemistry II",
+"course_title": null,
+"subject_name": "Chemistry and Biochemistry",
+"academic_level": "LD",
+"section_count": 60,
+"matching_section_count": 60,
+"complete_package_count": 54,
+"open_package_count": 54,
+"waitlist_package_count": 0,
+"open_section_count": 60,
+"open_seat_count": 2088,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lecture"
+],
+"instructors": [
+"Andrew Kummel",
+"Brian Leigh",
+"Jeffrey Rinehart",
+"Mark Young",
+"Michael Sailor"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [
+"CHEM 6A (minimum grade D) or CHEM 6AH (minimum grade D)"
+],
+"restrictions": [],
+"sections": [
+{
+"section_id": "E 00008344",
+"section_ref": "WI27:E 00008344",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"162754",
+"162755",
+"162756",
+"162757",
+"162758",
+"162759",
+"162760",
+"162761",
+"162762",
+"164936",
+"164937",
+"164938",
+"164939"
+],
+"capacity": 360,
+"enrolled": 9,
+"seats_available": 351,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "S",
+"day_name": "Saturday",
+"specific_date": "2027-03-13",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-02-25",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-01-28",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009742",
+"section_ref": "WI27:E 00009742",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161441",
+"162754"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009743",
+"section_ref": "WI27:E 00009743",
+"section_code": "001-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154760",
+"161442",
+"162755",
+"165483"
+],
+"capacity": 40,
+"enrolled": 4,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009744",
+"section_ref": "WI27:E 00009744",
+"section_code": "001-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161424",
+"162756"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009723",
+"section_ref": "WI27:E 00009723",
+"section_code": "001-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162757"
+],
+"capacity": 40,
+"enrolled": 2,
+"seats_available": 38,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009724",
+"section_ref": "WI27:E 00009724",
+"section_code": "001-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162758",
+"165459"
+],
+"capacity": 40,
+"enrolled": 2,
+"seats_available": 38,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009725",
+"section_ref": "WI27:E 00009725",
+"section_code": "001-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162759",
+"165460"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009751",
+"section_ref": "WI27:E 00009751",
+"section_code": "001-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154761",
+"162760",
+"165488"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009752",
+"section_ref": "WI27:E 00009752",
+"section_code": "001-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162761"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009753",
+"section_ref": "WI27:E 00009753",
+"section_code": "001-009-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162762"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00008373",
+"section_ref": "WI27:E 00008373",
+"section_code": "002-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"154248",
+"160424",
+"162763",
+"162764",
+"162765",
+"162766",
+"162767",
+"162768",
+"162769",
+"162770",
+"162771",
+"164956"
+],
+"capacity": 360,
+"enrolled": 20,
+"seats_available": 340,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "S",
+"day_name": "Saturday",
+"specific_date": "2027-03-13",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-01-28",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-02-25",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009889",
+"section_ref": "WI27:E 00009889",
+"section_code": "002-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154799",
+"154800",
+"162763",
+"165520",
+"165521"
+],
+"capacity": 40,
+"enrolled": 4,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009875",
+"section_ref": "WI27:E 00009875",
+"section_code": "002-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162764"
+],
+"capacity": 40,
+"enrolled": 3,
+"seats_available": 37,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009890",
+"section_ref": "WI27:E 00009890",
+"section_code": "002-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162765"
+],
+"capacity": 40,
+"enrolled": 4,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009891",
+"section_ref": "WI27:E 00009891",
+"section_code": "002-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161470",
+"162766"
+],
+"capacity": 40,
+"enrolled": 3,
+"seats_available": 37,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009892",
+"section_ref": "WI27:E 00009892",
+"section_code": "002-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162767"
+],
+"capacity": 40,
+"enrolled": 1,
+"seats_available": 39,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009893",
+"section_ref": "WI27:E 00009893",
+"section_code": "002-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162768"
+],
+"capacity": 40,
+"enrolled": 3,
+"seats_available": 37,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 710,
+"start_time_display": "11:00am",
+"end_time_display": "11:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009894",
+"section_ref": "WI27:E 00009894",
+"section_code": "002-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162769"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009895",
+"section_ref": "WI27:E 00009895",
+"section_code": "002-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162770",
+"165522"
+],
+"capacity": 40,
+"enrolled": 1,
+"seats_available": 39,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009901",
+"section_ref": "WI27:E 00009901",
+"section_code": "002-009-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162771"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Brian Leigh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00008374",
+"section_ref": "WI27:E 00008374",
+"section_code": "003-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"160425",
+"162772",
+"162773",
+"162774",
+"162775",
+"162776",
+"162777",
+"162778",
+"162779",
+"162780"
+],
+"capacity": 360,
+"enrolled": 5,
+"seats_available": 355,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-03-15",
+"start_minutes": 900,
+"end_minutes": 1079,
+"start_time_display": "3:00pm",
+"end_time_display": "5:59pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": "2027-03-03",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": "2027-02-03",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009731",
+"section_ref": "WI27:E 00009731",
+"section_code": "003-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162772",
+"316",
+"317"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009710",
+"section_ref": "WI27:E 00009710",
+"section_code": "003-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162773"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009711",
+"section_ref": "WI27:E 00009711",
+"section_code": "003-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162774"
+],
+"capacity": 40,
+"enrolled": 2,
+"seats_available": 38,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009712",
+"section_ref": "WI27:E 00009712",
+"section_code": "003-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162775"
+],
+"capacity": 40,
+"enrolled": 2,
+"seats_available": 38,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 710,
+"start_time_display": "11:00am",
+"end_time_display": "11:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009732",
+"section_ref": "WI27:E 00009732",
+"section_code": "003-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161420",
+"162776",
+"165475"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009733",
+"section_ref": "WI27:E 00009733",
+"section_code": "003-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162777"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009713",
+"section_ref": "WI27:E 00009713",
+"section_code": "003-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162778"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009714",
+"section_ref": "WI27:E 00009714",
+"section_code": "003-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"150537",
+"162779",
+"757",
+"758"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009715",
+"section_ref": "WI27:E 00009715",
+"section_code": "003-009-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162780"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Mark Young"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00008375",
+"section_ref": "WI27:E 00008375",
+"section_code": "004-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"160423",
+"162781",
+"162782",
+"162783",
+"162784",
+"162785",
+"162786",
+"162787",
+"162788",
+"162789"
+],
+"capacity": 360,
+"enrolled": 4,
+"seats_available": 356,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": "2027-03-17",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-01-25",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": "2027-02-17",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009902",
+"section_ref": "WI27:E 00009902",
+"section_code": "004-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162781"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009896",
+"section_ref": "WI27:E 00009896",
+"section_code": "004-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162782"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009897",
+"section_ref": "WI27:E 00009897",
+"section_code": "004-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162783"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009898",
+"section_ref": "WI27:E 00009898",
+"section_code": "004-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154801",
+"162784",
+"165523"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009899",
+"section_ref": "WI27:E 00009899",
+"section_code": "004-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162785",
+"165524"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009903",
+"section_ref": "WI27:E 00009903",
+"section_code": "004-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154802",
+"154803",
+"162786"
+],
+"capacity": 40,
+"enrolled": 2,
+"seats_available": 38,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009900",
+"section_ref": "WI27:E 00009900",
+"section_code": "004-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162787",
+"165525"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009926",
+"section_ref": "WI27:E 00009926",
+"section_code": "004-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162788"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009927",
+"section_ref": "WI27:E 00009927",
+"section_code": "004-009-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162789"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Sailor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00008376",
+"section_ref": "WI27:E 00008376",
+"section_code": "005-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"162790",
+"162791",
+"162792",
+"162793",
+"162794",
+"162795",
+"162796",
+"162797",
+"162798"
+],
+"capacity": 360,
+"enrolled": 2,
+"seats_available": 358,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 560,
+"start_time_display": "8:00am",
+"end_time_display": "9:20am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 560,
+"start_time_display": "8:00am",
+"end_time_display": "9:20am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-18",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-04",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-02-11",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-01-21",
+"start_minutes": 1200,
+"end_minutes": 1310,
+"start_time_display": "8:00pm",
+"end_time_display": "9:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009717",
+"section_ref": "WI27:E 00009717",
+"section_code": "005-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154720",
+"162790"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009739",
+"section_ref": "WI27:E 00009739",
+"section_code": "005-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162791",
+"165481"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009718",
+"section_ref": "WI27:E 00009718",
+"section_code": "005-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"159512",
+"159513",
+"159514",
+"159515",
+"159516",
+"159517",
+"159518",
+"159519",
+"159520",
+"159521",
+"159522",
+"159523",
+"159538",
+"159539",
+"159541",
+"159542",
+"159543",
+"159544",
+"159681",
+"160522",
+"161419",
+"162792",
+"584",
+"585",
+"586",
+"587"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009719",
+"section_ref": "WI27:E 00009719",
+"section_code": "005-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162793"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 710,
+"start_time_display": "11:00am",
+"end_time_display": "11:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009740",
+"section_ref": "WI27:E 00009740",
+"section_code": "005-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162794",
+"165482",
+"167855",
+"167856",
+"167857",
+"167858",
+"167859",
+"167860"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009741",
+"section_ref": "WI27:E 00009741",
+"section_code": "005-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162795"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009720",
+"section_ref": "WI27:E 00009720",
+"section_code": "005-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162796"
+],
+"capacity": 40,
+"enrolled": 1,
+"seats_available": 39,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009721",
+"section_ref": "WI27:E 00009721",
+"section_code": "005-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154721",
+"154722",
+"154723",
+"154724",
+"154725",
+"154726",
+"162797"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009722",
+"section_ref": "WI27:E 00009722",
+"section_code": "005-009-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154727",
+"154728",
+"154729",
+"154730",
+"154731",
+"154732",
+"154733",
+"154734",
+"154735",
+"154736",
+"154737",
+"154738",
+"154739",
+"154740",
+"154741",
+"154742",
+"154743",
+"154744",
+"159848",
+"162798",
+"165440",
+"165441",
+"165442",
+"165443",
+"165444",
+"165445",
+"165446",
+"165447",
+"165448",
+"165449",
+"165450",
+"165451",
+"165452",
+"165453",
+"165454",
+"165455",
+"165456",
+"165457",
+"165458",
+"890",
+"891",
+"892",
+"893",
+"894"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Andrew Kummel"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00008345",
+"section_ref": "WI27:E 00008345",
+"section_code": "006-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"160399",
+"162799",
+"162800",
+"162801",
+"162802",
+"162803",
+"162804",
+"162805",
+"162806",
+"162807"
+],
+"capacity": 360,
+"enrolled": 32,
+"seats_available": 328,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-18",
+"start_minutes": 900,
+"end_minutes": 1079,
+"start_time_display": "3:00pm",
+"end_time_display": "5:59pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009967",
+"section_ref": "WI27:E 00009967",
+"section_code": "006-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162799"
+],
+"capacity": 40,
+"enrolled": 1,
+"seats_available": 39,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009968",
+"section_ref": "WI27:E 00009968",
+"section_code": "006-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162800"
+],
+"capacity": 40,
+"enrolled": 3,
+"seats_available": 37,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009969",
+"section_ref": "WI27:E 00009969",
+"section_code": "006-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162801"
+],
+"capacity": 40,
+"enrolled": 11,
+"seats_available": 29,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 710,
+"start_time_display": "11:00am",
+"end_time_display": "11:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009970",
+"section_ref": "WI27:E 00009970",
+"section_code": "006-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162802"
+],
+"capacity": 40,
+"enrolled": 2,
+"seats_available": 38,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009982",
+"section_ref": "WI27:E 00009982",
+"section_code": "006-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162803"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009971",
+"section_ref": "WI27:E 00009971",
+"section_code": "006-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162804"
+],
+"capacity": 40,
+"enrolled": 5,
+"seats_available": 35,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009972",
+"section_ref": "WI27:E 00009972",
+"section_code": "006-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162805"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009983",
+"section_ref": "WI27:E 00009983",
+"section_code": "006-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154811",
+"162806",
+"165535"
+],
+"capacity": 40,
+"enrolled": 7,
+"seats_available": 33,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009984",
+"section_ref": "WI27:E 00009984",
+"section_code": "006-009-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"150636",
+"150747",
+"150806",
+"150807",
+"154812",
+"154813",
+"154814",
+"154815",
+"162807",
+"165536",
+"165537",
+"165538",
+"165539",
+"165540",
+"165541",
+"2304",
+"2305",
+"2306",
+"2307",
+"2308",
+"2309",
+"2310",
+"2311",
+"2312",
+"2313",
+"2314",
+"2315",
+"2316",
+"2317",
+"2318",
+"2319",
+"4107",
+"4108",
+"4109",
+"4110",
+"4111",
+"4112",
+"4113",
+"4114",
+"4115",
+"4116",
+"4117",
+"4118",
+"4119",
+"4120",
+"4121",
+"4122",
+"4123",
+"4124",
+"4125",
+"4126",
+"4127",
+"4128",
+"4129",
+"4130",
+"4131",
+"4132",
+"4133",
+"4134",
+"4135",
+"4136",
+"4137",
+"4138",
+"4139",
+"5415",
+"5416"
+],
+"capacity": 40,
+"enrolled": 0,
+"seats_available": 40,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Jeffrey Rinehart"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "COGS",
+"course_code": "160",
+"module_code": "COGS-160",
+"module_name": "Seminar on Special Topics",
+"course_title": "Seminar on Special Topics",
+"subject_name": "Cognitive Science",
+"academic_level": "UD",
+"section_count": 1,
+"matching_section_count": 1,
+"complete_package_count": 2,
+"open_package_count": 2,
+"waitlist_package_count": 0,
+"open_section_count": 1,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"se"
+],
+"instructors": [
+"David Kirsh"
+],
+"is_topic_course": true,
+"section_family": "001",
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [],
+"sections": [
+{
+"section_id": "E 00007661",
+"section_ref": "WI27:E 00007661",
+"section_code": "001-000-SE",
+"instruction_type_name": "se",
+"event_package_ids": [
+"160021",
+"164142"
+],
+"capacity": 50,
+"enrolled": 0,
+"seats_available": 50,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"David Kirsh"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-18",
+"start_minutes": 900,
+"end_minutes": 1079,
+"start_time_display": "3:00pm",
+"end_time_display": "5:59pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "COGS",
+"course_code": "160",
+"module_code": "COGS-160",
+"module_name": "Seminar on Special Topics",
+"course_title": "Seminar on Special Topics",
+"subject_name": "Cognitive Science",
+"academic_level": "UD",
+"section_count": 1,
+"matching_section_count": 1,
+"complete_package_count": 2,
+"open_package_count": 2,
+"waitlist_package_count": 0,
+"open_section_count": 1,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"se"
+],
+"instructors": [
+"Ayse Saygin"
+],
+"is_topic_course": true,
+"section_family": "002",
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [],
+"sections": [
+{
+"section_id": "E 00007650",
+"section_ref": "WI27:E 00007650",
+"section_code": "002-000-SE",
+"instruction_type_name": "se",
+"event_package_ids": [
+"159964",
+"164143"
+],
+"capacity": 60,
+"enrolled": 0,
+"seats_available": 60,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Ayse Saygin"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 740,
+"start_time_display": "11:00am",
+"end_time_display": "12:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 740,
+"start_time_display": "11:00am",
+"end_time_display": "12:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-18",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "CSE",
+"course_code": "100",
+"module_code": "CSE-100",
+"module_name": "Advanced Data Structures",
+"course_title": null,
+"subject_name": "Computer Science and Engineering",
+"academic_level": "UD",
+"section_count": 2,
+"matching_section_count": 2,
+"complete_package_count": 1,
+"open_package_count": 1,
+"waitlist_package_count": 0,
+"open_section_count": 2,
+"open_seat_count": 385,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lecture"
+],
+"instructors": [
+"Niema Moshiri"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [
+"CSE 21 (minimum grade D) or MATH 154 (minimum grade D) or MATH 158 (minimum grade D) or MATH 184 (minimum grade D) or MATH 188 (minimum grade D)",
+"CSE 12 (minimum grade D)",
+"CSE 15L (minimum grade D) or CSE 29 (minimum grade D) or ECE 15 (minimum grade D)"
+],
+"restrictions": [
+"Limited to class level: Freshman, Junior, Sophomore, Senior"
+],
+"sections": [
+{
+"section_id": "E 00006957",
+"section_ref": "WI27:E 00006957",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"165248",
+"167137"
+],
+"capacity": 395,
+"enrolled": 10,
+"seats_available": 385,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Niema Moshiri"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-03-19",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [
+"The final exam will either be self-scheduled in person at the TTC, or be a fully online asynchronous exam administered over a 24-hour window of time. Please refer to the course syllabi for more information."
+],
+"course_fees": []
+},
+{
+"section_id": "E 00010033",
+"section_ref": "WI27:E 00010033",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"165248"
+],
+"capacity": 395,
+"enrolled": 10,
+"seats_available": 385,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Niema Moshiri"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "CSE",
+"course_code": "110",
+"module_code": "CSE-110",
+"module_name": "Software Engineering",
+"course_title": null,
+"subject_name": "Computer Science and Engineering",
+"academic_level": "UD",
+"section_count": 5,
+"matching_section_count": 5,
+"complete_package_count": 3,
+"open_package_count": 3,
+"waitlist_package_count": 0,
+"open_section_count": 5,
+"open_seat_count": 195,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lab",
+"lecture"
+],
+"instructors": [
+"William Griswold"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [
+"CSE 100R (minimum grade D) or CSE 100 (minimum grade D)"
+],
+"restrictions": [
+"Limited to major: Computer Science, Computer Engineering, Comp Sci w/Spec Bioinformatics, Artificial Intelligence"
+],
+"sections": [
+{
+"section_id": "E 00006964",
+"section_ref": "WI27:E 00006964",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"165071",
+"165072",
+"165073",
+"166128"
+],
+"capacity": 196,
+"enrolled": 1,
+"seats_available": 195,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"William Griswold"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": "2027-03-17",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009861",
+"section_ref": "WI27:E 00009861",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"165071",
+"165072",
+"165073",
+"165516"
+],
+"capacity": 196,
+"enrolled": 1,
+"seats_available": 195,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"William Griswold"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00012585",
+"section_ref": "WI27:E 00012585",
+"section_code": "001-001-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [
+"165071",
+"165861"
+],
+"capacity": 66,
+"enrolled": 1,
+"seats_available": 65,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"William Griswold"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 1070,
+"start_time_display": "3:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00012642",
+"section_ref": "WI27:E 00012642",
+"section_code": "001-002-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [
+"161513",
+"165072"
+],
+"capacity": 65,
+"enrolled": 0,
+"seats_available": 65,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"William Griswold"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 1070,
+"start_time_display": "3:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00012586",
+"section_ref": "WI27:E 00012586",
+"section_code": "001-003-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [
+"165073",
+"165866"
+],
+"capacity": 65,
+"enrolled": 0,
+"seats_available": 65,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"William Griswold"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 1070,
+"start_time_display": "3:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "MATH",
+"course_code": "018",
+"module_code": "MATH-018",
+"module_name": "Linear Algebra",
+"course_title": null,
+"subject_name": "Mathematics",
+"academic_level": "LD",
+"section_count": 30,
+"matching_section_count": 30,
+"complete_package_count": 24,
+"open_package_count": 24,
+"waitlist_package_count": 0,
+"open_section_count": 30,
+"open_seat_count": 814,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lab",
+"lecture"
+],
+"instructors": [
+"Daniel Mallory",
+"Hsiao-Bing Cheng",
+"Quang Bach"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [
+"MATH 10A (minimum grade D) or MATH 20A (minimum grade D) or MATH 4C (minimum grade D)",
+"PPC (minimum 7.0)"
+],
+"restrictions": [],
+"sections": [
+{
+"section_id": "E 00009249",
+"section_ref": "WI27:E 00009249",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"161040",
+"163247",
+"163248",
+"163249",
+"163250",
+"163251",
+"163252",
+"163253",
+"163254",
+"163255",
+"163256"
+],
+"capacity": 340,
+"enrolled": 17,
+"seats_available": 323,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 710,
+"start_time_display": "11:00am",
+"end_time_display": "11:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 710,
+"start_time_display": "11:00am",
+"end_time_display": "11:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 710,
+"start_time_display": "11:00am",
+"end_time_display": "11:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-03-15",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009253",
+"section_ref": "WI27:E 00009253",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161236",
+"163247"
+],
+"capacity": 34,
+"enrolled": 11,
+"seats_available": 23,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00007271",
+"section_ref": "WI27:EL00007271",
+"section_code": "001-001-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [],
+"capacity": 340,
+"enrolled": 17,
+"seats_available": 323,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009250",
+"section_ref": "WI27:E 00009250",
+"section_code": "001-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161361",
+"163248"
+],
+"capacity": 34,
+"enrolled": 2,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009276",
+"section_ref": "WI27:E 00009276",
+"section_code": "001-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154557",
+"161361",
+"163249",
+"165249",
+"165250",
+"165251"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009277",
+"section_ref": "WI27:E 00009277",
+"section_code": "001-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160913",
+"163250"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009278",
+"section_ref": "WI27:E 00009278",
+"section_code": "001-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163251"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009279",
+"section_ref": "WI27:E 00009279",
+"section_code": "001-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160915",
+"163252",
+"165252"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009254",
+"section_ref": "WI27:E 00009254",
+"section_code": "001-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161243",
+"163253",
+"165243"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009255",
+"section_ref": "WI27:E 00009255",
+"section_code": "001-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154549",
+"154550",
+"161130",
+"163254",
+"165244",
+"165245"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009256",
+"section_ref": "WI27:E 00009256",
+"section_code": "001-009-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161251",
+"163255"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009257",
+"section_ref": "WI27:E 00009257",
+"section_code": "001-010-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154551",
+"161340",
+"163256"
+],
+"capacity": 34,
+"enrolled": 0,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Daniel Mallory"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009251",
+"section_ref": "WI27:E 00009251",
+"section_code": "002-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"1417",
+"1418",
+"159401",
+"159402",
+"159537",
+"159555",
+"159680",
+"159786",
+"161237",
+"163257",
+"163258",
+"163259",
+"163260",
+"163261",
+"163262",
+"4915",
+"4916"
+],
+"capacity": 216,
+"enrolled": 2,
+"seats_available": 214,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-03-15",
+"start_minutes": 900,
+"end_minutes": 1079,
+"start_time_display": "3:00pm",
+"end_time_display": "5:59pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": "2027-01-27",
+"start_minutes": 1200,
+"end_minutes": 1280,
+"start_time_display": "8:00pm",
+"end_time_display": "9:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": "2027-02-17",
+"start_minutes": 1200,
+"end_minutes": 1280,
+"start_time_display": "8:00pm",
+"end_time_display": "9:20pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009258",
+"section_ref": "WI27:E 00009258",
+"section_code": "002-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161261",
+"163257"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00007272",
+"section_ref": "WI27:EL00007272",
+"section_code": "002-001-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [],
+"capacity": 216,
+"enrolled": 2,
+"seats_available": 214,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009280",
+"section_ref": "WI27:E 00009280",
+"section_code": "002-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160916",
+"163258"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009259",
+"section_ref": "WI27:E 00009259",
+"section_code": "002-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163259"
+],
+"capacity": 36,
+"enrolled": 2,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009260",
+"section_ref": "WI27:E 00009260",
+"section_code": "002-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163260",
+"165246"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009281",
+"section_ref": "WI27:E 00009281",
+"section_code": "002-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160918",
+"163261"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009261",
+"section_ref": "WI27:E 00009261",
+"section_code": "002-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161256",
+"163262"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Hsiao-Bing Cheng"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009252",
+"section_ref": "WI27:E 00009252",
+"section_code": "003-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"161235",
+"163263",
+"163264",
+"163265",
+"163266",
+"163267",
+"163268",
+"163269",
+"163270"
+],
+"capacity": 288,
+"enrolled": 11,
+"seats_available": 277,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-03-19",
+"start_minutes": 900,
+"end_minutes": 1079,
+"start_time_display": "3:00pm",
+"end_time_display": "5:59pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009262",
+"section_ref": "WI27:E 00009262",
+"section_code": "003-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163263"
+],
+"capacity": 36,
+"enrolled": 3,
+"seats_available": 33,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "EL00007273",
+"section_ref": "WI27:EL00007273",
+"section_code": "003-001-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [],
+"capacity": 288,
+"enrolled": 11,
+"seats_available": 277,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009282",
+"section_ref": "WI27:E 00009282",
+"section_code": "003-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160919",
+"163264"
+],
+"capacity": 36,
+"enrolled": 6,
+"seats_available": 30,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009283",
+"section_ref": "WI27:E 00009283",
+"section_code": "003-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160920",
+"163265"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009263",
+"section_ref": "WI27:E 00009263",
+"section_code": "003-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163266",
+"165247",
+"166273"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009264",
+"section_ref": "WI27:E 00009264",
+"section_code": "003-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163267",
+"166273"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009265",
+"section_ref": "WI27:E 00009265",
+"section_code": "003-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163268",
+"166273"
+],
+"capacity": 36,
+"enrolled": 2,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009284",
+"section_ref": "WI27:E 00009284",
+"section_code": "003-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160921",
+"163269"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009285",
+"section_ref": "WI27:E 00009285",
+"section_code": "003-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160922",
+"163270",
+"165253",
+"165254"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Quang Bach"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "MATH",
+"course_code": "020C",
+"module_code": "MATH-020C",
+"module_name": "Calculus&Analyt Geom/Sci&Engnr",
+"course_title": null,
+"subject_name": "Mathematics",
+"academic_level": "LD",
+"section_count": 30,
+"matching_section_count": 30,
+"complete_package_count": 26,
+"open_package_count": 26,
+"waitlist_package_count": 0,
+"open_section_count": 30,
+"open_seat_count": 800,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lecture"
+],
+"instructors": [
+"Frances Hammock",
+"Frederick Weening",
+"Michael Holst"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [
+"MATH 20B (minimum grade C-)"
+],
+"restrictions": [],
+"sections": [
+{
+"section_id": "E 00009196",
+"section_ref": "WI27:E 00009196",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"163118",
+"163119",
+"163120",
+"163121",
+"163122",
+"163123",
+"163124",
+"163125",
+"165235"
+],
+"capacity": 248,
+"enrolled": 11,
+"seats_available": 237,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "S",
+"day_name": "Saturday",
+"specific_date": "2027-03-13",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-01-29",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-02-26",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009199",
+"section_ref": "WI27:E 00009199",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160888",
+"163118"
+],
+"capacity": 31,
+"enrolled": 9,
+"seats_available": 22,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009210",
+"section_ref": "WI27:E 00009210",
+"section_code": "001-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163119",
+"165236"
+],
+"capacity": 31,
+"enrolled": 0,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009211",
+"section_ref": "WI27:E 00009211",
+"section_code": "001-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163120",
+"4081",
+"4082"
+],
+"capacity": 31,
+"enrolled": 0,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009200",
+"section_ref": "WI27:E 00009200",
+"section_code": "001-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"160889",
+"163121"
+],
+"capacity": 31,
+"enrolled": 0,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009226",
+"section_ref": "WI27:E 00009226",
+"section_code": "001-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154541",
+"163122",
+"164508"
+],
+"capacity": 31,
+"enrolled": 0,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009227",
+"section_ref": "WI27:E 00009227",
+"section_code": "001-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163123",
+"164507"
+],
+"capacity": 31,
+"enrolled": 0,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009212",
+"section_ref": "WI27:E 00009212",
+"section_code": "001-007-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163124"
+],
+"capacity": 31,
+"enrolled": 0,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009213",
+"section_ref": "WI27:E 00009213",
+"section_code": "001-008-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163125"
+],
+"capacity": 31,
+"enrolled": 0,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frances Hammock"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009197",
+"section_ref": "WI27:E 00009197",
+"section_code": "002-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"160887",
+"163126",
+"163127",
+"163128",
+"163129",
+"163130",
+"163131"
+],
+"capacity": 192,
+"enrolled": 18,
+"seats_available": 174,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "S",
+"day_name": "Saturday",
+"specific_date": "2027-03-13",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-01-29",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-02-26",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009214",
+"section_ref": "WI27:E 00009214",
+"section_code": "002-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163126",
+"165237",
+"165238"
+],
+"capacity": 32,
+"enrolled": 2,
+"seats_available": 30,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009228",
+"section_ref": "WI27:E 00009228",
+"section_code": "002-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163127",
+"164506",
+"165239"
+],
+"capacity": 32,
+"enrolled": 13,
+"seats_available": 19,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009229",
+"section_ref": "WI27:E 00009229",
+"section_code": "002-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"1538",
+"1539",
+"163128",
+"164496"
+],
+"capacity": 32,
+"enrolled": 0,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009215",
+"section_ref": "WI27:E 00009215",
+"section_code": "002-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163129"
+],
+"capacity": 32,
+"enrolled": 0,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009230",
+"section_ref": "WI27:E 00009230",
+"section_code": "002-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163130",
+"164494"
+],
+"capacity": 32,
+"enrolled": 0,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009231",
+"section_ref": "WI27:E 00009231",
+"section_code": "002-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163131",
+"164709",
+"165240"
+],
+"capacity": 32,
+"enrolled": 1,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009198",
+"section_ref": "WI27:E 00009198",
+"section_code": "003-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"163132",
+"163133",
+"163134",
+"163135",
+"163136",
+"163137"
+],
+"capacity": 192,
+"enrolled": 2,
+"seats_available": 190,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "S",
+"day_name": "Saturday",
+"specific_date": "2027-03-13",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-01-29",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-02-26",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009216",
+"section_ref": "WI27:E 00009216",
+"section_code": "003-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154537",
+"163132"
+],
+"capacity": 32,
+"enrolled": 0,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009232",
+"section_ref": "WI27:E 00009232",
+"section_code": "003-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162542",
+"163133"
+],
+"capacity": 32,
+"enrolled": 0,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009233",
+"section_ref": "WI27:E 00009233",
+"section_code": "003-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154542",
+"154543",
+"161861",
+"163134"
+],
+"capacity": 32,
+"enrolled": 1,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009234",
+"section_ref": "WI27:E 00009234",
+"section_code": "003-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161860",
+"163135"
+],
+"capacity": 32,
+"enrolled": 1,
+"seats_available": 31,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009235",
+"section_ref": "WI27:E 00009235",
+"section_code": "003-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"154544",
+"161258",
+"163136"
+],
+"capacity": 32,
+"enrolled": 0,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009236",
+"section_ref": "WI27:E 00009236",
+"section_code": "003-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"1542",
+"1543",
+"159509",
+"161249",
+"163137",
+"4901",
+"4902"
+],
+"capacity": 32,
+"enrolled": 0,
+"seats_available": 32,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael Holst"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009209",
+"section_ref": "WI27:E 00009209",
+"section_code": "004-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"163138",
+"163139",
+"163140",
+"163141",
+"163142",
+"163143"
+],
+"capacity": 216,
+"enrolled": 17,
+"seats_available": 199,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frederick Weening"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "S",
+"day_name": "Saturday",
+"specific_date": "2027-03-13",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-01-29",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-02-26",
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009217",
+"section_ref": "WI27:E 00009217",
+"section_code": "004-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163138"
+],
+"capacity": 36,
+"enrolled": 2,
+"seats_available": 34,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frederick Weening"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009237",
+"section_ref": "WI27:E 00009237",
+"section_code": "004-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161248",
+"163139"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frederick Weening"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009218",
+"section_ref": "WI27:E 00009218",
+"section_code": "004-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163140"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frederick Weening"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1140,
+"end_minutes": 1190,
+"start_time_display": "7:00pm",
+"end_time_display": "7:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009219",
+"section_ref": "WI27:E 00009219",
+"section_code": "004-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163141",
+"164503"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frederick Weening"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1200,
+"end_minutes": 1250,
+"start_time_display": "8:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009220",
+"section_ref": "WI27:E 00009220",
+"section_code": "004-005-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163142"
+],
+"capacity": 36,
+"enrolled": 14,
+"seats_available": 22,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frederick Weening"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00009221",
+"section_ref": "WI27:E 00009221",
+"section_code": "004-006-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"163143"
+],
+"capacity": 36,
+"enrolled": 0,
+"seats_available": 36,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Frederick Weening"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 1080,
+"end_minutes": 1130,
+"start_time_display": "6:00pm",
+"end_time_display": "6:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "MGT",
+"course_code": "018",
+"module_code": "MGT-018",
+"module_name": "Managing Diverse Teams",
+"course_title": null,
+"subject_name": "Rady School of Management",
+"academic_level": "LD",
+"section_count": 3,
+"matching_section_count": 3,
+"complete_package_count": 7,
+"open_package_count": 7,
+"waitlist_package_count": 0,
+"open_section_count": 3,
+"open_seat_count": 292,
+"waitlist_available_count": 0,
+"instruction_types": [
+"lecture"
+],
+"instructors": [
+"Michael McKay"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [],
+"sections": [
+{
+"section_id": "E 00006333",
+"section_ref": "WI27:E 00006333",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"164239",
+"166826"
+],
+"capacity": 98,
+"enrolled": 0,
+"seats_available": 98,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael McKay"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 570,
+"end_minutes": 650,
+"start_time_display": "9:30am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 570,
+"end_minutes": 650,
+"start_time_display": "9:30am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": "2027-03-16",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "other",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-02-01",
+"start_minutes": 1200,
+"end_minutes": 1280,
+"start_time_display": "8:00pm",
+"end_time_display": "9:20pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00006334",
+"section_ref": "WI27:E 00006334",
+"section_code": "002-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"164240",
+"166827"
+],
+"capacity": 98,
+"enrolled": 1,
+"seats_available": 97,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael McKay"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 740,
+"start_time_display": "11:00am",
+"end_time_display": "12:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 660,
+"end_minutes": 740,
+"start_time_display": "11:00am",
+"end_time_display": "12:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-18",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "other",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-02-01",
+"start_minutes": 1200,
+"end_minutes": 1280,
+"start_time_display": "8:00pm",
+"end_time_display": "9:20pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00006335",
+"section_ref": "WI27:E 00006335",
+"section_code": "003-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"164241",
+"164319",
+"166828"
+],
+"capacity": 98,
+"enrolled": 1,
+"seats_available": 97,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Michael McKay"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 750,
+"end_minutes": 830,
+"start_time_display": "12:30pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 750,
+"end_minutes": 830,
+"start_time_display": "12:30pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": "2027-03-16",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "other",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-02-01",
+"start_minutes": 1200,
+"end_minutes": 1280,
+"start_time_display": "8:00pm",
+"end_time_display": "9:20pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "BENG",
+"course_code": "152",
+"module_code": "BENG-152",
+"module_name": "BioSystems Engineering Lab",
+"course_title": null,
+"subject_name": "Bioengineering",
+"academic_level": "UD",
+"section_count": 3,
+"matching_section_count": 3,
+"complete_package_count": 1,
+"open_package_count": 0,
+"waitlist_package_count": 1,
+"open_section_count": 0,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lab",
+"lecture"
+],
+"instructors": [
+"Alyssa Taylor"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [
+"Students enrolled in BENG 152 are responsible for a $20.00 materials fee which will be assessed with registration fees."
+],
+"prerequisites": [
+"ECE 35 (minimum grade D) or MAE 40 (minimum grade D)"
+],
+"restrictions": [
+"Limited to major: Bioengineering, Bioengineering: BioSystems"
+],
+"sections": [
+{
+"section_id": "E 00006901",
+"section_ref": "WI27:E 00006901",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"161869",
+"167103"
+],
+"capacity": 28,
+"enrolled": 2,
+"seats_available": 26,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "waitlist_only",
+"instructors": [
+"Alyssa Taylor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 780,
+"end_minutes": 830,
+"start_time_display": "1:00pm",
+"end_time_display": "1:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-03-19",
+"start_minutes": 690,
+"end_minutes": 869,
+"start_time_display": "11:30am",
+"end_time_display": "2:29pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00006902",
+"section_ref": "WI27:E 00006902",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"161869",
+"167111"
+],
+"capacity": 28,
+"enrolled": 2,
+"seats_available": 26,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "waitlist_only",
+"instructors": [
+"Alyssa Taylor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 890,
+"start_time_display": "2:00pm",
+"end_time_display": "2:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00006903",
+"section_ref": "WI27:E 00006903",
+"section_code": "001-001-LA",
+"instruction_type_name": "lab",
+"event_package_ids": [
+"161869",
+"167112"
+],
+"capacity": 28,
+"enrolled": 2,
+"seats_available": 26,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "waitlist_only",
+"instructors": [
+"Alyssa Taylor"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 960,
+"start_time_display": "12:00pm",
+"end_time_display": "4:00pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "DSE",
+"course_code": "210",
+"module_code": "DSE-210",
+"module_name": "Probability and Statistics/DS",
+"course_title": null,
+"subject_name": "Data Science and Engineering",
+"academic_level": "GR",
+"section_count": 1,
+"matching_section_count": 1,
+"complete_package_count": 1,
+"open_package_count": 1,
+"waitlist_package_count": 0,
+"open_section_count": 1,
+"open_seat_count": 20,
+"waitlist_available_count": 0,
+"instruction_types": [
+"lecture"
+],
+"instructors": [
+"Sophin Liu"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [
+"DSE 200 (minimum grade B-)"
+],
+"restrictions": [
+"Limited to academic level: Graduate"
+],
+"sections": [
+{
+"section_id": "E 00010106",
+"section_ref": "WI27:E 00010106",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"166350"
+],
+"capacity": 20,
+"enrolled": 0,
+"seats_available": 20,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Sophin Liu"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "S",
+"day_name": "Saturday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 1020,
+"start_time_display": "9:00am",
+"end_time_display": "5:00pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "BILD",
+"course_code": "003",
+"module_code": "BILD-003",
+"module_name": "Organismic&Evolutionary Biol",
+"course_title": null,
+"subject_name": "Biology/ Lower Division",
+"academic_level": "LD",
+"section_count": 15,
+"matching_section_count": 15,
+"complete_package_count": 12,
+"open_package_count": 12,
+"waitlist_package_count": 0,
+"open_section_count": 15,
+"open_seat_count": 1162,
+"waitlist_available_count": 0,
+"instruction_types": [
+"discussion",
+"lecture"
+],
+"instructors": [
+"Carolyn Kurle",
+"Keefe Reuther",
+"Scott Rifkin"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "4 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [],
+"sections": [
+{
+"section_id": "E 00008883",
+"section_ref": "WI27:E 00008883",
+"section_code": "001-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"160663",
+"162186",
+"162187",
+"162188",
+"162189",
+"165177"
+],
+"capacity": 395,
+"enrolled": 14,
+"seats_available": 381,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Carolyn Kurle"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 570,
+"end_minutes": 650,
+"start_time_display": "9:30am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 570,
+"end_minutes": 650,
+"start_time_display": "9:30am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": "2027-03-16",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010009",
+"section_ref": "WI27:E 00010009",
+"section_code": "001-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162186"
+],
+"capacity": 99,
+"enrolled": 4,
+"seats_available": 95,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Carolyn Kurle"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010000",
+"section_ref": "WI27:E 00010000",
+"section_code": "001-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162187"
+],
+"capacity": 99,
+"enrolled": 6,
+"seats_available": 93,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Carolyn Kurle"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010026",
+"section_ref": "WI27:E 00010026",
+"section_code": "001-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162188"
+],
+"capacity": 99,
+"enrolled": 4,
+"seats_available": 95,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Carolyn Kurle"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010010",
+"section_ref": "WI27:E 00010010",
+"section_code": "001-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162189",
+"929",
+"930"
+],
+"capacity": 98,
+"enrolled": 0,
+"seats_available": 98,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Carolyn Kurle"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 1020,
+"end_minutes": 1070,
+"start_time_display": "5:00pm",
+"end_time_display": "5:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00008884",
+"section_ref": "WI27:E 00008884",
+"section_code": "002-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"160664",
+"162190",
+"162191",
+"162192",
+"162193"
+],
+"capacity": 395,
+"enrolled": 4,
+"seats_available": 391,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Keefe Reuther"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 600,
+"end_minutes": 650,
+"start_time_display": "10:00am",
+"end_time_display": "10:50am",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": "2027-03-19",
+"start_minutes": 480,
+"end_minutes": 659,
+"start_time_display": "8:00am",
+"end_time_display": "10:59am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010027",
+"section_ref": "WI27:E 00010027",
+"section_code": "002-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162190",
+"165545"
+],
+"capacity": 99,
+"enrolled": 0,
+"seats_available": 99,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Keefe Reuther"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010028",
+"section_ref": "WI27:E 00010028",
+"section_code": "002-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162191"
+],
+"capacity": 99,
+"enrolled": 1,
+"seats_available": 98,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Keefe Reuther"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010011",
+"section_ref": "WI27:E 00010011",
+"section_code": "002-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162192"
+],
+"capacity": 99,
+"enrolled": 1,
+"seats_available": 98,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Keefe Reuther"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 480,
+"end_minutes": 530,
+"start_time_display": "8:00am",
+"end_time_display": "8:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010029",
+"section_ref": "WI27:E 00010029",
+"section_code": "002-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162193"
+],
+"capacity": 98,
+"enrolled": 1,
+"seats_available": 97,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Keefe Reuther"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00008885",
+"section_ref": "WI27:E 00008885",
+"section_code": "003-000-LE",
+"instruction_type_name": "lecture",
+"event_package_ids": [
+"160665",
+"162194",
+"162195",
+"162196",
+"162197"
+],
+"capacity": 395,
+"enrolled": 5,
+"seats_available": 390,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Scott Rifkin"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "class",
+"day_code": "T",
+"day_name": "Tuesday",
+"specific_date": null,
+"start_minutes": 840,
+"end_minutes": 920,
+"start_time_display": "2:00pm",
+"end_time_display": "3:20pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "final",
+"day_code": "R",
+"day_name": "Thursday",
+"specific_date": "2027-03-18",
+"start_minutes": 900,
+"end_minutes": 1079,
+"start_time_display": "3:00pm",
+"end_time_display": "5:59pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-02-08",
+"start_minutes": 1140,
+"end_minutes": 1250,
+"start_time_display": "7:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+},
+{
+"meeting_kind": "midterm",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": "2027-03-01",
+"start_minutes": 1140,
+"end_minutes": 1250,
+"start_time_display": "7:00pm",
+"end_time_display": "8:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010030",
+"section_ref": "WI27:E 00010030",
+"section_code": "003-001-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162194"
+],
+"capacity": 99,
+"enrolled": 1,
+"seats_available": 98,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Scott Rifkin"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 900,
+"end_minutes": 950,
+"start_time_display": "3:00pm",
+"end_time_display": "3:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010012",
+"section_ref": "WI27:E 00010012",
+"section_code": "003-002-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162195"
+],
+"capacity": 99,
+"enrolled": 3,
+"seats_available": 96,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Scott Rifkin"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "M",
+"day_name": "Monday",
+"specific_date": null,
+"start_minutes": 960,
+"end_minutes": 1010,
+"start_time_display": "4:00pm",
+"end_time_display": "4:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010031",
+"section_ref": "WI27:E 00010031",
+"section_code": "003-003-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162196"
+],
+"capacity": 99,
+"enrolled": 0,
+"seats_available": 99,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Scott Rifkin"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "W",
+"day_name": "Wednesday",
+"specific_date": null,
+"start_minutes": 540,
+"end_minutes": 590,
+"start_time_display": "9:00am",
+"end_time_display": "9:50am",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+},
+{
+"section_id": "E 00010032",
+"section_ref": "WI27:E 00010032",
+"section_code": "003-004-DI",
+"instruction_type_name": "discussion",
+"event_package_ids": [
+"162197"
+],
+"capacity": 98,
+"enrolled": 1,
+"seats_available": 97,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Scott Rifkin"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": "F",
+"day_name": "Friday",
+"specific_date": null,
+"start_minutes": 720,
+"end_minutes": 770,
+"start_time_display": "12:00pm",
+"end_time_display": "12:50pm",
+"is_remote": false,
+"is_tba": false
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+},
+{
+"term_code": "WI27",
+"subject_code": "AIP",
+"course_code": "197DC",
+"module_code": "AIP-197DC",
+"module_name": "Washington, DC Internship",
+"course_title": null,
+"subject_name": "Academic Internship Program",
+"academic_level": "UD",
+"section_count": 1,
+"matching_section_count": 1,
+"complete_package_count": 1,
+"open_package_count": 1,
+"waitlist_package_count": 0,
+"open_section_count": 1,
+"open_seat_count": 0,
+"waitlist_available_count": 0,
+"instruction_types": [
+"it"
+],
+"instructors": [
+"Seth Hill"
+],
+"is_topic_course": false,
+"section_family": null,
+"units_display": "6 units",
+"course_fees": [],
+"prerequisites": [],
+"restrictions": [
+"Limited to class level: Junior, Senior"
+],
+"sections": [
+{
+"section_id": "EL00004778",
+"section_ref": "WI27:EL00004778",
+"section_code": "001-000-IT",
+"instruction_type_name": "it",
+"event_package_ids": [],
+"capacity": 35,
+"enrolled": 0,
+"seats_available": 35,
+"waitlist_capacity": null,
+"waitlist_enrolled": null,
+"waitlist_available": null,
+"status": "AC",
+"instructors": [
+"Seth Hill"
+],
+"meetings": [
+{
+"meeting_kind": "class",
+"day_code": null,
+"day_name": null,
+"specific_date": null,
+"start_minutes": null,
+"end_minutes": null,
+"start_time_display": "tba",
+"end_time_display": "tba",
+"is_remote": false,
+"is_tba": true
+}
+],
+"section_text": [],
+"course_fees": []
+}
+]
+}
+]
+}

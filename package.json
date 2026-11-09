@@ -1,0 +1,27 @@
+{
+  "name": "tss-planner",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c blue,green \"npm:dev -w server\" \"npm:dev -w web\"",
+    "build": "npm run build -w web",
+    "start": "NODE_ENV=production node server/src/index.ts",
+    "sync": "node server/src/sync-cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p shared && tsc -p server && tsc -p web"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "concurrently": "^10.0.7",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
