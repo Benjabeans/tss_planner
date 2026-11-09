@@ -112,7 +112,7 @@ function Body() {
 
   const show = (t: MobileTab) => (tab === t ? 'flex' : 'hidden');
   return (
-    <main className="grid min-h-0 flex-1 lg:grid-cols-[minmax(340px,400px)_1fr]">
+    <main className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(340px,400px)_minmax(0,1fr)]">
       {/* Left column: search, or the schedule finder in its place so the calendar stays in view. */}
       <aside className={`${show('search')} no-print min-h-0 flex-col border-r border-rule bg-surface pb-14 lg:flex lg:pb-0`} aria-label="Course search">
         <div className={finder && desktop ? 'hidden' : 'flex min-h-0 flex-1 flex-col'}>

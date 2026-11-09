@@ -192,9 +192,14 @@ function SectionLine({ section, className = '', showInstructor = false }: { sect
     <div className={`flex items-baseline gap-2 text-[12.5px] ${className}`}>
       <span className="w-6 shrink-0 font-semibold">{section.type}</span>
       <span className="tnum w-[4.6rem] shrink-0 text-muted">{section.code.slice(0, 7)}</span>
-      <span className="tnum min-w-0 flex-1 truncate">{weekly.length ? weekly.join(', ') : <span className="text-muted">TBA</span>}</span>
+      <span className={`tnum min-w-0 truncate ${showInstructor ? '' : 'flex-1'}`}>
+        {weekly.length ? weekly.join(', ') : <span className="text-muted">TBA</span>}
+      </span>
+      {/* The meeting time matters more than the name: the name only gets the space that's left. */}
       {showInstructor && section.instructors.length > 0 && (
-        <span className="max-w-[8rem] shrink-0 truncate text-xs text-muted">{section.instructors.join(', ')}</span>
+        <span className="min-w-0 flex-1 truncate text-right text-xs text-muted" title={section.instructors.join(', ')}>
+          {section.instructors.join(', ')}
+        </span>
       )}
     </div>
   );

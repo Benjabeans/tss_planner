@@ -153,10 +153,10 @@ export function SearchPanel() {
       </div>
 
       {data && (
-        <div className="border-t border-rule px-3 py-2 text-xs text-muted">
-          {data.catalog.term.courseCount.toLocaleString()} courses · seats updated {relativeTime(data.catalog.term.syncedAt)} ·
-          confirm in TSS before booking
-        </div>
+        <p className="border-t border-rule px-3 py-2 text-xs text-muted">
+          {data.catalog.term.courseCount.toLocaleString()} courses · seats updated {relativeTime(data.catalog.term.syncedAt)}.{' '}
+          <span className="whitespace-nowrap">Confirm in TSS before booking.</span>
+        </p>
       )}
     </div>
   );
