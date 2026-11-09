@@ -156,8 +156,8 @@ export function PlanTable() {
                     const times = [...new Set(weekly.map((m) => formatRange(m.start!, m.end!)))];
                     return (
                       <tr key={s.id} className={pick.status === 'backup' ? 'text-muted' : undefined}>
-                        <td className="py-1 pr-2 pl-7 text-muted">{s.typeName}</td>
-                        <td className="tnum px-2">{s.code}</td>
+                        <td className="py-1 pr-2 pl-7 whitespace-nowrap text-muted">{s.typeName}</td>
+                        <td className="tnum px-2 whitespace-nowrap">{s.code}</td>
                         <td className="px-2">{weekly.length ? formatDays(weekly.map((m) => m.day!)) : 'TBA'}</td>
                         <td className="tnum px-2 whitespace-nowrap">{times.join(', ') || '—'}</td>
                         <td className="max-w-[10rem] truncate px-2">{s.instructors.join(', ') || <span className="text-muted">Staff</span>}</td>

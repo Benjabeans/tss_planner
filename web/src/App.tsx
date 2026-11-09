@@ -16,7 +16,7 @@ export function App() {
   useBootstrap();
   return (
     <PlannerProvider>
-      <div className="flex h-full flex-col">
+      <div className="flex h-dvh flex-col">
         <Header />
         <Body />
         <MobileTabs />
@@ -73,10 +73,10 @@ function Body() {
   const show = (t: MobileTab) => (tab === t ? 'flex' : 'hidden');
   return (
     <main className="grid min-h-0 flex-1 lg:grid-cols-[minmax(340px,400px)_1fr]">
-      <aside className={`${show('search')} no-print min-h-0 flex-col border-r border-rule bg-surface lg:flex`} aria-label="Course search">
+      <aside className={`${show('search')} no-print min-h-0 flex-col border-r border-rule bg-surface pb-14 lg:flex lg:pb-0`} aria-label="Course search">
         <SearchPanel />
       </aside>
-      <div className="scroll-thin min-h-0 overflow-y-auto">
+      <div className={`scroll-thin min-h-0 overflow-y-auto ${tab === 'search' ? 'hidden lg:block' : ''}`}>
         <div className="mx-auto flex max-w-[1200px] flex-col gap-3 p-3 pb-24 sm:p-4 lg:pb-6">
           <div className={`${show('calendar')} flex-col gap-3 lg:flex`}>
             <div className="no-print flex items-center gap-2">

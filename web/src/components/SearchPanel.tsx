@@ -86,7 +86,7 @@ export function SearchPanel() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="CSE 110, MATH 18, or a professor"
-            className="w-full rounded-lg border border-rule-strong bg-surface py-2 pr-8 pl-8 text-[14px] placeholder:text-faint focus:border-accent focus:outline-none"
+            className="w-full rounded-lg border border-rule-strong bg-surface py-2 pr-8 pl-8 text-[16px] placeholder:text-faint lg:text-[14px] focus:border-accent focus:outline-none"
             autoComplete="off"
             spellCheck={false}
             autoFocus
