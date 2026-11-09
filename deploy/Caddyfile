@@ -1,0 +1,10 @@
+# Replace with your domain; Caddy fetches HTTPS certificates automatically.
+planner.example.com {
+	encode zstd gzip
+	# Plans live in each browser for now, so the site is safe to expose. If you want it
+	# private, uncomment basic auth (generate a hash with: caddy hash-password).
+	# basic_auth {
+	# 	you $2a$14$REPLACE_WITH_HASH
+	# }
+	reverse_proxy planner:8787
+}

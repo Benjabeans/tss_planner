@@ -73,7 +73,7 @@ function Body() {
   const show = (t: MobileTab) => (tab === t ? 'flex' : 'hidden');
   return (
     <main className="grid min-h-0 flex-1 lg:grid-cols-[minmax(340px,400px)_1fr]">
-      <aside className={`${show('search')} min-h-0 flex-col border-r border-rule bg-surface lg:flex`} aria-label="Course search">
+      <aside className={`${show('search')} no-print min-h-0 flex-col border-r border-rule bg-surface lg:flex`} aria-label="Course search">
         <SearchPanel />
       </aside>
       <div className="scroll-thin min-h-0 overflow-y-auto">

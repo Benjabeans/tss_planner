@@ -73,6 +73,17 @@ try {
   await page.screenshot({ path: `${out}06-resolved.png` });
   step('swapping ECON 1 resolves the conflict');
 
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    (async () => {
+      await page.getByRole('button', { name: 'More actions' }).click();
+      await page.getByRole('menuitem', { name: /Export to calendar/ }).click();
+    })(),
+  ]);
+  const ics = await (await download.createReadStream()).toArray().then((c) => Buffer.concat(c).toString('utf8'));
+  if (!ics.includes('BEGIN:VEVENT') || !ics.includes('RRULE:FREQ=WEEKLY')) throw new Error('ics export looks wrong');
+  step(`exports .ics (${download.suggestedFilename()}, ${ics.split('BEGIN:VEVENT').length - 1} events)`);
+
   await page.getByRole('tab', { name: 'Finals' }).click();
   await page.waitForTimeout(150);
   await page.screenshot({ path: `${out}07-finals.png` });

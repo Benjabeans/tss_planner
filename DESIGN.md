@@ -2,7 +2,7 @@
 
 A WebReg-style weekly calendar planner for UC San Diego courses. It runs on public data from the Triton Student System (TSS) era. You plan here, then book in TSS (sis.ucsd.edu).
 
-Status: v1 is under construction. Last revised 2026-11-09.
+Status: phases 1–5 implemented and phase 6 scaffolded (Docker/Caddy, not yet run on a VPS). Last revised 2026-11-09.
 
 ---
 
@@ -110,7 +110,7 @@ UCSD API ─┤ upstream/ucsd.ts → normalize (shared) → store    ├─ /api
 ### 3.2 Repo layout
 ```
 tss_planner/
-  DESIGN.md  README.md  package.json (npm workspaces)
+  DESIGN.md  README.md  package.json (npm workspaces; Node 26 runs server .ts directly)
   shared/src/   types.ts normalize.ts packages.ts time.ts conflicts.ts layout.ts
                 search.ts ics.ts terms.ts colors.ts index.ts
   shared/test/  *.test.ts + fixtures/
@@ -288,7 +288,7 @@ Each package's weekly class meetings become a `VEVENT` with `RRULE:FREQ=WEEKLY;B
 | **3. Search and preview** | query parser, index, results, package rows, ghost preview, conflict chips, filters | Typing `CSE 110, MATH 18` and hovering previews instantly |
 | **4. Conflicts** | conflict engine wired up, header pill, toast with undo/fix, conflict center, backup status | All of §6 works |
 | **5. Plan management and export** | multiple plans, duplicate/rename, custom blocks, plan table, copy IDs, `.ics` export, print view | |
-| **6. Deploy** | Dockerfile, Caddy example, server-side plans in SQLite, basic auth | Runs on the VPS |
+| **6. Deploy** | Dockerfile, Caddy example (done); server-side plans in SQLite, accounts (todo) | Runs on the VPS |
 | **7. Later** | schedule generator (constraints such as days off, earliest start or "minimize gaps"), seat-open alerts, share links, prereq display | |
 
 ---
