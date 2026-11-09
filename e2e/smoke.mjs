@@ -131,14 +131,19 @@ try {
     await gen.getByRole('button', { name: re }).first().click();
   }
   await gen.getByRole('button', { name: /conflict/ }).first().waitFor();
+  // The finder opens in the left column, so the calendar stays visible while options are previewed.
   await gen.getByRole('button', { name: 'Find a schedule' }).click();
+  await gen.getByRole('heading', { name: 'Find a schedule' }).waitFor();
+  if (await gen.getByPlaceholder('CSE 110, MATH 18, or a professor').isVisible()) throw new Error('finder should replace the search panel');
   const option = gen.getByRole('button', { name: /^Option 1 / });
   await option.hover();
-  await gen.getByText(/Previewing/).waitFor();
+  await gen.getByText(/Previewing/).first().waitFor();
+  await gen.locator('.cal-block[data-ghost]').first().waitFor();
   await gen.screenshot({ path: `${out}13-generator-preview.png` });
   await option.click();
+  await gen.getByRole('button', { name: 'Use this schedule' }).first().click();
   await gen.getByRole('button', { name: /No conflicts/ }).waitFor();
-  await gen.keyboard.press('Escape');
+  if (await gen.getByRole('heading', { name: 'Find a schedule' }).count()) throw new Error('finder should close after applying');
   await gen.mouse.move(1000, 900);
   await gen.waitForTimeout(2200);
   await gen.screenshot({ path: `${out}14-generator-applied.png` });
@@ -168,6 +173,17 @@ try {
   await mobile.locator('nav[aria-label=Sections] button', { hasText: 'Plan' }).click();
   await mobile.screenshot({ path: `${out}12-mobile-plan.png` });
   step('mobile tabs work');
+
+  // Phones can't show the option list and the calendar together: picking an option shows it on the calendar.
+  await mobile.locator('nav[aria-label=Sections] button', { hasText: 'Calendar' }).click();
+  await mobile.getByRole('button', { name: 'Find a schedule' }).click();
+  await mobile.getByRole('button', { name: /^Option 1 / }).click();
+  await mobile.getByText(/Previewing/).first().waitFor();
+  await mobile.locator('.cal-block[data-ghost]').first().waitFor();
+  await mobile.screenshot({ path: `${out}15-mobile-finder.png` });
+  await mobile.getByRole('button', { name: 'Use this schedule' }).click();
+  await mobile.getByText(/Applied Option 1|Option 1 matches your plan already/).waitFor();
+  step('mobile finder previews an option on the calendar and applies it');
 } catch (err) {
   console.error('✗ FAILED after:', steps.at(-1) ?? '(start)');
   console.error(err);

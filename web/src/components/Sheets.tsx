@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { AlertTriangle, ArrowRightLeft, Check, X } from 'lucide-react';
+import { AlertTriangle, ArrowRightLeft, Check, Sparkles, X } from 'lucide-react';
 import type { Course, CustomBlock, PickStatus } from '@shared/types.ts';
 import type { ConflictGroup } from '@shared/conflicts.ts';
 import { alternativesFor, packageSections } from '@shared/plan.ts';
@@ -12,7 +12,6 @@ import { useUi } from '../store/ui.ts';
 import { addPackage, removeCourse, setStatus, undoRecord } from '../lib/actions.ts';
 import { describeConflict, seatText } from '../lib/describe.ts';
 import { STATUS_LABEL, PickHealth } from './PlanTable.tsx';
-import { GenerateSheet } from './GenerateSheet.tsx';
 import { CourseDetails } from './CourseCard.tsx';
 import { Pill } from './SearchPanel.tsx';
 
@@ -37,7 +36,6 @@ export function SheetHost() {
         {sheet.kind === 'conflicts' && <ConflictSheet focus={sheet.focus} onClose={close} />}
         {sheet.kind === 'block' && <BlockSheet blockId={sheet.blockId} onClose={close} />}
         {sheet.kind === 'settings' && <SettingsSheet onClose={close} />}
-        {sheet.kind === 'generate' && <GenerateSheet onClose={close} />}
       </div>
     </div>
   );
@@ -264,10 +262,14 @@ function ConflictSheet({ focus, onClose }: { focus?: string; onClose: () => void
       {real.length > 0 && (
         <button
           type="button"
-          onClick={() => useUi.getState().openSheet({ kind: 'generate' })}
-          className="mb-3 w-full rounded-lg border border-dashed border-rule-strong px-3 py-2 text-left text-[13px] hover:border-ink"
+          onClick={() => useUi.getState().openFinder()}
+          className="mb-3 flex w-full items-start gap-2 rounded-lg border border-rule-strong px-3 py-2 text-left text-[13px] hover:border-ink hover:bg-accent-soft/25"
         >
-          <b>Find a schedule</b> <span className="text-muted">tries every section combination for you</span>
+          <Sparkles className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+          <span>
+            <b className="font-semibold">Find a schedule</b>
+            <span className="block text-xs text-muted">Tries every section combination and shows the ones that fit.</span>
+          </span>
         </button>
       )}
       <div className="space-y-3">

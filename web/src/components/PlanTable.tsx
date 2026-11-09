@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AlertTriangle, Check, Copy, Plus, RefreshCw, Sparkles, Trash2 } from 'lucide-react';
+import { AlertTriangle, Check, Copy, Plus, RefreshCw, Trash2 } from 'lucide-react';
 import type { PickStatus } from '@shared/types.ts';
 import { packageSections, summarizePackage } from '@shared/plan.ts';
 import { formatDays, formatRange } from '@shared/time.ts';
@@ -46,14 +46,6 @@ export function PlanTable() {
         </h2>
         <span className="text-xs text-muted">Book these in TSS using the section IDs.</span>
         <div className="ml-auto flex flex-wrap gap-1.5">
-          <button
-            type="button"
-            disabled={plan.picks.length === 0}
-            onClick={() => useUi.getState().openSheet({ kind: 'generate' })}
-            className="flex items-center gap-1 rounded-md bg-accent px-2 py-1 text-xs font-semibold text-accent-ink hover:brightness-95 disabled:opacity-40"
-          >
-            <Sparkles className="size-3.5" /> Find a schedule
-          </button>
           <button
             type="button"
             disabled={allIds.length === 0}
