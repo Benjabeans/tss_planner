@@ -264,7 +264,10 @@ Client-side, over an index built once per catalog:
 - Ranking order: exact code, then code prefix, then title or instructor token matches, then the rest.
 - Results render as a virtualized list and only expand sections on demand.
 
-### 7.5 ICS export
+### 7.5 Schedule generator
+`generateSchedules({courses, fixed, constraints, preference})` runs a depth-first search over each course's packages. It starts with the course that has the fewest usable packages and prunes on hard conflicts: class, final and custom-block overlaps. Midterm and dated-meeting overlaps are allowed but noted. Locked and enrolled courses and custom blocks are passed in as `fixed`. Results are ranked by a weighted score covering days on campus, gap minutes, minutes before 10am and full/waitlisted packages. The preference (balanced, fewest days, fewest gaps, start later) picks the weights. The search stops after a node budget (150k) and reports that it did. When nothing fits, it explains why: either a course has no package that passes the filters (or avoids the fixed items), or it names the course pairs that can never coexist. For example, in WI27 every CSE 110 lab (Mon 3:00–5:50pm) overlaps CSE 100's only discussion (Mon 4:00–4:50pm).
+
+### 7.6 ICS export
 Each package's weekly class meetings become a `VEVENT` with `RRULE:FREQ=WEEKLY;BYDAY=…;UNTIL=<instruction end>`. The first occurrence is aligned to the first matching weekday on or after instruction begins, and holidays become `EXDATE`s. Finals and midterms are single events. Times use TZID `America/Los_Angeles` with a VTIMEZONE block.
 
 ---
@@ -289,7 +292,7 @@ Each package's weekly class meetings become a `VEVENT` with `RRULE:FREQ=WEEKLY;B
 | **4. Conflicts** | conflict engine wired up, header pill, toast with undo/fix, conflict center, backup status | All of §6 works |
 | **5. Plan management and export** | multiple plans, duplicate/rename, custom blocks, plan table, copy IDs, `.ics` export, print view | |
 | **6. Deploy** | Dockerfile, Caddy example (done); server-side plans in SQLite, accounts (todo) | Runs on the VPS |
-| **7. Later** | schedule generator (constraints such as days off, earliest start or "minimize gaps"), seat-open alerts, share links, prereq display | |
+| **7. Later** | ~~schedule generator~~ (done: `shared/src/generate.ts` + "Find a schedule" sheet), seat-open alerts, share links, server-side plans | |
 
 ---
 

@@ -1,10 +1,11 @@
-import { AlertTriangle, CalendarDays, Check, ChevronDown, Copy, Download, MoreHorizontal, Pencil, Plus, Printer, Settings, Sparkles, Trash2 } from 'lucide-react';
+import { AlertTriangle, CalendarDays, Check, ChevronDown, Copy, Download, Link2, MoreHorizontal, Pencil, Plus, Printer, Settings, Sparkles, Trash2 } from 'lucide-react';
 import { buildIcs } from '@shared/ics.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { usePlanStore } from '../store/plans.ts';
 import { useCatalogStore } from '../store/catalog.ts';
 import { useUi } from '../store/ui.ts';
 import { Menu, MenuDivider, MenuItem } from './Menu.tsx';
+import { shareUrl } from '../lib/share.ts';
 
 export function Header() {
   return (
@@ -121,6 +122,22 @@ function PlanSwitcher() {
             }}
           >
             <Copy className="size-3.5" /> Duplicate this plan
+          </MenuItem>
+          <MenuItem
+            disabled={!plan || (plan.picks.length === 0 && plan.blocks.length === 0)}
+            onClick={async () => {
+              close();
+              if (!plan) return;
+              const url = shareUrl(plan);
+              try {
+                await navigator.clipboard.writeText(url);
+                useUi.getState().pushToast({ tone: 'ok', message: 'Share link copied. Anyone who opens it gets a copy of this plan.' });
+              } catch {
+                window.prompt('Copy this link:', url);
+              }
+            }}
+          >
+            <Link2 className="size-3.5" /> Copy share link
           </MenuItem>
           <MenuItem
             disabled={!plan}

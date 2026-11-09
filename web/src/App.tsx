@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { clearShareHash, importShared, readShareHash } from './lib/share.ts';
 import { CalendarRange, ListChecks, Search } from 'lucide-react';
 import { termSortKey } from '@shared/terms.ts';
 import { PlannerProvider, usePlanner } from './lib/planner.tsx';
@@ -31,6 +32,38 @@ export function App() {
 function useBootstrap() {
   const terms = useCatalogStore((s) => s.terms);
   const termCode = usePlanStore((s) => s.termCode);
+  const byTerm = useCatalogStore((s) => s.byTerm);
+  const [shared, setShared] = useState(() => readShareHash());
+  const imported = useRef(false);
+
+  // Pasting a share link into an open tab only changes the hash, without a reload.
+  useEffect(() => {
+    const onHash = () => {
+      const p = readShareHash();
+      if (!p) return;
+      imported.current = false;
+      setShared(p);
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  // A #share= link switches to its term, then imports once that catalog is ready.
+  useEffect(() => {
+    if (!shared || imported.current) return;
+    if (termCode !== shared.t) {
+      usePlanStore.getState().setTerm(shared.t);
+      return;
+    }
+    if (importShared(shared)) {
+      imported.current = true;
+      clearShareHash();
+    } else if (byTerm[shared.t]?.status === 'missing' || byTerm[shared.t]?.status === 'error') {
+      imported.current = true;
+      clearShareHash();
+      useUi.getState().pushToast({ tone: 'danger', message: 'That shared plan is for a term this planner has no data for.' });
+    }
+  }, [shared, termCode, byTerm]);
 
   useEffect(() => {
     void useCatalogStore.getState().loadTerms();
@@ -42,6 +75,7 @@ function useBootstrap() {
     if (!terms || terms.length === 0) return;
     const available = terms.filter((t) => t.available);
     if (termCode && terms.some((t) => t.code === termCode)) return;
+    if (shared && terms.some((t) => t.code === shared.t)) return;
     // Default to the latest term that has data.
     const latest = [...available].sort((a, b) => termSortKey(b.code).localeCompare(termSortKey(a.code)))[0];
     if (latest) usePlanStore.getState().setTerm(latest.code);

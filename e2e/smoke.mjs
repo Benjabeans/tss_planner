@@ -28,7 +28,11 @@ async function newPage(opts) {
 
 try {
   // ---------------------------------------------------------------- desktop, light
-  const page = await newPage({ viewport: { width: 1440, height: 940 }, colorScheme: 'light' });
+  const page = await newPage({
+    viewport: { width: 1440, height: 940 },
+    colorScheme: 'light',
+    permissions: ['clipboard-read', 'clipboard-write'],
+  });
   await page.getByText('Your week is empty').waitFor();
   await page.screenshot({ path: `${out}01-empty.png` });
   step('loads with an empty week');
@@ -103,6 +107,17 @@ try {
   const courses = await page.getByText(/2 courses/).count();
   if (courses < 1) throw new Error('plan did not persist across reload');
   step('plan persists across reload');
+
+  await page.getByRole('button', { name: 'Switch plan' }).click();
+  await page.getByRole('menuitem', { name: /Copy share link/ }).click();
+  const link = await page.evaluate(() => navigator.clipboard.readText());
+  if (!link.includes('#share=')) throw new Error(`unexpected share link: ${link}`);
+  const friend = await newPage({ viewport: { width: 1440, height: 940 } });
+  await friend.goto(link);
+  await friend.getByText(/Imported “Plan A” as a new plan/).waitFor();
+  await friend.getByText('Plan A (shared)').first().waitFor();
+  if (friend.url().includes('#share=')) throw new Error('share hash was not cleared');
+  step('share link imports the plan in a fresh browser');
 
   // ---------------------------------------------------------------- generator
   const gen = await newPage({ viewport: { width: 1440, height: 940 }, colorScheme: 'light' });
