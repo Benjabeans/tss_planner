@@ -24,6 +24,13 @@
   --ok-soft: #dff1e4;
   --shadow: 0 1px 2px rgb(22 33 58 / 0.06), 0 4px 16px rgb(22 33 58 / 0.08);
   --hour-h: 3.25rem;
+  /* Width of the calendar's hour-label column; phones need every pixel for day columns. */
+  --gutter: 2.5rem;
+}
+@media (min-width: 640px) {
+  :root {
+    --gutter: 3.25rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -167,6 +174,14 @@ body {
 .cal-block {
   position: absolute;
   overflow: hidden;
+  /* A <button> centers its content vertically; calendar labels belong at the top of the block. */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  container-type: inline-size;
+  padding: 4px 6px;
+  text-align: left;
+  line-height: 1.2;
   border-radius: 6px;
   background: var(--fill);
   color: var(--cink);
@@ -174,6 +189,95 @@ body {
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--edge) 22%, transparent);
   font-family: var(--font-cond);
   transition: box-shadow 120ms ease, opacity 120ms ease;
+}
+.cal-block[data-short] {
+  padding-block: 2px;
+}
+.cal-code {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.cal-code-text {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cal-alert {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  margin: 1px 0 0 auto;
+  color: var(--danger);
+}
+.cal-meta {
+  display: block;
+  margin-top: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 11.5px;
+  opacity: 0.85;
+}
+.cal-type {
+  font-weight: 500;
+}
+.cal-type + .cal-time::before {
+  content: ' · ';
+}
+.cal-start {
+  display: none;
+}
+@media (max-width: 639px) {
+  .cal-block {
+    padding: 3px 4px;
+  }
+  .cal-code {
+    font-size: 11.5px;
+  }
+  .cal-meta {
+    font-size: 11px;
+  }
+}
+/* Narrow blocks (phones, side-by-side conflict lanes): the start time is enough, the height shows
+   the length. Tall blocks have room to stack the type and the full range on their own lines. */
+@container (max-width: 7.5rem) {
+  .cal-time {
+    display: none;
+  }
+  .cal-start {
+    display: inline;
+  }
+  .cal-type + .cal-time + .cal-start::before {
+    content: ' ';
+  }
+  .cal-block[data-tall] .cal-meta {
+    white-space: normal;
+  }
+  .cal-block[data-tall] .cal-type {
+    display: block;
+  }
+  .cal-block[data-tall] .cal-time {
+    display: block;
+  }
+  .cal-block[data-tall] .cal-type + .cal-time::before {
+    content: none;
+  }
+  .cal-block[data-tall] .cal-start {
+    display: none;
+  }
+}
+@container (max-width: 2.75rem) {
+  .cal-alert,
+  .cal-meta {
+    display: none;
+  }
+  .cal-code-text {
+    text-overflow: clip;
+  }
 }
 .cal-block[data-emphasis='dim'] {
   opacity: 0.45;

@@ -2,7 +2,7 @@ import { useMemo, type CSSProperties } from 'react';
 import { AlertTriangle, CalendarClock } from 'lucide-react';
 import type { Conflict, Severity, Slot } from '@shared/conflicts.ts';
 import { layoutLanes } from '@shared/layout.ts';
-import { DAY_ABBR, addDays, formatDate, formatHour, formatRange, weekdayOfDate } from '@shared/time.ts';
+import { DAY_ABBR, addDays, formatDate, formatHour, formatRange, formatTime, weekdayOfDate } from '@shared/time.ts';
 import { isSchedulable, packageSections } from '@shared/plan.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { useUi } from '../store/ui.ts';
@@ -187,7 +187,7 @@ function TimeGrid({ columns, empty }: { columns: Column[]; empty: React.ReactNod
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-rule bg-surface" role="grid" aria-label="Calendar">
-      <div className="grid" style={{ gridTemplateColumns: `3.25rem repeat(${columns.length}, minmax(0, 1fr))` }}>
+      <div className="grid" style={{ gridTemplateColumns: `var(--gutter) repeat(${columns.length}, minmax(0, 1fr))` }}>
         <div className="border-b border-rule" />
         {columns.map((c) => (
           <div key={c.key} className="border-b border-l border-rule px-2 py-2 text-center" role="columnheader">
@@ -200,7 +200,7 @@ function TimeGrid({ columns, empty }: { columns: Column[]; empty: React.ReactNod
           {hours.map((m, i) => (
             <div
               key={m}
-              className="tnum absolute right-1.5 -translate-y-1/2 text-[11px] text-faint"
+              className="tnum absolute right-1.5 -translate-y-1/2 text-[11px] text-muted"
               style={{ top: `calc(var(--hour-h) * ${i})` }}
             >
               {i === 0 ? '' : formatHour(m)}
@@ -264,7 +264,8 @@ function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties 
   const fresh = useUi((s) => s.fresh);
   const { slot } = item;
   const emphasis = !item.ghost && focusCourse && focusCourse === slot.ownerId ? 'focus' : undefined;
-  const short = slot.end - slot.start < 45;
+  const minutes = slot.end - slot.start;
+  const short = minutes < 45;
   const [code, type] = splitLabel(slot.label);
 
   const onClick = () => {
@@ -274,12 +275,18 @@ function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties 
     else ui.openSheet({ kind: 'pick', courseKey: slot.ownerId });
   };
 
-  const title = `${slot.label} · ${formatRange(slot.start, slot.end)}${item.ghost ? ' (preview — click to add)' : ''}`;
+  const title = `${slot.label} · ${formatRange(slot.start, slot.end)}${item.severity === 'error' ? ' · conflict' : ''}${
+    item.ghost ? ' (preview — click to add)' : ''
+  }`;
+  // Labels adapt to the block's own width (container queries in styles.css): full range when wide,
+  // start time when narrow, stacked lines when the block is tall enough to hold them.
   return (
     <button
       type="button"
-      className="cal-block text-left"
+      className="cal-block"
       data-color={item.color}
+      data-short={short || undefined}
+      data-tall={minutes >= 75 || undefined}
       data-ghost={item.ghost || undefined}
       data-status={item.status}
       data-emphasis={emphasis}
@@ -293,17 +300,21 @@ function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties 
       onMouseEnter={() => useUi.getState().setFocusCourse(slot.ownerId)}
       onMouseLeave={() => useUi.getState().setFocusCourse(null)}
     >
-      <div className={`px-1 leading-tight sm:px-1.5 ${short ? 'py-0.5' : 'py-1'}`}>
-        <div className="flex items-start gap-1 text-[11.5px] font-semibold sm:text-[12.5px]">
-          <span className="min-w-0 break-words">{code}</span>
-          {item.severity === 'error' && <AlertTriangle className="mt-px ml-auto size-3 shrink-0 text-danger" aria-label="Conflict" />}
-        </div>
-        <div className="tnum truncate text-[11px] opacity-85 sm:text-[11.5px]">
-          {type && <span className="font-medium">{type}</span>}
-          {type && !short && ' · '}
-          {!short && formatRange(slot.start, slot.end)}
-        </div>
-      </div>
+      <span className="cal-code">
+        <span className="cal-code-text">{code}</span>
+        {item.severity === 'error' && <AlertTriangle className="cal-alert" aria-hidden />}
+      </span>
+      {(type || !short) && (
+        <span className="cal-meta tnum">
+          {type && <span className="cal-type">{type}</span>}
+          {!short && (
+            <>
+              <span className="cal-time">{formatRange(slot.start, slot.end)}</span>
+              <span className="cal-start">{formatTime(slot.start).slice(0, -2)}</span>
+            </>
+          )}
+        </span>
+      )}
     </button>
   );
 }
