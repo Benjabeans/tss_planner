@@ -14,13 +14,20 @@ import { TERM_DATES, type TermDates } from '@shared/terms.ts';
 import { useCatalogStore, type LoadedCatalog } from '../store/catalog.ts';
 import { usePlanStore } from '../store/plans.ts';
 import { useUi } from '../store/ui.ts';
+import { addPackage, applySchedule } from './actions.ts';
 
 export interface PreviewData {
-  course: Course;
-  pkg: Package;
+  /** Courses whose sections are being previewed (their current blocks dim). */
+  courseKeys: Set<string>;
   slots: Slot[];
+  /** Conflicts between the previewed sections and the rest of the plan. */
   conflicts: Conflict[];
+  /** True when the preview is exactly what's already planned. */
   current: boolean;
+  label: string;
+  /** Set when previewing a single section (search rows, swap lists). */
+  single: { course: Course; pkg: Package } | null;
+  apply: () => void;
 }
 
 export interface PlannerData {
@@ -86,23 +93,37 @@ export function PlannerProvider({ children }: { children: ReactNode }) {
     };
   }, [plan, data, tightGapMin]);
 
+  const scheduleRef = useUi((s) => s.schedulePreview);
+
   const preview = useMemo<PreviewData | null>(() => {
-    if (!previewRef || !data) return null;
-    const course = data.index.byKey.get(previewRef.courseKey);
-    const pkg = course ? findPackage(course, previewRef.packageId) : null;
-    if (!course || !pkg) return null;
-    const pick = plan?.picks.find((p) => p.courseKey === course.key);
+    if (!data) return null;
+    const choices = scheduleRef ? scheduleRef.choices : previewRef ? [previewRef] : [];
+    const resolved = choices
+      .map((ch) => {
+        const course = data.index.byKey.get(ch.courseKey);
+        const pkg = course ? findPackage(course, ch.packageId) : null;
+        return course && pkg ? { course, pkg } : null;
+      })
+      .filter((x): x is { course: Course; pkg: Package } => x !== null);
+    if (resolved.length === 0) return null;
+    const courseKeys = new Set(resolved.map((r) => r.course.key));
     // Conflicts must reference these exact slot objects so ghost blocks can be marked.
-    const slots = slotsForPackage(course, pkg, { kind: 'candidate', status: pick?.status });
-    const others = base.slots.filter((s) => s.ownerId !== course.key && s.status !== 'backup');
+    const slots = resolved.flatMap(({ course, pkg }) =>
+      slotsForPackage(course, pkg, { kind: 'candidate', status: plan?.picks.find((p) => p.courseKey === course.key)?.status }),
+    );
+    const others = base.slots.filter((s) => !courseKeys.has(s.ownerId) && s.status !== 'backup');
+    const current = resolved.every(({ course, pkg }) => plan?.picks.find((p) => p.courseKey === course.key)?.packageId === pkg.id);
+    const single = !scheduleRef && resolved.length === 1 ? resolved[0]! : null;
     return {
-      course,
-      pkg,
+      courseKeys,
       slots,
       conflicts: findCrossConflicts(slots, others),
-      current: pick?.packageId === pkg.id,
+      current,
+      label: scheduleRef ? scheduleRef.label : resolved[0]!.course.displayCode,
+      single,
+      apply: () => (single ? addPackage(single.course, single.pkg) : applySchedule(resolved, scheduleRef?.label ?? 'schedule')),
     };
-  }, [previewRef, data, plan, base.slots]);
+  }, [previewRef, scheduleRef, data, plan, base.slots]);
 
   const value = useMemo<PlannerData>(() => {
     const labelFor = (ownerId: string) => {

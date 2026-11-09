@@ -12,6 +12,7 @@ import { useUi } from '../store/ui.ts';
 import { addPackage, removeCourse, setStatus } from '../lib/actions.ts';
 import { describeConflict, seatText } from '../lib/describe.ts';
 import { STATUS_LABEL, PickHealth } from './PlanTable.tsx';
+import { GenerateSheet } from './GenerateSheet.tsx';
 import { CourseDetails } from './CourseCard.tsx';
 import { Pill } from './SearchPanel.tsx';
 
@@ -28,13 +29,15 @@ export function SheetHost() {
 
   if (!sheet) return null;
   return (
-    <div className="no-print fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true">
-      <button type="button" className="absolute inset-0 bg-ink/20" aria-label="Close panel" onClick={close} />
-      <div className="relative flex h-full w-full max-w-md flex-col border-l border-rule bg-surface shadow-[var(--shadow)]">
+    <div className="no-print fixed inset-0 z-50 flex justify-start" role="dialog" aria-modal="true">
+      {/* Sheets open over the search panel so calendar previews stay visible. */}
+      <button type="button" className="absolute inset-0 bg-ink/15 lg:bg-transparent" aria-label="Close panel" onClick={close} />
+      <div className="relative flex h-full w-full max-w-md flex-col border-r border-rule bg-surface shadow-[var(--shadow)] lg:max-w-[400px]">
         {sheet.kind === 'pick' && <PickSheet courseKey={sheet.courseKey} onClose={close} />}
         {sheet.kind === 'conflicts' && <ConflictSheet focus={sheet.focus} onClose={close} />}
         {sheet.kind === 'block' && <BlockSheet blockId={sheet.blockId} onClose={close} />}
         {sheet.kind === 'settings' && <SettingsSheet onClose={close} />}
+        {sheet.kind === 'generate' && <GenerateSheet onClose={close} />}
       </div>
     </div>
   );
@@ -245,6 +248,15 @@ function ConflictSheet({ focus, onClose }: { focus?: string; onClose: () => void
       sub={real.length ? 'Swap a section, keep one as a backup, or split them across plans.' : 'Everything in this plan fits together.'}
       onClose={onClose}
     >
+      {real.length > 0 && (
+        <button
+          type="button"
+          onClick={() => useUi.getState().openSheet({ kind: 'generate' })}
+          className="mb-3 w-full rounded-lg border border-dashed border-rule-strong px-3 py-2 text-left text-[13px] hover:border-ink"
+        >
+          <b>Find a schedule</b> <span className="text-muted">tries every section combination for you</span>
+        </button>
+      )}
       <div className="space-y-3">
         {ordered.map((g) => (
           <ConflictCard key={g.owners.join('~')} group={g} />

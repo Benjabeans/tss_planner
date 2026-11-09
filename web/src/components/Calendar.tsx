@@ -6,7 +6,6 @@ import { DAY_ABBR, addDays, formatDate, formatHour, formatRange, weekdayOfDate }
 import { isSchedulable, packageSections } from '@shared/plan.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { useUi } from '../store/ui.ts';
-import { addPackage } from '../lib/actions.ts';
 import { describeConflict } from '../lib/describe.ts';
 
 interface BlockItem {
@@ -40,7 +39,7 @@ function useColorOf() {
   const { plan } = usePlanner();
   return (slot: Slot): string => {
     if (slot.ownerKind === 'block') return plan?.blocks.find((b) => b.id === slot.ownerId)?.color ?? 'slate';
-    return plan?.picks.find((p) => p.courseKey === slot.ownerId)?.color ?? 'blue';
+    return plan?.picks.find((p) => p.courseKey === slot.ownerId)?.color ?? (slot.ownerKind === 'candidate' ? 'slate' : 'blue');
   };
 }
 
@@ -49,7 +48,7 @@ function worst(a: Severity | null, b: Severity): Severity {
   return a === null || rank[b] < rank[a] ? b : a;
 }
 
-function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorOf: (s: Slot) => string, ghostColor: string) {
+function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorOf: (s: Slot) => string) {
   const sev = new Map<Slot, Severity>();
   for (const c of conflicts) {
     if (c.severity === 'info') continue;
@@ -65,7 +64,7 @@ function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorO
     severity: sev.get(s) ?? null,
   }));
   ghosts.forEach((s, i) =>
-    items.push({ id: `g${i}`, slot: s, color: ghostColor, ghost: true, severity: sev.get(s) ?? null }),
+    items.push({ id: `g${i}`, slot: s, color: colorOf(s), ghost: true, severity: sev.get(s) ?? null }),
   );
   return items;
 }
@@ -100,12 +99,14 @@ function WeekView() {
   const { slots, conflicts, preview, plan } = usePlanner();
   const colorOf = useColorOf();
   const columns = useMemo<Column[]>(() => {
-    const weekly = slots.filter((s) => !s.date);
+    // While previewing, the previewed courses' current blocks step aside so the ghosts show the result.
+    const hidden = preview && !preview.current ? preview.courseKeys : new Set<string>();
+    const visible = (c: Conflict) => !hidden.has(c.a.ownerId) && !hidden.has(c.b.ownerId);
+    const weekly = slots.filter((s) => !s.date && !hidden.has(s.ownerId));
     const ghostSlots = preview && !preview.current ? preview.slots.filter((s) => !s.date) : [];
     const previewConflicts = preview && !preview.current ? preview.conflicts.filter((c) => !c.date) : [];
-    const allConflicts = [...conflicts.filter((c) => !c.date), ...previewConflicts];
-    const ghostColor = preview ? (plan?.picks.find((p) => p.courseKey === preview.course.key)?.color ?? 'slate') : 'slate';
-    const items = buildItems(weekly, ghostSlots, allConflicts, colorOf, ghostColor);
+    const allConflicts = [...conflicts.filter((c) => !c.date && visible(c)), ...previewConflicts];
+    const items = buildItems(weekly, ghostSlots, allConflicts, colorOf);
     const days = [1, 2, 3, 4, 5];
     if (items.some((i) => i.slot.day === 6)) days.push(6);
     if (items.some((i) => i.slot.day === 0)) days.push(0);
@@ -138,14 +139,14 @@ function FinalsView() {
   const { slots, conflicts, preview, termDates, plan } = usePlanner();
   const colorOf = useColorOf();
   const columns = useMemo<Column[]>(() => {
-    const finals = slots.filter((s) => s.kind === 'final');
+    const hidden = preview && !preview.current ? preview.courseKeys : new Set<string>();
+    const finals = slots.filter((s) => s.kind === 'final' && !hidden.has(s.ownerId));
     const ghostSlots = preview && !preview.current ? preview.slots.filter((s) => s.kind === 'final') : [];
     const finalConflicts = [
-      ...conflicts.filter((c) => c.kind === 'final'),
+      ...conflicts.filter((c) => c.kind === 'final' && !hidden.has(c.a.ownerId) && !hidden.has(c.b.ownerId)),
       ...(preview && !preview.current ? preview.conflicts.filter((c) => c.kind === 'final') : []),
     ];
-    const ghostColor = preview ? (plan?.picks.find((p) => p.courseKey === preview.course.key)?.color ?? 'slate') : 'slate';
-    const items = buildItems(finals, ghostSlots, finalConflicts, colorOf, ghostColor);
+    const items = buildItems(finals, ghostSlots, finalConflicts, colorOf);
 
     let dates: string[] = [];
     if (termDates) {
@@ -262,15 +263,13 @@ function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties 
   const pulse = useUi((s) => s.pulse);
   const fresh = useUi((s) => s.fresh);
   const { slot } = item;
-  const isPick = slot.ownerKind === 'pick';
-  const swapping = isPick && preview && !preview.current && preview.course.key === slot.ownerId;
-  const emphasis = swapping ? 'dim' : focusCourse && focusCourse === slot.ownerId ? 'focus' : undefined;
+  const emphasis = !item.ghost && focusCourse && focusCourse === slot.ownerId ? 'focus' : undefined;
   const short = slot.end - slot.start < 45;
   const [code, type] = splitLabel(slot.label);
 
   const onClick = () => {
     const ui = useUi.getState();
-    if (item.ghost && preview) addPackage(preview.course, preview.pkg);
+    if (item.ghost && preview) preview.apply();
     else if (slot.ownerKind === 'block') ui.openSheet({ kind: 'block', blockId: slot.ownerId });
     else ui.openSheet({ kind: 'pick', courseKey: slot.ownerId });
   };

@@ -70,3 +70,26 @@ export function undo(planSnapshot: Parameters<ReturnType<typeof usePlanStore.get
   usePlanStore.getState().restorePlan(planSnapshot);
   useUi.getState().pushToast({ tone: 'neutral', message: 'Undone.' });
 }
+
+/** Apply a generated schedule: swap/add every listed package in one undoable step. */
+export function applySchedule(choices: { course: Course; pkg: Package }[], label: string): void {
+  const plans = usePlanStore.getState();
+  const termCode = plans.termCode;
+  if (!termCode) return;
+  const planId = plans.ensurePlan(termCode);
+  const before = usePlanStore.getState().plans[planId]!;
+  let changed = 0;
+  for (const { course, pkg } of choices) {
+    if (before.picks.find((p) => p.courseKey === course.key)?.packageId === pkg.id) continue;
+    usePlanStore.getState().addOrSwap(planId, course, pkg);
+    changed++;
+  }
+  const ui = useUi.getState();
+  ui.setSchedulePreview(null);
+  ui.pushToast({
+    tone: 'ok',
+    message: changed ? `Applied ${label}: ${changed} course${changed === 1 ? '' : 's'} changed.` : `${label} matches your plan already.`,
+    undo: changed ? before : undefined,
+  });
+  ui.pulseCourses(choices.map((c) => c.course.key));
+}

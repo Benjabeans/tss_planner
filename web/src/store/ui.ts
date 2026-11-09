@@ -6,7 +6,13 @@ export interface Preview {
   packageId: string;
 }
 
+export interface SchedulePreview {
+  label: string;
+  choices: { courseKey: string; packageId: string }[];
+}
+
 export type Sheet =
+  | { kind: 'generate' }
   | { kind: 'pick'; courseKey: string }
   | { kind: 'conflicts'; focus?: string }
   | { kind: 'block'; blockId: string | null }
@@ -25,6 +31,7 @@ export type MobileTab = 'search' | 'calendar' | 'plan';
 
 interface UiState {
   preview: Preview | null;
+  schedulePreview: SchedulePreview | null;
   view: 'week' | 'finals';
   sheet: Sheet;
   toasts: Toast[];
@@ -36,6 +43,7 @@ interface UiState {
   fresh: string | null;
 
   setPreview: (p: Preview | null) => void;
+  setSchedulePreview: (p: SchedulePreview | null) => void;
   setView: (v: 'week' | 'finals') => void;
   openSheet: (s: Sheet) => void;
   pushToast: (t: Omit<Toast, 'id'>) => void;
@@ -50,6 +58,7 @@ let toastId = 1;
 
 export const useUi = create<UiState>((set) => ({
   preview: null,
+  schedulePreview: null,
   view: 'week',
   sheet: null,
   toasts: [],
@@ -59,11 +68,12 @@ export const useUi = create<UiState>((set) => ({
   fresh: null,
 
   setPreview: (preview) => set({ preview }),
+  setSchedulePreview: (schedulePreview) => set({ schedulePreview }),
   setView: (view) => set({ view }),
-  openSheet: (sheet) => set({ sheet }),
+  openSheet: (sheet) => set({ sheet, schedulePreview: null, preview: null }),
   pushToast: (t) => {
     const id = toastId++;
-    set((s) => ({ toasts: [...s.toasts.slice(-1), { ...t, id }] }));
+    set({ toasts: [{ ...t, id }] });
     setTimeout(() => set((s) => ({ toasts: s.toasts.filter((x) => x.id !== id) })), t.action ? 8000 : t.undo ? 6000 : 3500);
   },
   dismissToast: (id) => set((s) => ({ toasts: s.toasts.filter((x) => x.id !== id) })),

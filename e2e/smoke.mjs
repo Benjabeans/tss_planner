@@ -104,6 +104,31 @@ try {
   if (courses < 1) throw new Error('plan did not persist across reload');
   step('plan persists across reload');
 
+  // ---------------------------------------------------------------- generator
+  const gen = await newPage({ viewport: { width: 1440, height: 940 }, colorScheme: 'light' });
+  const gs = gen.getByPlaceholder('CSE 110, MATH 18, or a professor');
+  for (const [q, re] of [
+    ['CSE 110', /^Add CSE 110/],
+    ['ECON 1', /Add ECON 1 .*Conflicts with CSE 110/],
+    ['MATH 18', /^Add MATH 18/],
+  ]) {
+    await gs.fill(q);
+    await gen.getByRole('button', { name: re }).first().click();
+  }
+  await gen.getByRole('button', { name: /conflict/ }).first().waitFor();
+  await gen.getByRole('button', { name: 'Find a schedule' }).click();
+  const option = gen.getByRole('button', { name: /^Option 1 / });
+  await option.hover();
+  await gen.getByText(/Previewing/).waitFor();
+  await gen.screenshot({ path: `${out}13-generator-preview.png` });
+  await option.click();
+  await gen.getByRole('button', { name: /No conflicts/ }).waitFor();
+  await gen.keyboard.press('Escape');
+  await gen.mouse.move(1000, 900);
+  await gen.waitForTimeout(2200);
+  await gen.screenshot({ path: `${out}14-generator-applied.png` });
+  step('generator finds and applies a conflict-free schedule');
+
   // ---------------------------------------------------------------- dark
   const dark = await newPage({ viewport: { width: 1440, height: 940 }, colorScheme: 'dark' });
   const ds = dark.getByPlaceholder('CSE 110, MATH 18, or a professor');

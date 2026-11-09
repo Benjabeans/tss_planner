@@ -115,7 +115,7 @@ function PreviewHint() {
   if (!preview) return null;
   return (
     <p className="truncate text-xs text-muted">
-      Previewing <b className="text-ink">{preview.course.displayCode}</b>
+      Previewing <b className="text-ink">{preview.label}</b>
       {preview.current ? ' (already in your plan)' : ' — click to add'}
     </p>
   );

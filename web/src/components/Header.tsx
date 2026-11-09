@@ -1,4 +1,4 @@
-import { AlertTriangle, CalendarDays, Check, ChevronDown, Copy, Download, MoreHorizontal, Pencil, Plus, Printer, Settings, Trash2 } from 'lucide-react';
+import { AlertTriangle, CalendarDays, Check, ChevronDown, Copy, Download, MoreHorizontal, Pencil, Plus, Printer, Settings, Sparkles, Trash2 } from 'lucide-react';
 import { buildIcs } from '@shared/ics.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { usePlanStore } from '../store/plans.ts';
@@ -224,6 +224,15 @@ function MoreMenu() {
     >
       {(close) => (
         <>
+          <MenuItem
+            disabled={!plan || plan.picks.length === 0}
+            onClick={() => {
+              useUi.getState().openSheet({ kind: 'generate' });
+              close();
+            }}
+          >
+            <Sparkles className="size-3.5" /> Find a schedule…
+          </MenuItem>
           <MenuItem
             disabled={!plan || plan.picks.length === 0 || !termDates}
             onClick={() => {
