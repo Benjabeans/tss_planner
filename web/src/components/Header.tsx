@@ -9,7 +9,7 @@ import { shareUrl } from '../lib/share.ts';
 
 export function Header() {
   return (
-    <header className="no-print flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-rule bg-surface px-3 py-2 sm:px-4">
+    <header className="no-print flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-rule bg-surface px-3 py-2 sm:px-4 lg:h-12 lg:py-0">
       <div className="flex items-center gap-2 pr-1">
         <Logo />
         <span className="text-[15px] font-semibold tracking-tight">TSS Planner</span>

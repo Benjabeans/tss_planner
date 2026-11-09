@@ -260,10 +260,12 @@ function laneStyle(p: { lane: number; lanes: number } | undefined): CSSPropertie
 function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties }) {
   const { preview } = usePlanner();
   const focusCourse = useUi((s) => s.focusCourse);
+  // The course whose sheet is open stays highlighted, so the sheet and its blocks read as one.
+  const sheetCourse = useUi((s) => (s.sheet?.kind === 'pick' ? s.sheet.courseKey : null));
   const pulse = useUi((s) => s.pulse);
   const fresh = useUi((s) => s.fresh);
   const { slot } = item;
-  const emphasis = !item.ghost && focusCourse && focusCourse === slot.ownerId ? 'focus' : undefined;
+  const emphasis = !item.ghost && (focusCourse ?? sheetCourse) === slot.ownerId ? 'focus' : undefined;
   const minutes = slot.end - slot.start;
   const short = minutes < 45;
   const [code, type] = splitLabel(slot.label);
