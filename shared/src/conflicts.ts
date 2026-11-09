@@ -27,6 +27,8 @@ export type ConflictKind =
   | 'class'
   /** Final vs final on the same date. */
   | 'final'
+  /** Two exams (midterm/final) on the same date and time. */
+  | 'exam'
   /** A dated meeting (midterm, one-off) vs a weekly class or another dated meeting. */
   | 'dated'
   /** Anything vs a custom block. */
@@ -58,6 +60,7 @@ export interface ConflictOptions {
 const BASE_SEVERITY: Record<ConflictKind, Severity> = {
   class: 'error',
   final: 'error',
+  exam: 'error',
   dated: 'warning',
   block: 'warning',
   tight: 'info',
@@ -70,8 +73,12 @@ function sameOwner(a: Slot, b: Slot): boolean {
 }
 
 function makeConflict(kind: ConflictKind, a: Slot, b: Slot, start: number, end: number, date: string | null): Conflict {
-  const weak = a.status === 'backup' || b.status === 'backup';
-  const severity: Severity = weak ? 'info' : BASE_SEVERITY[kind];
+  // Backups are contingencies, so their overlaps are only notes — except against a course
+  // you're enrolled in, which a backup could never be taken alongside.
+  const backup = a.status === 'backup' || b.status === 'backup';
+  const enrolled = a.status === 'enrolled' || b.status === 'enrolled';
+  const base = BASE_SEVERITY[kind];
+  const severity: Severity = !backup ? base : enrolled && base !== 'info' ? 'warning' : 'info';
   const ends = [a, b].map((s) => `${s.ownerKind}:${s.ownerId}:${s.sectionId ?? ''}`).sort();
   return {
     id: `${kind}|${ends.join('~')}|${date ?? a.day}|${start}`,
@@ -110,7 +117,8 @@ export function compareSlots(a: Slot, b: Slot, opts: ConflictOptions = {}): Conf
   // Dated vs dated: same calendar date.
   if (a.date && b.date) {
     if (a.date !== b.date || !overlaps(a.start, a.end, b.start, b.end)) return null;
-    const kind: ConflictKind = a.kind === 'final' && b.kind === 'final' ? 'final' : 'dated';
+    const exam = (x: Slot) => x.kind === 'final' || x.kind === 'midterm';
+    const kind: ConflictKind = a.kind === 'final' && b.kind === 'final' ? 'final' : exam(a) && exam(b) ? 'exam' : 'dated';
     return makeConflict(kind, a, b, Math.max(a.start, b.start), Math.min(a.end, b.end), a.date);
   }
 

@@ -88,6 +88,11 @@ export class UcsdClient {
       onProgress?.(Math.min(offset + PAGE_SIZE, total), total);
       if (body.courses.length === 0) break;
     }
+    // Paging can drift if upstream changes mid-sync; a short catalog must not replace a good one.
+    const shortBy = (Number.isFinite(total) ? total : 0) - courses.length;
+    if (shortBy > Math.max(5, total * 0.01)) {
+      throw new UpstreamShapeError(`search: got ${courses.length} of ${total} courses; refusing a partial catalog`);
+    }
     return courses;
   }
 }

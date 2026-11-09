@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react';
 import type { Course, Package, Plan } from '@shared/types.ts';
 import type { Conflict, Slot } from '@shared/conflicts.ts';
 import { findConflicts, findCrossConflicts, groupConflicts, type ConflictGroup } from '@shared/conflicts.ts';
@@ -124,6 +124,17 @@ export function PlannerProvider({ children }: { children: ReactNode }) {
       apply: () => (single ? addPackage(single.course, single.pkg) : applySchedule(resolved, scheduleRef?.label ?? 'schedule')),
     };
   }, [previewRef, scheduleRef, data, plan, base.slots]);
+
+  // Keep stored package ids pointing at the primary id (see repointPicks).
+  useEffect(() => {
+    if (!plan) return;
+    const ids: Record<string, { packageId: string; sectionIds: string[] }> = {};
+    for (const p of plan.picks) {
+      const r = base.picks.get(p.courseKey);
+      if (r?.pkg && r.pkg.id !== p.packageId) ids[p.courseKey] = { packageId: r.pkg.id, sectionIds: r.pkg.sectionIds };
+    }
+    if (Object.keys(ids).length) usePlanStore.getState().repointPicks(plan.id, ids);
+  }, [plan, base.picks]);
 
   const value = useMemo<PlannerData>(() => {
     const labelFor = (ownerId: string) => {

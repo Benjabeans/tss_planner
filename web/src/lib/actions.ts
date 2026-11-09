@@ -1,4 +1,5 @@
-import type { Course, Package, PickStatus } from '@shared/types.ts';
+import type { Course, Package, PickStatus, Plan } from '@shared/types.ts';
+import type { UndoRecord } from '../store/ui.ts';
 import { conflictsAgainst, planSlots, packageSections } from '@shared/plan.ts';
 import { usePlanStore } from '../store/plans.ts';
 import { useUi } from '../store/ui.ts';
@@ -42,7 +43,7 @@ export function addPackage(course: Course, pkg: Package): void {
   ui.pushToast({
     tone: errors.length ? 'danger' : warnings.length || pkg.status !== 'open' ? 'warn' : 'ok',
     message,
-    undo: before,
+    undo: undoRecord([before]),
     action: errors.length || warnings.length ? { label: 'Fix', run: () => ui.openSheet({ kind: 'conflicts', focus: course.key }) } : undefined,
   });
   if (errors.length) ui.pulseCourses([course.key, ...errors.map((c) => (c.a.ownerId === course.key ? c.b.ownerId : c.a.ownerId))]);
@@ -56,7 +57,7 @@ export function removeCourse(courseKey: string, label: string): void {
   if (!plan) return;
   plans.removePick(plan.id, courseKey);
   const ui = useUi.getState();
-  ui.pushToast({ tone: 'neutral', message: `Removed ${label}.`, undo: plan });
+  ui.pushToast({ tone: 'neutral', message: `Removed ${label}.`, undo: undoRecord([plan]) });
   if (ui.sheet?.kind === 'pick' && ui.sheet.courseKey === courseKey) ui.openSheet(null);
 }
 
@@ -66,8 +67,20 @@ export function setStatus(courseKey: string, status: PickStatus): void {
   if (plan) plans.setPickStatus(plan.id, courseKey, status);
 }
 
-export function undo(planSnapshot: Parameters<ReturnType<typeof usePlanStore.getState>['restorePlan']>[0]): void {
-  usePlanStore.getState().restorePlan(planSnapshot);
+/** Call right after a change, with the plans as they were before it. */
+export function undoRecord(before: Plan[]): UndoRecord {
+  const plans = usePlanStore.getState().plans;
+  return { before, guard: Object.fromEntries(before.map((p) => [p.id, plans[p.id]?.rev ?? 0])) };
+}
+
+/** Restore the snapshots only if nothing changed since; never clobber later edits. */
+export function undo(rec: UndoRecord): void {
+  const plans = usePlanStore.getState().plans;
+  if (rec.before.some((p) => (plans[p.id]?.rev ?? 0) !== rec.guard[p.id])) {
+    useUi.getState().pushToast({ tone: 'warn', message: 'Can’t undo: the plan changed after that.' });
+    return;
+  }
+  for (const p of rec.before) usePlanStore.getState().restorePlan(p);
   useUi.getState().pushToast({ tone: 'neutral', message: 'Undone.' });
 }
 
@@ -89,7 +102,7 @@ export function applySchedule(choices: { course: Course; pkg: Package }[], label
   ui.pushToast({
     tone: 'ok',
     message: changed ? `Applied ${label}: ${changed} course${changed === 1 ? '' : 's'} changed.` : `${label} matches your plan already.`,
-    undo: changed ? before : undefined,
+    undo: changed ? undoRecord([before]) : undefined,
   });
   ui.pulseCourses(choices.map((c) => c.course.key));
 }

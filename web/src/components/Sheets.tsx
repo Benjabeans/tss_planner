@@ -9,7 +9,7 @@ import { DAY_SHORT, formatTime, summarizeWeekly } from '@shared/time.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { usePlanStore, newBlockId } from '../store/plans.ts';
 import { useUi } from '../store/ui.ts';
-import { addPackage, removeCourse, setStatus } from '../lib/actions.ts';
+import { addPackage, removeCourse, setStatus, undoRecord } from '../lib/actions.ts';
 import { describeConflict, seatText } from '../lib/describe.ts';
 import { STATUS_LABEL, PickHealth } from './PlanTable.tsx';
 import { GenerateSheet } from './GenerateSheet.tsx';
@@ -141,7 +141,9 @@ function SwapList({ course, onlyFixes = false, limit }: { course: Course; onlyFi
   const { plan, data, labelFor } = usePlanner();
   const alts = useMemo(() => (plan && data ? alternativesFor(course.key, plan, data.index) : []), [course, plan, data]);
   const setPreview = useUi((s) => s.setPreview);
-  const shown = (onlyFixes ? alts.filter((a) => !a.current && !a.conflicts.some((c) => c.severity === 'error')) : alts).slice(0, limit);
+  // "Fits" means no errors and no warnings (a custom block counts); info notes are fine.
+  const fits = (a: (typeof alts)[number]) => !a.conflicts.some((c) => c.severity !== 'info');
+  const shown = (onlyFixes ? alts.filter((a) => !a.current && fits(a)) : alts).slice(0, limit);
 
   if (shown.length === 0) {
     return <p className="text-[13px] text-muted">{onlyFixes ? `No other section of ${course.displayCode} avoids this.` : 'No sections listed.'}</p>;
@@ -150,7 +152,10 @@ function SwapList({ course, onlyFixes = false, limit }: { course: Course; onlyFi
     <ul className="space-y-1">
       {shown.map(({ pkg, conflicts, current }) => {
         const errors = conflicts.filter((c) => c.severity === 'error');
-        const others = [...new Set(errors.flatMap((c) => [c.a.ownerId, c.b.ownerId]).filter((o) => o !== course.key))].map(labelFor);
+        const warnings = conflicts.filter((c) => c.severity === 'warning');
+        const othersOf = (list: typeof conflicts) =>
+          [...new Set(list.flatMap((c) => [c.a.ownerId, c.b.ownerId]).filter((o) => o !== course.key))].map(labelFor);
+        const others = othersOf(errors);
         return (
           <li key={pkg.id}>
             <button
@@ -182,6 +187,10 @@ function SwapList({ course, onlyFixes = false, limit }: { course: Course; onlyFi
                   <span className="flex items-center gap-1 font-medium text-danger">
                     <AlertTriangle className="size-3" /> Conflicts with {others.join(', ')}
                   </span>
+                ) : warnings.length ? (
+                  <span className="flex items-center gap-1 font-medium text-warn">
+                    <AlertTriangle className="size-3" /> Overlaps {othersOf(warnings).join(', ')}
+                  </span>
                 ) : (
                   <span className="flex items-center gap-1 font-medium text-ok">
                     <Check className="size-3" /> Fits
@@ -205,10 +214,14 @@ function MoveToPlan({ courseKey }: { courseKey: string }) {
   if (!plan || !termCode) return null;
   const others = Object.values(plans).filter((p) => p.termCode === termCode && p.id !== plan.id);
   const move = (to: string) => {
-    const before = plan;
+    const before = [plan, usePlanStore.getState().plans[to]!];
     usePlanStore.getState().movePick(plan.id, courseKey, to);
     useUi.getState().openSheet(null);
-    useUi.getState().pushToast({ tone: 'neutral', message: `Moved to ${usePlanStore.getState().plans[to]?.name}.`, undo: before });
+    useUi.getState().pushToast({
+      tone: 'neutral',
+      message: `Moved to ${usePlanStore.getState().plans[to]?.name}.`,
+      undo: undoRecord(before),
+    });
   };
   return (
     <div className="flex flex-wrap gap-1.5">
@@ -284,7 +297,7 @@ function ConflictCard({ group }: { group: ConflictGroup }) {
     .map((o) => ({ id: o, course: data?.index.byKey.get(o) ?? null, block: plan?.blocks.find((b) => b.id === o) ?? null }))
     .filter((s) => s.course || s.block);
   const anyFix = sides.some(
-    (s) => s.course && plan && data && alternativesFor(s.course.key, plan, data.index).some((a) => !a.current && !a.conflicts.some((c) => c.severity === 'error')),
+    (s) => s.course && plan && data && alternativesFor(s.course.key, plan, data.index).some((a) => !a.current && !a.conflicts.some((c) => c.severity !== 'info')),
   );
 
   return (

@@ -53,7 +53,8 @@ export function parseQuery(q: string, subjects: Set<string>): ParsedQuery {
   const words: string[] = [];
   let carried: string | null = null;
 
-  for (const part of q.split(/[,;]+/)) {
+  // Commas, semicolons, slashes, "&", "+", "and", "or" all separate items: "CSE 100/101", "CSE 110 and 120".
+  for (const part of q.split(/[,;/&+]+|\s(?:and|or)\s/i)) {
     const tokens = part.trim().toUpperCase().split(/\s+/).filter(Boolean);
     for (let i = 0; i < tokens.length; i++) {
       const t = tokens[i]!;
@@ -107,6 +108,13 @@ export function searchCourses(index: SearchIndex, q: string, limit = 100): Cours
   }
 
   for (const s of parsed.subjects) (index.bySubject.get(s) ?? []).forEach(push);
+
+  // Words next to codes narrow those results ("CSE 8A lab"); if nothing matches, keep the codes.
+  if (out.length > 0) {
+    if (parsed.words.length === 0) return out.slice(0, limit);
+    const narrowed = out.filter((c) => parsed.words.every((w) => index.hay.get(c.key)!.all.includes(w)));
+    return (narrowed.length ? narrowed : out).slice(0, limit);
+  }
 
   if (parsed.words.length) {
     const scored: { c: Course; score: number }[] = [];

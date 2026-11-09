@@ -39,6 +39,17 @@ describe('pick health', () => {
   it('detects changed meetings', () => {
     expect(resolvePick(pickFor(index, 'CSE 110', 0, { fingerprint: 'deadbeef' }), index).state).toBe('changed');
   });
+  it('resolves alias ids and survives an id change via the saved section set', () => {
+    const c = courseByCode(index, 'CSE 110');
+    const withAlias = c.packages.find((p) => p.altIds.length > 0);
+    if (withAlias) expect(resolvePick(pickFor(index, 'CSE 110', c.packages.indexOf(withAlias), { packageId: withAlias.altIds[0]! }), index).state).toBe('ok');
+    const pkg = c.packages[1]!;
+    const renamed = pickFor(index, 'CSE 110', 1, { packageId: 'gone', sectionIds: pkg.sectionIds });
+    const r = resolvePick(renamed, index);
+    expect(r.state).toBe('ok');
+    expect(r.pkg?.id).toBe(pkg.id);
+  });
+
   it('detects a removed package or course', () => {
     expect(resolvePick(pickFor(index, 'CSE 110', 0, { packageId: 'nope' }), index).state).toBe('missing-package');
     expect(resolvePick(pickFor(index, 'CSE 110', 0, { courseKey: 'nope' }), index).state).toBe('missing-course');

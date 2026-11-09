@@ -190,6 +190,8 @@ export type PickStatus = 'planned' | 'enrolled' | 'waitlisted' | 'backup';
 export interface PlanPick {
   courseKey: string;
   packageId: string;
+  /** Sections of the package when added; lets a pick survive upstream package-id changes. */
+  sectionIds?: string[];
   color: string;
   status: PickStatus;
   /** Hash of the package's meetings when it was added; detects upstream changes. */
@@ -216,4 +218,6 @@ export interface Plan {
   blocks: CustomBlock[];
   createdAt: string;
   updatedAt: string;
+  /** Bumped on every change; guards undo against clobbering later edits. */
+  rev?: number;
 }

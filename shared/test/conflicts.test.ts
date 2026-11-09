@@ -54,6 +54,12 @@ describe('weekly class conflicts', () => {
     expect(compareSlots(a, b)!.severity).toBe('info');
   });
 
+  it('keeps a backup overlapping an enrolled course as a warning', () => {
+    const a = slot({ day: 1, start: 600, end: 650, status: 'backup' });
+    const b = slot({ day: 1, start: 600, end: 650, status: 'enrolled' });
+    expect(compareSlots(a, b)!.severity).toBe('warning');
+  });
+
   it('flags conflicts that involve an enrolled course', () => {
     const a = slot({ day: 1, start: 600, end: 650, status: 'enrolled' });
     const b = slot({ day: 1, start: 600, end: 650 });
@@ -90,6 +96,16 @@ describe('dated meetings', () => {
     expect(compareSlots(f1, f2)!.kind).toBe('final');
     expect(compareSlots(f1, f2)!.severity).toBe('error');
     expect(compareSlots(f1, f3)).toBeNull();
+  });
+
+  it('two exams on the same date and time are an error (exam ↔ exam)', () => {
+    const m1 = slot({ kind: 'midterm', date: '2027-02-03', day: 3, start: 1140, end: 1260 });
+    const m2 = slot({ kind: 'midterm', date: '2027-02-03', day: 3, start: 1200, end: 1310 });
+    const c = compareSlots(m1, m2)!;
+    expect(c.kind).toBe('exam');
+    expect(c.severity).toBe('error');
+    const other = slot({ kind: 'other', date: '2027-02-03', day: 3, start: 1200, end: 1310 });
+    expect(compareSlots(m1, other)!.kind).toBe('dated');
   });
 
   it('finals never conflict with weekly classes', () => {

@@ -25,6 +25,7 @@ interface CachedCatalog {
   etag: string;
   gzip: Buffer;
   syncedAt: string;
+  mtimeMs: number;
 }
 
 /** File-backed catalog store with atomic writes and an in-memory cache. */
@@ -32,6 +33,7 @@ export class Store {
   readonly dir: string;
   private cache = new Map<string, CachedCatalog>();
   private meta: Meta;
+  private metaMtimeMs = 0;
 
   constructor(dir: string) {
     this.dir = dir;
@@ -48,23 +50,35 @@ export class Store {
     renameSync(tmp, file);
   }
 
+  private get metaFile(): string {
+    return path.join(this.dir, 'meta.json');
+  }
+
   private readMeta(): Meta {
-    const file = path.join(this.dir, 'meta.json');
-    if (!existsSync(file)) return { terms: [], termsFetchedAt: null, sync: {} };
+    if (!existsSync(this.metaFile)) return { terms: [], termsFetchedAt: null, sync: {} };
     try {
-      return JSON.parse(readFileSync(file, 'utf8')) as Meta;
+      this.metaMtimeMs = statSync(this.metaFile).mtimeMs;
+      return JSON.parse(readFileSync(this.metaFile, 'utf8')) as Meta;
     } catch {
       return { terms: [], termsFetchedAt: null, sync: {} };
     }
   }
 
+  /** Another process (e.g. `npm run sync` next to `npm run dev`) may have written meta.json. */
+  private refreshMeta(): void {
+    if (existsSync(this.metaFile) && statSync(this.metaFile).mtimeMs !== this.metaMtimeMs) this.meta = this.readMeta();
+  }
+
   getMeta(): Meta {
+    this.refreshMeta();
     return this.meta;
   }
 
   updateMeta(fn: (m: Meta) => void): void {
+    this.refreshMeta();
     fn(this.meta);
-    this.writeAtomic(path.join(this.dir, 'meta.json'), JSON.stringify(this.meta, null, 2));
+    this.writeAtomic(this.metaFile, JSON.stringify(this.meta, null, 2));
+    this.metaMtimeMs = statSync(this.metaFile).mtimeMs;
   }
 
   setSyncState(code: string, patch: Partial<TermSyncState>): void {
@@ -83,26 +97,28 @@ export class Store {
 
   writeCatalog(catalog: Catalog): void {
     const body = JSON.stringify(catalog);
-    this.writeAtomic(this.catalogPath(catalog.term.code), body);
-    this.cache.set(catalog.term.code, this.toCached(body, catalog.term.syncedAt));
+    const file = this.catalogPath(catalog.term.code);
+    this.writeAtomic(file, body);
+    this.cache.set(catalog.term.code, this.toCached(body, catalog.term.syncedAt, statSync(file).mtimeMs));
   }
 
-  /** Serialized catalog + ETag, cached in memory. */
+  /** Serialized catalog + ETag, cached in memory and reloaded if the file changed on disk. */
   readCatalog(code: string): CachedCatalog | null {
     const file = this.catalogPath(code);
     if (!existsSync(file)) return null;
+    const mtimeMs = statSync(file).mtimeMs;
     const cached = this.cache.get(code);
-    if (cached) return cached;
+    if (cached && cached.mtimeMs === mtimeMs) return cached;
     const body = readFileSync(file, 'utf8');
     const syncedAt = (JSON.parse(body) as Catalog).term.syncedAt;
-    const entry = this.toCached(body, syncedAt);
+    const entry = this.toCached(body, syncedAt, mtimeMs);
     this.cache.set(code, entry);
     return entry;
   }
 
-  private toCached(body: string, syncedAt: string): CachedCatalog {
+  private toCached(body: string, syncedAt: string, mtimeMs: number): CachedCatalog {
     const etag = `"${createHash('sha1').update(body).digest('hex').slice(0, 16)}"`;
-    return { body, etag, gzip: gzipSync(body), syncedAt };
+    return { body, etag, gzip: gzipSync(body), syncedAt, mtimeMs };
   }
 
   writeRawSnapshot(code: string, raw: unknown, keep: number): string {
@@ -118,8 +134,4 @@ export class Store {
     return file;
   }
 
-  catalogMtime(code: string): Date | null {
-    const file = this.catalogPath(code);
-    return existsSync(file) ? statSync(file).mtime : null;
-  }
 }

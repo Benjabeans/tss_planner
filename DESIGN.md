@@ -49,8 +49,11 @@ A full term is about 2,400 course listings, 7,500 sections and 11,700 meetings. 
 TSS (SAP Student Lifecycle Management) books a **package**, which is a bundle of required components (e.g. LE + DI + LA). Dropping a package drops all of its parts. A package is the unit you choose in this planner, replacing WebReg's A01/A02 rows.
 
 We derive packages like this, and it reproduces the API's own `complete_package_count`:
-1. **When sections carry `event_package_ids`:** invert the lists to get package → sections. A package is *complete* when it covers every instruction type among the course's packaged sections. Partial packages (LE-only, LA-only) are hidden. Sections with no packages, such as an optional FW, are shown as notes on the course.
-2. **When no section has package IDs:** use the section-code structure. For each group, `000` plus each child sub-number (`001`, `002`, …) is one package. A group with no children is just its `000` section.
+1. **When sections carry `event_package_ids`:** invert the lists to get package → sections. A package is *complete* when it covers every instruction type that **its section group** (e.g. `004`) has among packaged sections. Groups can differ: one lecture might come with labs and another without (FA26 BILD 4). Partial packages (LE-only, LA-only) are hidden. Sections with no packages, such as an optional FW, are shown as notes on the course.
+2. **When no section has package IDs, or none is complete:** use the section-code structure. For each group, `000` plus each child sub-number (`001`, `002`, …) is one package. A group with no children is just its `000` section.
+3. **Aliases:** upstream often has several package IDs that bundle the identical set of sections (about 3,100 extra IDs in WI27, probably separate seat pools). For planning they are one choice. The lowest ID is primary and the rest are `altIds`. Lookups match either, and each pick also stores its section IDs, so it survives upstream renumbering.
+
+Including aliases, this reproduces the upstream `complete_package_count` for every course in FA26 and WI27, with three exceptions where upstream is internally inconsistent: ECE 121B, HILD 7A and MAE 156A (see `shared/test/normalize.test.ts`).
 
 Example: CSE 110 (WI27) has three complete packages. Each is LE 001-000 + DI 001-001 + one of three labs.
 
@@ -204,13 +207,16 @@ Two meetings overlap if they occur on the same day and `a.start < b.end && b.sta
 |---|---|---|---|
 | C1 | Class ↔ class (weekly) | CSE 110 LE MWF 12:00 vs MATH 18 DI W 12:00 | **error** |
 | C2 | Class ↔ dated event | CHEM 6B midterm Mon Feb 1 7pm vs a weekly Mon 7pm discussion | warning |
-| C3 | Final ↔ final, or exam ↔ exam (same date) | two finals Wed Mar 17 11:30am | **error** (finals view) |
+| C3 | Final ↔ final (same date) | two finals Wed Mar 17 11:30am | **error** (finals view) |
+| C3b | Exam ↔ exam (midterm/final, same date) | two midterms Wed Feb 3 7pm | **error** |
 | C4 | Class ↔ custom block | lab vs "Work" block Tue 2–5pm | warning |
 | C5 | Tight transition (< 10 min gap, same day) | ends 10:50, next starts 10:55 | info |
-| — | Involving a **backup** pick | any of the above | downgraded to info |
+| — | Involving a **backup** pick | any of the above | downgraded to info (warning if the other side is **enrolled**) |
 | — | Same course twice | adding a 2nd package of CSE 110 | not a conflict: it's a **swap** |
 
-Severity escalates when an **enrolled** pick is involved ("conflicts with a course you're enrolled in").
+When an **enrolled** pick is involved, the conflict center labels it ("enrolled course"), and a backup that overlaps an enrolled course stays a warning instead of dropping to a note.
+
+**"Fits"** in swap lists and the generator means no error *and* no warning, so a section that runs into your Work block doesn't count as a fix.
 
 Other plan warnings that aren't time conflicts, shown in the same center:
 - **Full / waitlist-only package** (warning). You'd be waitlisted, and waitlisted units still count toward the cap.

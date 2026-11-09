@@ -79,6 +79,13 @@ describe('search', () => {
     expect(searchCourses(idx, 'MATH 018').map((c) => c.displayCode)).toEqual(['MATH 18']);
   });
 
+  it('treats and / slash as separators and words as narrowing', () => {
+    expect(searchCourses(idx, 'CSE 110 and 100').map((c) => c.displayCode)).toEqual(['CSE 110', 'CSE 100']);
+    expect(searchCourses(idx, 'cse 100/110').map((c) => c.displayCode)).toEqual(['CSE 100', 'CSE 110']);
+    expect(searchCourses(idx, 'MATH 18 zzzz').map((c) => c.displayCode)).toEqual(['MATH 18']);
+    expect(searchCourses(idx, 'CSE 100, 110 griswold').map((c) => c.displayCode)).toEqual(['CSE 110']);
+  });
+
   it('falls back to prefix matches', () => {
     expect(searchCourses(idx, 'MATH 20').map((c) => c.displayCode)).toEqual(['MATH 20C']);
   });

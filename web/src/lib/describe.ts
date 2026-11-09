@@ -15,6 +15,8 @@ export function describeConflict(c: Conflict): string {
       return `${a} and ${b} overlap ${whenOf(c)}`;
     case 'final':
       return `Finals overlap: ${a} and ${b}, ${whenOf(c)}`;
+    case 'exam':
+      return `Exams overlap: ${a} and ${b}, ${whenOf(c)}`;
     case 'dated':
       return `${c.a.date ? a : b} falls on ${c.a.date ? b : a}, ${whenOf(c)}`;
     case 'block': {

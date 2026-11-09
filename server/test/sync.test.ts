@@ -22,7 +22,7 @@ const COURSES: RawCourse[] = [
   })),
 ];
 
-function fakeUpstream(opts: { refreshedAt?: string; breakCourses?: boolean; calls?: string[] } = {}) {
+function fakeUpstream(opts: { refreshedAt?: string; breakCourses?: boolean; shortPages?: boolean; calls?: string[] } = {}) {
   const json = (body: unknown, status = 200) =>
     new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
   return (async (input: string | URL | Request, init?: RequestInit) => {
@@ -47,7 +47,9 @@ function fakeUpstream(opts: { refreshedAt?: string; breakCourses?: boolean; call
     if (url.pathname.endsWith('/filters')) return json({ subjects: [{ value: 'CSE', label: 'Computer Science and Engineering' }] });
     if (url.pathname.endsWith('/courses/search')) {
       const body = JSON.parse(String(init?.body));
+      if (body.term_code !== 'WI27') return json({ total: 0, courses: [] });
       if (opts.breakCourses) return json({ total: 1, courses: [{ module_code: 'X' }] });
+      if (opts.shortPages && body.offset > 0) return json({ total: COURSES.length, courses: [] });
       return json({ total: COURSES.length, courses: COURSES.slice(body.offset, body.offset + body.limit) });
     }
     return json({ error: 'nope' }, 404);
@@ -93,6 +95,42 @@ describe('Syncer', () => {
     expect(store.getMeta().sync.WI27!.status).toBe('error');
     expect(store.getMeta().sync.WI27!.error).toMatch(/course missing/);
     expect(new Store(dir).readCatalog('WI27')!.etag).toBe(before);
+  });
+});
+
+describe('Syncer robustness', () => {
+  it('runs a forced sync requested while another pass is in progress', async () => {
+    const calls: string[] = [];
+    const { syncer } = makeSyncer(fakeUpstream({ calls }));
+    const first = syncer.tick(); // initial pass syncs WI27
+    const second = syncer.tick({ force: ['WI27'] }); // arrives mid-pass
+    await Promise.all([first, second]);
+    expect(calls.filter((c) => c.endsWith('/courses/search'))).toHaveLength(4); // 2 pages × 2 passes
+  });
+
+  it('records an error for a forced term upstream does not list', async () => {
+    const { store, syncer } = makeSyncer(fakeUpstream());
+    await syncer.tick({ force: ['SP99'] });
+    expect(store.getMeta().sync.SP99!.status).toBe('error');
+  });
+
+  it('refuses a partial catalog when paging comes up short', async () => {
+    const { store, syncer } = makeSyncer(fakeUpstream({ shortPages: true }));
+    await syncer.tick();
+    expect(store.getMeta().sync.WI27!.status).toBe('error');
+    expect(store.getMeta().sync.WI27!.error).toMatch(/partial catalog/);
+    expect(store.hasCatalog('WI27')).toBe(false);
+  });
+
+  it('serves a catalog written by another process (CLI sync next to the dev server)', async () => {
+    const server = new Store(dir);
+    await makeSyncer(fakeUpstream(), server).syncer.tick();
+    const before = server.readCatalog('WI27')!.etag;
+    await new Promise((r) => setTimeout(r, 20));
+    const cli = new Store(dir);
+    await makeSyncer(fakeUpstream({ refreshedAt: '2026-11-10 00:00:00+00' }), cli).syncer.tick();
+    expect(server.readCatalog('WI27')!.etag).not.toBe(before);
+    expect(server.getMeta().sync.WI27!.refreshedAt).toBe('2026-11-10 00:00:00+00');
   });
 });
 

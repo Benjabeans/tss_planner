@@ -29,8 +29,9 @@ export function packageSections(course: Course, pkg: Package): Section[] {
   return pkg.sectionIds.map((id) => byId.get(id)).filter((s): s is Section => !!s);
 }
 
+/** Find a package by its id or any alias id (upstream may change which id is primary). */
 export function findPackage(course: Course, packageId: string): Package | null {
-  return course.packages.find((p) => p.id === packageId) ?? null;
+  return course.packages.find((p) => p.id === packageId || p.altIds.includes(packageId)) ?? null;
 }
 
 export function isSchedulable(m: Meeting): m is Meeting & { day: number; start: number; end: number } {
@@ -87,7 +88,9 @@ export type PickResolution =
 export function resolvePick(pick: PlanPick, index: CatalogIndex): PickResolution {
   const course = index.byKey.get(pick.courseKey);
   if (!course) return { state: 'missing-course', course: null, pkg: null };
-  const pkg = findPackage(course, pick.packageId);
+  // Fall back to the exact section set when upstream dropped the saved id altogether.
+  const sig = pick.sectionIds?.join(',');
+  const pkg = findPackage(course, pick.packageId) ?? (sig ? course.packages.find((p) => p.sectionIds.join(',') === sig) ?? null : null);
   if (!pkg) return { state: 'missing-package', course, pkg: null };
   const state = fingerprintPackage(course, pkg) === pick.fingerprint ? 'ok' : 'changed';
   return { state, course, pkg };

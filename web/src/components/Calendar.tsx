@@ -320,7 +320,7 @@ function BelowWeek() {
   const dated = slots
     .filter((s) => s.date && s.kind !== 'final')
     .sort((a, b) => a.date!.localeCompare(b.date!) || a.start - b.start);
-  const datedConflicts = conflicts.filter((c) => c.kind === 'dated');
+  const datedConflicts = conflicts.filter((c) => c.kind === 'dated' || c.kind === 'exam');
 
   const tba: { key: string; text: string }[] = [];
   if (plan && data) {
@@ -353,7 +353,10 @@ function BelowWeek() {
                     {s.label} <span className="tnum text-muted">{formatRange(s.start, s.end)}</span>
                   </span>
                   {hit && (
-                    <span className="flex shrink-0 items-center gap-1 text-xs text-warn" title={describeConflict(hit)}>
+                    <span
+                      className={`flex shrink-0 items-center gap-1 text-xs ${hit.severity === 'error' ? 'text-danger' : 'text-warn'}`}
+                      title={describeConflict(hit)}
+                    >
                       <AlertTriangle className="size-3" aria-hidden /> overlaps{' '}
                       {labelFor(hit.a === s ? hit.b.ownerId : hit.a.ownerId)}
                     </span>

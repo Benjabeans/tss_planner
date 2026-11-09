@@ -19,11 +19,17 @@ export type Sheet =
   | { kind: 'settings' }
   | null;
 
+/** Plans as they were before an action, plus their revisions right after it. */
+export interface UndoRecord {
+  before: Plan[];
+  guard: Record<string, number>;
+}
+
 export interface Toast {
   id: number;
   tone: 'neutral' | 'danger' | 'warn' | 'ok';
   message: string;
-  undo?: Plan;
+  undo?: UndoRecord;
   action?: { label: string; run: () => void };
 }
 

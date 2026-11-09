@@ -10,10 +10,12 @@ import { rawSample, sampleCatalog } from './helpers.ts';
 const upstreamCount = (c: Course) => c.packages.reduce((n, p) => n + 1 + p.altIds.length, 0);
 
 /**
- * Known upstream oddities (WI27): ECE 121B reports 0 complete packages (we show its partial
- * ones rather than nothing); MMW 14/122 count packages whose component types vary.
+ * Known upstream oddities: ECE 121B (WI27) reports 0 complete packages, so we fall back to
+ * section-code structure rather than leave it unplannable; HILD 7A and MAE 156A (FA26) count
+ * lecture-only packages as complete even though their groups also package discussions/labs,
+ * unlike every other course.
  */
-const KNOWN_COUNT_EXCEPTIONS = new Set(['ECE-121B', 'MMW-014', 'MMW-122']);
+const KNOWN_COUNT_EXCEPTIONS = new Set(['ECE-121B', 'HILD-007A', 'MAE-156A']);
 
 describe('displayNumber', () => {
   it('strips zero padding but keeps suffixes', () => {
@@ -62,6 +64,24 @@ describe('package derivation', () => {
     expect(c.packages.map((p) => p.id)).toEqual(['g:001-001', 'g:002-001']);
     const aip = sampleCatalog().courses.find((x) => x.moduleCode === 'AIP-197')!;
     expect(aip.packages.map((p) => p.id)).toEqual(['g:001']);
+  });
+
+  it('judges completeness per section group, not per course', () => {
+    // Synthetic: group 001 has LE+DI, group 002 has only LE. Both lectures must be bookable.
+    const sec = (id: string, code: string, pkgs: string[]) => ({
+      section_id: id, section_code: code, instruction_type_name: code.slice(-2), event_package_ids: pkgs,
+      capacity: 10, enrolled: 0, seats_available: 10, waitlist_capacity: null, waitlist_enrolled: null,
+      waitlist_available: null, status: 'AC', instructors: [], meetings: [], section_text: [],
+    });
+    const raw = {
+      ...rawSample.courses.find((c) => c.module_code === 'CSE-110')!,
+      sections: [sec('a', '001-000-LE', ['1', '9']), sec('b', '001-001-DI', ['1']), sec('c', '002-000-LE', ['2', '3'])],
+    };
+    const c = normalizeCourse(raw);
+    expect(c.packages.map((p) => [p.id, p.altIds])).toEqual([
+      ['1', []],
+      ['2', ['3']],
+    ]);
   });
 
   it('lists sections outside complete packages as extras (ANAR 167 fieldwork)', () => {
@@ -133,8 +153,7 @@ describe.skipIf(snapshots.length === 0)('full-term snapshots', () => {
         .filter((c) => !KNOWN_COUNT_EXCEPTIONS.has(c.module_code))
         .filter((c) => upstreamCount(normalizeCourse(c)) !== c.complete_package_count)
         .map((c) => c.module_code);
-      // Allow a sliver of drift between terms, but flag anything systematic.
-      expect(mismatches.length, mismatches.join(', ')).toBeLessThanOrEqual(Math.ceil(raw.courses.length * 0.002));
+      expect(mismatches).toEqual([]);
     });
   }
 });

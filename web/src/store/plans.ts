@@ -38,6 +38,7 @@ interface PlansState {
   removeBlock: (planId: string, blockId: string) => void;
 
   restorePlan: (plan: Plan) => void;
+  repointPicks: (planId: string, ids: Record<string, { packageId: string; sectionIds: string[] }>) => void;
   updateSettings: (patch: Partial<Settings>) => void;
 }
 
@@ -60,7 +61,7 @@ export const usePlanStore = create<PlansState>()(
         set((s) => {
           const plan = s.plans[planId];
           if (!plan) return s;
-          return { plans: { ...s.plans, [planId]: { ...fn(plan), updatedAt: now() } } };
+          return { plans: { ...s.plans, [planId]: { ...fn(plan), updatedAt: now(), rev: (plan.rev ?? 0) + 1 } } };
         });
 
       return {
@@ -91,6 +92,7 @@ export const usePlanStore = create<PlansState>()(
             const pick: PlanPick = {
               courseKey: course.key,
               packageId: pkg.id,
+              sectionIds: pkg.sectionIds,
               color: existing?.color ?? nextColor(p.picks.map((x) => x.color)),
               status: existing?.status ?? 'planned',
               fingerprint: fingerprintPackage(course, pkg),
@@ -120,7 +122,13 @@ export const usePlanStore = create<PlansState>()(
             ...p,
             picks: p.picks.map((x) =>
               x.courseKey === courseKey
-                ? { ...x, fingerprint: fingerprintPackage(course, pkg), summaryAtAdd: summarizePackage(course, pkg) }
+                ? {
+                    ...x,
+                    packageId: pkg.id,
+                    sectionIds: pkg.sectionIds,
+                    fingerprint: fingerprintPackage(course, pkg),
+                    summaryAtAdd: summarizePackage(course, pkg),
+                  }
                 : x,
             ),
           })),
@@ -171,8 +179,8 @@ export const usePlanStore = create<PlansState>()(
             return {
               plans: {
                 ...s.plans,
-                [fromPlanId]: { ...from, picks: from.picks.filter((x) => x.courseKey !== courseKey), updatedAt: now() },
-                [toPlanId]: { ...to, picks: toPicks, updatedAt: now() },
+                [fromPlanId]: { ...from, picks: from.picks.filter((x) => x.courseKey !== courseKey), updatedAt: now(), rev: (from.rev ?? 0) + 1 },
+                [toPlanId]: { ...to, picks: toPicks, updatedAt: now(), rev: (to.rev ?? 0) + 1 },
               },
             };
           }),
@@ -187,7 +195,19 @@ export const usePlanStore = create<PlansState>()(
 
         removeBlock: (planId, blockId) => mutate(planId, (p) => ({ ...p, blocks: p.blocks.filter((b) => b.id !== blockId) })),
 
-        restorePlan: (plan) => set((s) => ({ plans: { ...s.plans, [plan.id]: plan } })),
+        // Keep the revision monotonic so an older undo record can never match again.
+        restorePlan: (plan) =>
+          set((s) => ({ plans: { ...s.plans, [plan.id]: { ...plan, rev: (s.plans[plan.id]?.rev ?? plan.rev ?? 0) + 1 } } })),
+
+        // Upstream changed which id is primary for the same sections: same choice, new id.
+        // Not a user edit, so the revision stays put (undo records remain valid).
+        repointPicks: (planId, ids) =>
+          set((s) => {
+            const plan = s.plans[planId];
+            if (!plan) return s;
+            const picks = plan.picks.map((x) => (ids[x.courseKey] ? { ...x, ...ids[x.courseKey] } : x));
+            return { plans: { ...s.plans, [planId]: { ...plan, picks } } };
+          }),
 
         updateSettings: (patch) => set((s) => ({ settings: { ...s.settings, ...patch } })),
       };

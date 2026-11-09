@@ -126,62 +126,77 @@ function packageFrom(id: string, sections: Section[]): Package {
   return { id, altIds: [], sectionIds: sorted.map((s) => s.id), seatsAvailable, status };
 }
 
+/** Section-code structure: each group's "000" section plus each child sub-number. */
+function structuralPackages(sections: Section[]): Package[] {
+  const groups = new Map<string, Map<string, Section[]>>();
+  for (const s of sections) {
+    if (!groups.has(s.group)) groups.set(s.group, new Map());
+    const subs = groups.get(s.group)!;
+    if (!subs.has(s.sub)) subs.set(s.sub, []);
+    subs.get(s.sub)!.push(s);
+  }
+  const out: Package[] = [];
+  for (const [group, subs] of groups) {
+    const base = subs.get('000') ?? [];
+    const kids = [...subs.keys()].filter((k) => k !== '000').sort();
+    if (kids.length === 0) out.push(packageFrom(`g:${group}`, base));
+    else for (const k of kids) out.push(packageFrom(`g:${group}-${k}`, [...base, ...subs.get(k)!]));
+  }
+  return out;
+}
+
+const numericIdOrder = (a: string, b: string) => (a.length - b.length) || a.localeCompare(b);
+
 /**
  * Derive the bookable packages of a course (see DESIGN.md §2.3).
  *
  * 1. With upstream event-package ids: a package is complete when it covers every
- *    instruction type among the course's packaged sections.
- * 2. Without any ids: group by section code — the group's "000" section plus each
- *    child sub-number forms one package.
+ *    instruction type that its section group (e.g. "004") has among packaged sections.
+ *    Groups can differ — one lecture may come with labs, another without.
+ * 2. Without ids (or when no id-package is complete): group by section code.
  */
 export function derivePackages(raw: RawSection[], sections: Section[]): { packages: Package[]; extraSectionIds: string[] } {
   const byId = new Map(sections.map((s) => [s.id, s]));
   const packaged = raw.filter((s) => s.event_package_ids?.length);
 
-  let packages: Package[];
+  let packages: Package[] = [];
   if (packaged.length > 0) {
     const members = new Map<string, Section[]>();
+    const groupTypes = new Map<string, Set<string>>();
     for (const r of packaged) {
+      const sec = byId.get(r.section_id)!;
+      if (!groupTypes.has(sec.group)) groupTypes.set(sec.group, new Set());
+      groupTypes.get(sec.group)!.add(sec.type);
       for (const pid of r.event_package_ids) {
         if (!members.has(pid)) members.set(pid, []);
-        members.get(pid)!.push(byId.get(r.section_id)!);
+        members.get(pid)!.push(sec);
       }
     }
-    const types = new Set(packaged.map((r) => byId.get(r.section_id)!.type));
-    const all = [...members.entries()].map(([pid, ss]) => ({ pid, ss }));
-    let complete = all.filter(({ ss }) => types.size === new Set(ss.map((s) => s.type)).size && ss.every((s) => types.has(s.type)));
-    if (complete.length === 0) complete = all; // never show an empty course
+    const isComplete = (ss: Section[]) => {
+      const need = new Set<string>();
+      for (const g of new Set(ss.map((x) => x.group))) for (const t of groupTypes.get(g) ?? []) need.add(t);
+      const have = new Set(ss.map((x) => x.type));
+      return need.size === have.size && [...need].every((t) => have.has(t));
+    };
     // Upstream often has several package ids for the exact same sections (e.g. separate
-    // seat pools). For planning they are one choice; keep the extra ids as aliases.
-    const bySig = new Map<string, Package>();
-    packages = [];
-    for (const { pid, ss } of complete) {
-      const pkg = packageFrom(pid, ss);
-      const sig = pkg.sectionIds.join(',');
-      const existing = bySig.get(sig);
-      if (existing) {
-        existing.altIds.push(pid);
-        continue;
-      }
-      bySig.set(sig, pkg);
+    // seat pools). For planning they are one choice: the lowest id is primary, the rest
+    // are aliases so saved picks keep resolving if upstream reshuffles ids.
+    const bySig = new Map<string, { ids: string[]; ss: Section[] }>();
+    for (const [pid, ss] of members) {
+      if (!isComplete(ss)) continue;
+      const sig = [...ss].sort(compareSections).map((x) => x.id).join(',');
+      if (!bySig.has(sig)) bySig.set(sig, { ids: [], ss });
+      bySig.get(sig)!.ids.push(pid);
+    }
+    for (const { ids, ss } of bySig.values()) {
+      ids.sort(numericIdOrder);
+      const pkg = packageFrom(ids[0]!, ss);
+      pkg.altIds = ids.slice(1);
       packages.push(pkg);
     }
-  } else {
-    const groups = new Map<string, Map<string, Section[]>>();
-    for (const s of sections) {
-      if (!groups.has(s.group)) groups.set(s.group, new Map());
-      const subs = groups.get(s.group)!;
-      if (!subs.has(s.sub)) subs.set(s.sub, []);
-      subs.get(s.sub)!.push(s);
-    }
-    packages = [];
-    for (const [group, subs] of groups) {
-      const base = subs.get('000') ?? [];
-      const kids = [...subs.keys()].filter((k) => k !== '000').sort();
-      if (kids.length === 0) packages.push(packageFrom(`g:${group}`, base));
-      else for (const k of kids) packages.push(packageFrom(`g:${group}-${k}`, [...base, ...subs.get(k)!]));
-    }
   }
+  // Never leave a course with sections unplannable.
+  if (packages.length === 0) packages = structuralPackages(sections);
 
   packages.sort((a, b) => {
     const sa = byId.get(a.sectionIds[0]!)!;

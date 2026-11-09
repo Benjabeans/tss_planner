@@ -17,6 +17,9 @@ export interface SyncerOptions {
  */
 export class Syncer {
   private running: Promise<void> | null = null;
+  /** Terms explicitly requested; survive a tick that is already in progress. */
+  private pending = new Set<string>();
+  private rerun = false;
   private timer: NodeJS.Timeout | null = null;
   private readonly o: SyncerOptions;
 
@@ -28,10 +31,24 @@ export class Syncer {
     (this.o.log ?? console.log)(`[sync] ${msg}`);
   }
 
-  /** One pass: refresh the term list, then sync whichever terms need it. Never overlaps. */
+  /**
+   * One pass: refresh the term list, then sync whichever terms need it. Never overlaps:
+   * a call during a running pass queues its forced terms and runs another pass afterwards.
+   */
   tick(opts: { force?: string[] } = {}): Promise<void> {
-    if (this.running) return this.running;
-    this.running = this.runTick(opts).finally(() => {
+    for (const c of opts.force ?? []) this.pending.add(c);
+    if (this.running) {
+      if (opts.force?.length) this.rerun = true;
+      return this.running;
+    }
+    this.running = (async () => {
+      do {
+        this.rerun = false;
+        const force = [...this.pending];
+        this.pending.clear();
+        await this.runTick({ force });
+      } while (this.rerun || this.pending.size > 0);
+    })().finally(() => {
       this.running = null;
     });
     return this.running;
@@ -59,6 +76,10 @@ export class Syncer {
       const reason = force.includes(t.term_code) ? 'requested' : this.needsSync(t);
       if (!reason) continue;
       await this.syncTerm(t, reason);
+    }
+    // Forced terms upstream didn't list: try anyway, so the failure is recorded rather than silent.
+    for (const code of force.filter((c) => !terms.some((t) => t.term_code === c))) {
+      await this.syncTerm({ term_code: code, last_full_refresh_at: null }, 'requested (not in upstream term list)');
     }
   }
 
