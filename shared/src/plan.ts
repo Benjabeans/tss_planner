@@ -131,6 +131,15 @@ export function candidateConflicts(
   return findCrossConflicts(slotsForPackage(course, pkg, { kind: 'candidate', status }), others);
 }
 
+/**
+ * Same as candidateConflicts, against precomputed plan slots (fast path for search results).
+ * Slots of the course itself and backups are ignored.
+ */
+export function conflictsAgainst(course: Course, pkg: Package, plan: Slot[], status?: PlanPick['status']): Conflict[] {
+  const others = plan.filter((s) => s.ownerId !== course.key && s.status !== 'backup');
+  return findCrossConflicts(slotsForPackage(course, pkg, { kind: 'candidate', status }), others);
+}
+
 export interface Alternative {
   pkg: Package;
   conflicts: Conflict[];
