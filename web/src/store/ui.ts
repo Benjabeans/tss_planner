@@ -63,8 +63,8 @@ export const useUi = create<UiState>((set) => ({
   openSheet: (sheet) => set({ sheet }),
   pushToast: (t) => {
     const id = toastId++;
-    set((s) => ({ toasts: [...s.toasts.slice(-2), { ...t, id }] }));
-    setTimeout(() => set((s) => ({ toasts: s.toasts.filter((x) => x.id !== id) })), t.undo || t.action ? 8000 : 4000);
+    set((s) => ({ toasts: [...s.toasts.slice(-1), { ...t, id }] }));
+    setTimeout(() => set((s) => ({ toasts: s.toasts.filter((x) => x.id !== id) })), t.action ? 8000 : t.undo ? 6000 : 3500);
   },
   dismissToast: (id) => set((s) => ({ toasts: s.toasts.filter((x) => x.id !== id) })),
   setMobileTab: (mobileTab) => set({ mobileTab }),

@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^26.6.6",
     "concurrently": "^10.0.7",
+    "playwright": "^1.65.0",
     "typescript": "^7.0.2",
     "vitest": "^5.1.0"
   }
