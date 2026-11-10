@@ -148,7 +148,8 @@ export function generateSchedules(input: GenerateInput): GenerateResult {
   let truncated = false;
 
   const record = () => {
-    const slots = chosen.flatMap((o) => o.slots);
+    // Score the whole week: locked courses count toward days on campus and the gaps between classes.
+    const slots = [...fixed, ...chosen.flatMap((o) => o.slots)];
     const notOpen = chosen.filter((o) => o.pkg.status !== 'open').length;
     const { score, stats } = scoreSchedule(slots, notOpen, preference);
     if (best.length >= limit && score >= best[best.length - 1]!.score) return;

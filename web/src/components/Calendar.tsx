@@ -25,12 +25,20 @@ interface Band {
   title: string;
 }
 
+/** Where a previewed course's section sits now; it moves away in the preview. */
+interface Outline {
+  id: string;
+  slot: Slot;
+  color: string;
+}
+
 interface Column {
   key: string;
   label: string;
   sub?: string;
   items: BlockItem[];
   bands: Band[];
+  removed: Outline[];
 }
 
 const HOUR = 60;
@@ -48,7 +56,8 @@ function worst(a: Severity | null, b: Severity): Severity {
   return a === null || rank[b] < rank[a] ? b : a;
 }
 
-function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorOf: (s: Slot) => string) {
+/** `same`: previewed slots that match the plan; they render solid since nothing changes there. */
+function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorOf: (s: Slot) => string, same?: Set<Slot>) {
   const sev = new Map<Slot, Severity>();
   for (const c of conflicts) {
     if (c.severity === 'info') continue;
@@ -63,10 +72,15 @@ function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorO
     status: s.status,
     severity: sev.get(s) ?? null,
   }));
-  ghosts.forEach((s, i) =>
-    items.push({ id: `g${i}`, slot: s, color: colorOf(s), ghost: true, severity: sev.get(s) ?? null }),
-  );
+  ghosts.forEach((s, i) => {
+    const kept = same?.has(s) ?? false;
+    items.push({ id: `g${i}`, slot: s, color: colorOf(s), ghost: !kept, status: kept ? s.status : undefined, severity: sev.get(s) ?? null });
+  });
   return items;
+}
+
+function outlinesOf(slots: Slot[], colorOf: (s: Slot) => string): Outline[] {
+  return slots.map((s, i) => ({ id: `w${i}`, slot: s, color: colorOf(s) }));
 }
 
 function bandsFor(conflicts: Conflict[]): Band[] {
@@ -75,10 +89,10 @@ function bandsFor(conflicts: Conflict[]): Band[] {
     .map((c) => ({ id: c.id, start: c.start, end: c.end, severity: c.severity, title: describeConflict(c) }));
 }
 
-function rangeOf(items: BlockItem[]): { start: number; end: number } {
+function rangeOf(items: { slot: Slot }[], extent?: { start: number; end: number } | null): { start: number; end: number } {
   let start = 8 * HOUR;
   let end = 18 * HOUR;
-  for (const it of items) {
+  for (const it of [...items, ...(extent ? [{ slot: extent }] : [])]) {
     start = Math.min(start, Math.floor(it.slot.start / HOUR) * HOUR);
     end = Math.max(end, Math.ceil(it.slot.end / HOUR) * HOUR);
   }
@@ -106,22 +120,27 @@ function WeekView() {
     const ghostSlots = preview && !preview.current ? preview.slots.filter((s) => !s.date) : [];
     const previewConflicts = preview && !preview.current ? preview.conflicts.filter((c) => !c.date) : [];
     const allConflicts = [...conflicts.filter((c) => !c.date && visible(c)), ...previewConflicts];
-    const items = buildItems(weekly, ghostSlots, allConflicts, colorOf);
+    const items = buildItems(weekly, ghostSlots, allConflicts, colorOf, preview?.same);
+    const removed = outlinesOf(preview && !preview.current ? preview.removed.filter((s) => !s.date) : [], colorOf);
     const days = [1, 2, 3, 4, 5];
-    if (items.some((i) => i.slot.day === 6)) days.push(6);
-    if (items.some((i) => i.slot.day === 0)) days.push(0);
+    const used = [...items, ...removed];
+    if (used.some((i) => i.slot.day === 6)) days.push(6);
+    if (used.some((i) => i.slot.day === 0)) days.push(0);
     return days.map((d) => ({
       key: String(d),
       label: DAY_ABBR[d]!,
       items: items.filter((i) => i.slot.day === d),
       bands: bandsFor(allConflicts.filter((c) => c.day === d)),
+      removed: removed.filter((o) => o.slot.day === d),
     }));
   }, [slots, conflicts, preview, plan, colorOf]);
 
+  const extent = useUi((s) => s.weekExtent);
   const empty = (plan?.picks.length ?? 0) === 0 && (plan?.blocks.length ?? 0) === 0 && !preview;
   return (
     <TimeGrid
       columns={columns}
+      extent={extent}
       empty={
         empty ? (
           <>
@@ -146,20 +165,22 @@ function FinalsView() {
       ...conflicts.filter((c) => c.kind === 'final' && !hidden.has(c.a.ownerId) && !hidden.has(c.b.ownerId)),
       ...(preview && !preview.current ? preview.conflicts.filter((c) => c.kind === 'final') : []),
     ];
-    const items = buildItems(finals, ghostSlots, finalConflicts, colorOf);
+    const items = buildItems(finals, ghostSlots, finalConflicts, colorOf, preview?.same);
+    const removed = outlinesOf(preview && !preview.current ? preview.removed.filter((s) => s.kind === 'final') : [], colorOf);
 
     let dates: string[] = [];
     if (termDates) {
       for (let d = termDates.finalsBegin; d <= termDates.finalsEnd; d = addDays(d, 1)) dates.push(d);
     }
-    for (const it of items) if (it.slot.date && !dates.includes(it.slot.date)) dates.push(it.slot.date);
-    dates = dates.sort().filter((d) => weekdayOfDate(d) !== 0 || items.some((i) => i.slot.date === d));
+    for (const it of [...items, ...removed]) if (it.slot.date && !dates.includes(it.slot.date)) dates.push(it.slot.date);
+    dates = dates.sort().filter((d) => weekdayOfDate(d) !== 0 || [...items, ...removed].some((i) => i.slot.date === d));
     return dates.map((date) => ({
       key: date,
       label: DAY_ABBR[weekdayOfDate(date)]!,
       sub: formatDate(date),
       items: items.filter((i) => i.slot.date === date),
       bands: bandsFor(finalConflicts.filter((c) => c.date === date)),
+      removed: removed.filter((o) => o.slot.date === date),
     }));
   }, [slots, conflicts, preview, termDates, plan, colorOf]);
 
@@ -179,8 +200,16 @@ function FinalsView() {
   );
 }
 
-function TimeGrid({ columns, empty }: { columns: Column[]; empty: React.ReactNode }) {
-  const range = useMemo(() => rangeOf(columns.flatMap((c) => c.items)), [columns]);
+function TimeGrid({
+  columns,
+  empty,
+  extent,
+}: {
+  columns: Column[];
+  empty: React.ReactNode;
+  extent?: { start: number; end: number } | null;
+}) {
+  const range = useMemo(() => rangeOf(columns.flatMap((c) => [...c.items, ...c.removed]), extent), [columns, extent]);
   const hours: number[] = [];
   for (let m = range.start; m < range.end; m += HOUR) hours.push(m);
   const span = (range.end - range.start) / HOUR;
@@ -241,6 +270,19 @@ function DayColumn({ column, range, span }: { column: Column; range: { start: nu
         backgroundSize: '100% var(--hour-h), 100% calc(var(--hour-h) / 2)',
       }}
     >
+      {/* Outlines sit behind the blocks and outside the lane layout: they show where a section is now. */}
+      {column.removed.map((o) => (
+        <div
+          key={o.id}
+          className="cal-was"
+          data-color={o.color}
+          style={pos(o.slot.start, o.slot.end)}
+          title={`Now: ${o.slot.label} · ${formatRange(o.slot.start, o.slot.end)} (moves in this preview)`}
+          aria-hidden
+        >
+          <span className="cal-was-label">{o.slot.label}</span>
+        </div>
+      ))}
       {column.items.map((it) => (
         <CalendarBlock key={it.id} item={it} style={{ ...pos(it.slot.start, it.slot.end), ...laneStyle(lanes.get(it.id)) }} />
       ))}

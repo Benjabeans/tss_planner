@@ -1,12 +1,24 @@
 import { createContext, Fragment, useContext, useEffect, useMemo, useRef, type KeyboardEvent, type ReactNode } from 'react';
 import { ChevronLeft, ChevronRight, Lock, Sparkles, Unlock, X } from 'lucide-react';
 import type { Course, Package } from '@shared/types.ts';
-import { generateSchedules, type GeneratedSchedule, type GenerateResult, type Preference } from '@shared/generate.ts';
-import { findPackage, packageSections, slotsForBlock, slotsForPackage } from '@shared/plan.ts';
-import { DAY_SHORT, formatTime, summarizeWeekly } from '@shared/time.ts';
+import { generateSchedules, type GeneratedSchedule, type GenerateResult, type Preference, type ScheduleStats } from '@shared/generate.ts';
+import { findPackage, slotsForBlock, slotsForPackage } from '@shared/plan.ts';
+import {
+  compareSnapshots,
+  sectionChanges,
+  sectionWhen,
+  snapshotPlan,
+  withChoices,
+  type CourseChange,
+  type Delta,
+  type PlanSnapshot,
+  type SectionSwap,
+} from '@shared/compare.ts';
+import { DAY_SHORT, formatTime } from '@shared/time.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { useIsDesktop } from '../lib/media.ts';
-import { useUi } from '../store/ui.ts';
+import { usePlanStore } from '../store/plans.ts';
+import { useUi, type FinderUi } from '../store/ui.ts';
 import { applySchedule } from '../lib/actions.ts';
 import { Pill } from './SearchPanel.tsx';
 
@@ -27,11 +39,39 @@ function gapText(min: number): string {
   return `${`${h ? `${h}h ` : ''}${m ? `${m}m` : ''}`.trim()} between classes`;
 }
 
-/** Short facts about a schedule, each kept whole when the line wraps. */
-function facts(s: GeneratedSchedule): string[] {
-  const out = [`${s.stats.days} day${s.stats.days === 1 ? '' : 's'} on campus`, gapText(s.stats.gapMinutes)];
-  if (s.stats.earliest !== null && s.stats.latest !== null) out.push(`${formatTime(s.stats.earliest)}–${formatTime(s.stats.latest)}`);
+/** Short facts about a week, each kept whole when the line wraps. */
+function facts(stats: ScheduleStats): string[] {
+  const out = [`${stats.days} day${stats.days === 1 ? '' : 's'} on campus`, gapText(stats.gapMinutes)];
+  if (stats.earliest !== null && stats.latest !== null) out.push(`${formatTime(stats.earliest)}–${formatTime(stats.latest)}`);
   return out;
+}
+
+const conflictText = (n: number) => (n === 0 ? 'No conflicts' : `${n} conflict${n === 1 ? '' : 's'}`);
+
+/** What the calendar shows: an option index, the plan as it is, or nothing picked yet. */
+function shownOf(f: FinderUi): number | 'plan' | null {
+  if (f.hovered !== null) return f.hovered;
+  return f.showPlan ? 'plan' : f.selected;
+}
+
+function selectOption(i: number) {
+  useUi.getState().patchFinder({ selected: i, hovered: null, showPlan: false });
+}
+
+const TONE: Record<Delta['tone'], string> = { good: 'text-ok', bad: 'text-warn', neutral: 'text-muted' };
+
+/** "fixes 2 conflicts · 1 fewer day on campus · starts 1h later", colored by whether it's better. */
+function Deltas({ items }: { items: Delta[] }) {
+  return (
+    <>
+      {items.map((d, i) => (
+        <Fragment key={d.text}>
+          {i > 0 && <span className="text-faint"> · </span>}
+          <span className={`whitespace-nowrap ${TONE[d.tone]}`}>{d.text}</span>
+        </Fragment>
+      ))}
+    </>
+  );
 }
 
 function Facts({ items }: { items: string[] }) {
@@ -51,11 +91,22 @@ function Facts({ items }: { items: string[] }) {
 // Provider: one generator run shared by the panel and the calendar's pager
 // ---------------------------------------------------------------------------
 
+/** One option measured against the plan as it is. */
+interface OptionInfo {
+  snapshot: PlanSnapshot;
+  deltas: Delta[];
+  changes: CourseChange[];
+}
+
 interface FinderData {
   /** Courses the finder rearranges or keeps (backups are left out). */
   courseKeys: string[];
   locked: Set<string>;
   result: GenerateResult | null;
+  /** The plan as it is, measured the same way as the options. */
+  baseline: PlanSnapshot | null;
+  /** Parallel to result.schedules. */
+  options: OptionInfo[];
   apply: (index: number) => void;
 }
 
@@ -75,7 +126,8 @@ export function FinderProvider({ children }: { children: ReactNode }) {
   const { plan, data } = usePlanner();
   const open = useUi((s) => s.finder !== null);
   const opts = useUi((s) => s.finderOpts);
-  const active = useUi((s) => (s.finder ? (s.finder.hovered ?? s.finder.selected) : null));
+  const shown = useUi((s) => (s.finder ? shownOf(s.finder) : null));
+  const tightGapMin = usePlanStore((s) => s.settings.tightGapMin);
 
   const courseKeys = useMemo(() => plan?.picks.filter((p) => p.status !== 'backup').map((p) => p.courseKey) ?? [], [plan]);
   const locked = useMemo(
@@ -108,20 +160,58 @@ export function FinderProvider({ children }: { children: ReactNode }) {
     });
   }, [open, plan, data, locked, opts]);
 
-  // A new result list invalidates option numbers.
-  useEffect(() => useUi.getState().patchFinder({ selected: null, hovered: null }), [result]);
+  // Every option measured the same way as the plan, so the two can be compared number for number.
+  const compared = useMemo(() => {
+    if (!open || !plan || !data) return { baseline: null, options: [] };
+    const free = courseKeys.filter((k) => !locked.has(k));
+    const o = { courseKeys: free, conflictOptions: { tightGapMin } };
+    const baseline = snapshotPlan(plan, data.index, o);
+    const options = (result?.schedules ?? []).map((s) => {
+      const snapshot = snapshotPlan(withChoices(plan, data.index, s.choices), data.index, o);
+      return { snapshot, deltas: compareSnapshots(baseline, snapshot), changes: sectionChanges(plan, data.index, s.choices) };
+    });
+    return { baseline, options };
+  }, [open, plan, data, courseKeys, locked, result, tightGapMin]);
 
-  // The calendar previews the option under the pointer, else the one the user picked.
+  // Keep the week view the same height while flipping between the plan and the options.
   useEffect(() => {
-    const s = active !== null ? result?.schedules[active] : undefined;
-    useUi.getState().setSchedulePreview(s ? { label: optionLabel(active!), choices: s.choices } : null);
-  }, [active, result]);
+    if (!result || !data) return;
+    let start = Infinity;
+    let end = -Infinity;
+    for (const s of result.schedules) {
+      for (const c of s.choices) {
+        const course = data.index.byKey.get(c.courseKey);
+        const pkg = course ? findPackage(course, c.packageId) : null;
+        if (!course || !pkg) continue;
+        for (const slot of slotsForPackage(course, pkg, { kind: 'candidate' })) {
+          if (slot.date) continue;
+          start = Math.min(start, slot.start);
+          end = Math.max(end, slot.end);
+        }
+      }
+    }
+    const ui = useUi.getState();
+    ui.setWeekExtent(Number.isFinite(start) ? { start, end } : null);
+    return () => ui.setWeekExtent(null);
+  }, [result, data]);
+
+  // A new result list invalidates option numbers.
+  useEffect(() => useUi.getState().patchFinder({ selected: null, hovered: null, showPlan: false }), [result]);
+
+  // The calendar previews the option under the pointer, else the one the user picked, unless
+  // they asked to see their plan as it is.
+  useEffect(() => {
+    const s = typeof shown === 'number' ? result?.schedules[shown] : undefined;
+    useUi.getState().setSchedulePreview(s ? { label: optionLabel(shown as number), choices: s.choices } : null);
+  }, [shown, result]);
 
   const value = useMemo<FinderData>(
     () => ({
       courseKeys,
       locked,
       result,
+      baseline: compared.baseline,
+      options: compared.options,
       apply: (i) => {
         const s = result?.schedules[i];
         if (!s || !data) return;
@@ -135,7 +225,7 @@ export function FinderProvider({ children }: { children: ReactNode }) {
         applySchedule(resolved, optionLabel(i));
       },
     }),
-    [courseKeys, locked, result, data],
+    [courseKeys, locked, result, compared, data],
   );
 
   return <FinderCtx.Provider value={value}>{children}</FinderCtx.Provider>;
@@ -171,14 +261,18 @@ export function FindButton() {
 // ---------------------------------------------------------------------------
 
 export function SchedulePager({ variant }: { variant: 'toolbar' | 'mobile' }) {
-  const { result, apply } = useFinderData();
+  const { result, apply, baseline, options } = useFinderData();
   const finder = useUi((s) => s.finder);
   const n = result?.schedules.length ?? 0;
   if (!finder || n === 0) return null;
 
-  const shown = finder.hovered ?? finder.selected;
-  const select = (i: number) => useUi.getState().patchFinder({ selected: i, hovered: null });
-  const step = (d: 1 | -1) => select(finder.selected === null ? (d > 0 ? 0 : n - 1) : (finder.selected + d + n) % n);
+  const shown = shownOf(finder);
+  const step = (d: 1 | -1) => selectOption(finder.selected === null ? (d > 0 ? 0 : n - 1) : (finder.selected + d + n) % n);
+  // Hovering a different option is a quick look; the toggle stays for the option the user picked.
+  const glancing = typeof finder.hovered === 'number' && finder.hovered !== finder.selected;
+  const comparing = !glancing && (finder.selected !== null || finder.showPlan);
+  const target = finder.selected ?? 0;
+
   const stepper = (
     <span className="flex shrink-0 items-center">
       <IconButton label="Previous option" onClick={() => step(-1)}>
@@ -189,14 +283,27 @@ export function SchedulePager({ variant }: { variant: 'toolbar' | 'mobile' }) {
       </IconButton>
     </span>
   );
+  const toggle = (
+    <span className="flex shrink-0 items-center gap-1.5">
+      <CompareToggle
+        showingPlan={shown === 'plan'}
+        option={target}
+        onPlan={() => useUi.getState().patchFinder({ showPlan: true, hovered: null })}
+        onOption={() => selectOption(target)}
+      />
+      <span className="text-muted">of {n}</span>
+    </span>
+  );
   const status =
-    shown === null ? (
-      <span className="text-muted">
-        {n} schedule{n === 1 ? '' : 's'} fit · {variant === 'mobile' ? 'step through them' : 'hover one to preview'}
-      </span>
-    ) : (
+    typeof shown === 'number' ? (
       <span>
         Previewing <b className="font-semibold">{optionLabel(shown)}</b> <span className="text-muted">of {n}</span>
+      </span>
+    ) : shown === 'plan' ? (
+      <span>Showing your plan as it is</span>
+    ) : (
+      <span className="text-muted">
+        {n} schedule{n === 1 ? '' : 's'} fit · {variant === 'mobile' ? 'step through them' : 'hover one to preview'}
       </span>
     );
   const use =
@@ -214,28 +321,39 @@ export function SchedulePager({ variant }: { variant: 'toolbar' | 'mobile' }) {
     return (
       <div className="flex min-w-0 items-center gap-2 text-[13px]" aria-live="polite">
         {stepper}
-        <span className="min-w-0 truncate">{status}</span>
+        {comparing ? toggle : <span className="min-w-0 truncate">{status}</span>}
         {use}
       </div>
     );
   }
 
-  const s = shown !== null ? result!.schedules[shown] : null;
+  // Phones: the list is out of sight, so the pager carries the comparison itself.
+  const info = typeof shown === 'number' ? options[shown] : undefined;
+  const summary =
+    shown === 'plan' && baseline ? (
+      <>
+        <span className={`whitespace-nowrap ${baseline.conflicts ? 'text-danger' : 'text-ok'}`}>{conflictText(baseline.conflicts)}</span>
+        <span className="text-faint"> · </span>
+        <Facts items={facts(baseline.stats)} />
+      </>
+    ) : info ? (
+      info.deltas.length > 0 ? (
+        <Deltas items={info.deltas} />
+      ) : (
+        <Facts items={[info.changes.length ? 'same days and times as your plan' : 'this is your plan', ...facts(info.snapshot.stats)]} />
+      )
+    ) : null;
   return (
     <div className="no-print fixed inset-x-2 bottom-[4rem] z-30 rounded-xl border border-rule-strong bg-surface px-2 py-1.5 text-[13px] shadow-[var(--shadow)] lg:hidden">
-      <div className="flex items-start gap-2">
-        <div className="min-w-0 flex-1 pt-1 pl-1.5" aria-live="polite">
-          <p className="truncate">{status}</p>
-          {s && (
-            <p className="tnum text-xs text-muted">
-              <Facts items={facts(s)} />
-            </p>
-          )}
+      <div className="flex items-center gap-2">
+        <div className="min-w-0 flex-1 pl-0.5" aria-live="polite">
+          {comparing ? toggle : <p className="truncate pl-1">{status}</p>}
         </div>
         <IconButton label="Close schedule finder" onClick={() => useUi.getState().closeFinder()}>
           <X className="size-4" />
         </IconButton>
       </div>
+      {summary && <p className="tnum mt-1 px-1.5 text-xs text-muted">{summary}</p>}
       <div className="mt-1 flex items-center gap-1.5">
         {stepper}
         <button
@@ -247,6 +365,32 @@ export function SchedulePager({ variant }: { variant: 'toolbar' | 'mobile' }) {
         </button>
         <span className="ml-auto">{use}</span>
       </div>
+    </div>
+  );
+}
+
+/** Flip the calendar between the plan as it is and the picked option. */
+function CompareToggle({
+  showingPlan,
+  option,
+  onPlan,
+  onOption,
+}: {
+  showingPlan: boolean;
+  option: number;
+  onPlan: () => void;
+  onOption: () => void;
+}) {
+  const seg = (on: boolean) =>
+    `flex items-center rounded-md px-2.5 text-[13px] font-medium ${on ? 'bg-ink text-surface' : 'text-muted hover:text-ink'}`;
+  return (
+    <div role="group" aria-label="Compare with your plan" className="inline-flex h-8 shrink-0 rounded-lg border border-rule-strong bg-surface p-0.5">
+      <button type="button" aria-pressed={showingPlan} onClick={onPlan} className={seg(showingPlan)}>
+        Your plan
+      </button>
+      <button type="button" aria-pressed={!showingPlan} onClick={onOption} className={seg(!showingPlan)}>
+        {optionLabel(option)}
+      </button>
     </div>
   );
 }
@@ -398,7 +542,7 @@ export function FinderPanel() {
                   </select>
                 </label>
               </div>
-              <Results result={result} selected={finder?.selected ?? null} desktop={desktop} />
+              <Results result={result} finder={finder} desktop={desktop} />
             </div>
           </>
         )}
@@ -407,8 +551,9 @@ export function FinderPanel() {
   );
 }
 
-function Results({ result, selected, desktop }: { result: GenerateResult | null; selected: number | null; desktop: boolean }) {
+function Results({ result, finder, desktop }: { result: GenerateResult | null; finder: FinderUi | null; desktop: boolean }) {
   const { labelFor } = usePlanner();
+  const { baseline, options } = useFinderData();
   if (!result) return <p className="text-muted">Unlock at least one course to rearrange.</p>;
   if (result.blockers.length > 0) {
     return (
@@ -442,56 +587,107 @@ function Results({ result, selected, desktop }: { result: GenerateResult | null;
       </div>
     );
   }
+  const selected = finder?.selected ?? null;
   return (
-    <>
-      <ol className="space-y-1.5" onMouseLeave={() => useUi.getState().patchFinder({ hovered: null })}>
-        {result.schedules.map((s, i) => (
-          <OptionCard key={s.choices.map((c) => c.packageId).join('|')} index={i} schedule={s} selected={selected === i} desktop={desktop} />
-        ))}
+    <div data-option-list onMouseLeave={() => useUi.getState().patchFinder({ hovered: null })}>
+      {baseline && <BaselineCard snapshot={baseline} pinned={finder?.showPlan ?? false} desktop={desktop} />}
+      <ol className="mt-1.5 space-y-1.5">
+        {result.schedules.map((s, i) =>
+          options[i] ? (
+            <OptionCard
+              key={s.choices.map((c) => c.packageId).join('|')}
+              index={i}
+              schedule={s}
+              info={options[i]}
+              selected={selected === i}
+              desktop={desktop}
+            />
+          ) : null,
+        )}
       </ol>
       <p className="mt-2.5 text-xs text-muted">
         {desktop ? 'Hover an option to preview it on your calendar, click to pick it.' : 'Tap an option to see it on your calendar.'}{' '}
-        Checked {result.explored.toLocaleString()} combinations
+        Dashed outlines mark where sections are now. Checked {result.explored.toLocaleString()} combinations
         {result.truncated ? ' (stopped early; lock a course to search the rest)' : ''}.
       </p>
-    </>
+    </div>
   );
 }
 
-function OptionCard({ index, schedule, selected, desktop }: { index: number; schedule: GeneratedSchedule; selected: boolean; desktop: boolean }) {
-  const { plan, data } = usePlanner();
-  const { apply } = useFinderData();
+/** Arrow keys move between "Your plan" and the options. */
+function onListKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
+  if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+  e.preventDefault();
+  const all = [...(e.currentTarget.closest('[data-option-list]')?.querySelectorAll<HTMLButtonElement>('button[data-option]') ?? [])];
+  const at = all.indexOf(e.currentTarget);
+  all[(at + (e.key === 'ArrowDown' ? 1 : -1) + all.length) % all.length]?.focus();
+}
 
-  // What would change, section by section, compared with the plan as it is.
-  const changes = useMemo(() => {
-    if (!plan || !data) return [];
-    return schedule.choices.flatMap((c) => {
-      const course = data.index.byKey.get(c.courseKey);
-      const pkg = course ? findPackage(course, c.packageId) : null;
-      const cur = plan.picks.find((p) => p.courseKey === c.courseKey);
-      if (!course || !pkg || cur?.packageId === pkg.id) return [];
-      const was = cur ? findPackage(course, cur.packageId) : null;
-      const sections = packageSections(course, pkg).filter((s) => !was?.sectionIds.includes(s.id));
-      return [{ key: c.courseKey, label: course.displayCode, sections, status: pkg.status }];
-    });
-  }, [schedule, plan, data]);
+/** The plan as it is, measured like the options, so each option can be read against it. */
+function BaselineCard({ snapshot, pinned, desktop }: { snapshot: PlanSnapshot; pinned: boolean; desktop: boolean }) {
+  const choose = () => {
+    const ui = useUi.getState();
+    if (desktop) {
+      ui.patchFinder({ showPlan: true, hovered: null });
+    } else {
+      ui.patchFinder({ showPlan: true, hovered: null, list: false });
+      ui.setMobileTab('calendar');
+    }
+  };
+  const items = facts(snapshot.stats);
+  if (snapshot.stats.notOpen > 0) items.push(`${snapshot.stats.notOpen} full or waitlisted`);
+  return (
+    <div
+      onMouseEnter={() => useUi.getState().patchFinder({ hovered: 'plan' })}
+      className={`rounded-lg border border-dashed ${pinned ? 'border-ink bg-surface-2' : 'border-rule-strong hover:border-ink hover:bg-surface-2/60'}`}
+    >
+      <button
+        type="button"
+        data-option="plan"
+        aria-pressed={pinned}
+        onFocus={() => useUi.getState().patchFinder({ showPlan: true })}
+        onClick={choose}
+        onKeyDown={onListKeyDown}
+        className="w-full rounded-lg px-3 py-2 text-left"
+      >
+        <span className="flex items-baseline gap-2">
+          <span className="font-semibold">Your plan</span>
+          <span className="text-xs text-muted">as it is now</span>
+          <span className={`ml-auto text-xs font-medium ${snapshot.conflicts ? 'text-danger' : 'text-ok'}`}>{conflictText(snapshot.conflicts)}</span>
+        </span>
+        <span className="tnum mt-0.5 block text-xs text-muted">
+          <Facts items={items} />
+        </span>
+      </button>
+    </div>
+  );
+}
+
+function OptionCard({
+  index,
+  schedule,
+  info,
+  selected,
+  desktop,
+}: {
+  index: number;
+  schedule: GeneratedSchedule;
+  info: OptionInfo;
+  selected: boolean;
+  desktop: boolean;
+}) {
+  const { apply } = useFinderData();
+  const { changes, deltas, snapshot } = info;
 
   const choose = () => {
     const ui = useUi.getState();
     if (desktop) {
-      ui.patchFinder({ selected: index });
+      selectOption(index);
     } else {
       // Phones can't show the list and the calendar at once: go look at it.
-      ui.patchFinder({ selected: index, hovered: null, list: false });
+      ui.patchFinder({ selected: index, hovered: null, showPlan: false, list: false });
       ui.setMobileTab('calendar');
     }
-  };
-  const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
-    e.preventDefault();
-    const all = [...(e.currentTarget.closest('ol')?.querySelectorAll<HTMLButtonElement>('button[data-option]') ?? [])];
-    const at = all.indexOf(e.currentTarget);
-    all[(at + (e.key === 'ArrowDown' ? 1 : -1) + all.length) % all.length]?.focus();
   };
 
   return (
@@ -503,15 +699,15 @@ function OptionCard({ index, schedule, selected, desktop }: { index: number; sch
         type="button"
         data-option={index}
         aria-expanded={selected}
-        onFocus={() => useUi.getState().patchFinder({ selected: index })}
+        onFocus={() => selectOption(index)}
         onClick={choose}
-        onKeyDown={onKeyDown}
+        onKeyDown={onListKeyDown}
         className="w-full rounded-lg px-3 py-2 text-left"
       >
         <span className="flex items-baseline gap-2">
           <span className="font-semibold">{optionLabel(index)}</span>
           <span className="text-xs text-muted">
-            {changes.length === 0 ? 'your current plan' : `${changes.length} course${changes.length === 1 ? '' : 's'} change`}
+            {changes.length === 0 ? 'your plan as it is' : `${changes.length} course${changes.length === 1 ? '' : 's'} change`}
           </span>
           {schedule.stats.notOpen > 0 && (
             <span className="ml-auto text-xs font-medium text-warn">
@@ -520,8 +716,13 @@ function OptionCard({ index, schedule, selected, desktop }: { index: number; sch
           )}
         </span>
         <span className="tnum mt-0.5 block text-xs text-muted">
-          <Facts items={facts(schedule)} />
+          <Facts items={facts(snapshot.stats)} />
         </span>
+        {changes.length > 0 && (
+          <span className="tnum mt-0.5 block text-xs font-medium">
+            {deltas.length > 0 ? <Deltas items={deltas} /> : <span className="text-muted">Same days and times as your plan</span>}
+          </span>
+        )}
       </button>
       {selected && (
         <div className="border-t border-rule px-3 pt-2 pb-2.5">
@@ -531,17 +732,23 @@ function OptionCard({ index, schedule, selected, desktop }: { index: number; sch
             <>
               <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 text-xs">
                 {changes.map((ch) => (
-                  <Fragment key={ch.key}>
-                    <dt className="font-semibold">{ch.label}</dt>
-                    <dd className="tnum">
-                      {ch.sections.map((s) => (
-                        <span key={s.id} className="block">
-                          {s.type} {s.code.slice(0, 7)}{' '}
-                          <span className="text-muted">{summarizeWeekly(s.meetings).join(', ') || 'TBA'}</span>
-                        </span>
-                      ))}
-                      {ch.status !== 'open' && <span className="block text-warn">{ch.status === 'waitlist_only' ? 'Waitlist only' : 'Full'}</span>}
-                    </dd>
+                  <Fragment key={ch.courseKey}>
+                    {ch.swaps.map((sw, i) => (
+                      <Fragment key={`${sw.type}${i}`}>
+                        <dt className="whitespace-nowrap font-semibold">
+                          {i === 0 ? ch.displayCode : ''} <span className="font-normal text-muted">{sw.type}</span>
+                        </dt>
+                        <dd className="tnum">
+                          <SwapText swap={sw} />
+                        </dd>
+                      </Fragment>
+                    ))}
+                    {ch.status !== 'open' && (
+                      <>
+                        <dt />
+                        <dd className="text-warn">{ch.status === 'waitlist_only' ? 'Waitlist only' : 'Full'}</dd>
+                      </>
+                    )}
                   </Fragment>
                 ))}
               </dl>
@@ -557,6 +764,40 @@ function OptionCard({ index, schedule, selected, desktop }: { index: number; sch
         </div>
       )}
     </li>
+  );
+}
+
+/** One section's move: "M 3:00–5:50pm → W 3:00–5:50pm". */
+function SwapText({ swap }: { swap: SectionSwap }) {
+  const { from, to } = swap;
+  const code = (s: { code: string }) => s.code.slice(0, 7);
+  if (from && to) {
+    const was = sectionWhen(from);
+    const now = sectionWhen(to);
+    if (was === now) {
+      return (
+        <span title={`${from.code} → ${to.code}`}>
+          {now} <span className="text-muted">· same time, section {code(to)}</span>
+        </span>
+      );
+    }
+    return (
+      <span title={`${from.code} → ${to.code}`}>
+        <span className="text-muted line-through">{was}</span> <span className="text-muted">→</span> {now}
+      </span>
+    );
+  }
+  if (to) {
+    return (
+      <span title={to.code}>
+        <span className="text-ok">adds</span> {sectionWhen(to)}
+      </span>
+    );
+  }
+  return (
+    <span title={from!.code}>
+      <span className="text-muted line-through">{sectionWhen(from!)}</span> <span className="text-muted">dropped</span>
+    </span>
   );
 }
 

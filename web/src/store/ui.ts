@@ -48,10 +48,12 @@ export interface FinderOpts {
 
 /** The open schedule finder. Option indexes point into the current result list. */
 export interface FinderUi {
-  /** Option the user picked (stays previewed). */
+  /** Option the user picked (stays previewed unless `showPlan`). */
   selected: number | null;
-  /** Option under the pointer (previewed while hovering). */
-  hovered: number | null;
+  /** Option under the pointer, or 'plan' for the "Your plan" card (previewed while hovering). */
+  hovered: number | 'plan' | null;
+  /** Show the plan as it is instead of the picked option, to compare the two. */
+  showPlan: boolean;
   /** Phones only: the option list is showing (true) or the calendar with the pager (false). */
   list: boolean;
 }
@@ -63,6 +65,9 @@ interface UiState {
   sheet: Sheet;
   finder: FinderUi | null;
   finderOpts: FinderOpts;
+  /** Hours the week view must span (set by the finder so flipping between options doesn't resize it). */
+  weekExtent: { start: number; end: number } | null;
+  setWeekExtent: (e: { start: number; end: number } | null) => void;
   toasts: Toast[];
   mobileTab: MobileTab;
   /** Course key to highlight on the calendar (hovering its row or block). */
@@ -95,6 +100,8 @@ export const useUi = create<UiState>((set) => ({
   view: 'week',
   sheet: null,
   finder: null,
+  weekExtent: null,
+  setWeekExtent: (weekExtent) => set({ weekExtent }),
   finderOpts: { locked: null, openOnly: false, avoidDays: [], earliest: null, latest: null, preference: 'balanced' },
   toasts: [],
   mobileTab: 'search',
@@ -111,11 +118,11 @@ export const useUi = create<UiState>((set) => ({
       schedulePreview: null,
       preview: null,
       // A sheet takes over the calendar preview; drop the finder's pick so the two never disagree.
-      finder: s.finder && sheet ? { ...s.finder, selected: null, hovered: null } : s.finder,
+      finder: s.finder && sheet ? { ...s.finder, selected: null, hovered: null, showPlan: false } : s.finder,
     })),
   openFinder: () =>
     set((s) => ({
-      finder: { selected: null, hovered: null, list: true },
+      finder: { selected: null, hovered: null, showPlan: false, list: true },
       finderOpts: { ...s.finderOpts, locked: null },
       sheet: null,
       preview: null,
@@ -126,7 +133,7 @@ export const useUi = create<UiState>((set) => ({
   setFinderOpts: (p) =>
     set((s) => ({
       finderOpts: { ...s.finderOpts, ...p },
-      finder: s.finder ? { ...s.finder, selected: null, hovered: null } : null,
+      finder: s.finder ? { ...s.finder, selected: null, hovered: null, showPlan: false } : null,
     })),
   pushToast: (t) => {
     const id = toastId++;
