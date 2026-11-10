@@ -310,7 +310,7 @@ Each package's weekly class meetings become a `VEVENT` with `RRULE:FREQ=WEEKLY;B
 | **3. Search and preview** | query parser, index, results, package rows, ghost preview, conflict chips, filters | Typing `CSE 110, MATH 18` and hovering previews instantly |
 | **4. Conflicts** | conflict engine wired up, header pill, toast with undo/fix, conflict center, backup status | All of §6 works |
 | **5. Plan management and export** | multiple plans, duplicate/rename, custom blocks, plan table, copy IDs, `.ics` export, print view | |
-| **6. Deploy** | Dockerfile, Caddy example (done); server-side plans in SQLite, accounts (todo) | Runs on the VPS |
+| **6. Deploy** | Dockerfile with health check, Caddy example, capped logs, CSP and security headers (done); server-side plans in SQLite, accounts (todo) | Runs on the VPS |
 | **7. Later** | ~~schedule generator~~ (done: `shared/src/generate.ts` + the "Find a schedule" panel), seat-open alerts, share links, server-side plans | |
 
 ---

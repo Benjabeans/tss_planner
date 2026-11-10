@@ -59,7 +59,9 @@ $EDITOR deploy/Caddyfile        # set your domain; optionally enable basic auth
 docker compose -f deploy/docker-compose.yml up -d --build
 ```
 
-The container serves the built web app and the API on port 8787. Caddy terminates HTTPS in front of it, and catalog data persists in the `planner-data` volume. Without Docker, run `npm ci && npm run build && npm run sync && NODE_ENV=production HOST=0.0.0.0 npm start` behind any reverse proxy.
+The container serves the built web app and the API on port 8787. Caddy terminates HTTPS in front of it, and catalog data persists in the `planner-data` volume. Without Docker, run `npm ci && npm run build && npm run sync && NODE_ENV=production npm start` and point a reverse proxy with HTTPS at `127.0.0.1:8787`. The server listens only on localhost unless you set `HOST`, so port 8787 isn't reachable from outside.
+
+In production the server sends a strict Content-Security-Policy (only same-origin scripts, plus a hash of the theme script in `index.html`), and the Docker image has a health check on `/api/health`.
 
 ### Environment
 
