@@ -1,4 +1,5 @@
-import { mkdtempSync, rmSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
@@ -160,5 +161,30 @@ describe('HTTP API', () => {
     expect((await app.request('/api/terms/SP99/catalog')).status).toBe(404);
     expect((await app.request('/api/terms/../catalog')).status).toBe(404);
     expect((await app.request('/api/sync/WI27', { method: 'POST' })).status).toBe(403);
+  });
+
+  it('sends a CSP that allows only index.html’s own inline script in production', async () => {
+    const web = mkdtempSync(path.join(tmpdir(), 'tss-web-'));
+    try {
+      const theme = "document.documentElement.dataset.theme = 'dark';";
+      writeFileSync(
+        path.join(web, 'index.html'),
+        `<html><head><script>${theme}</script><script type="module" src="/assets/app.js"></script></head></html>`,
+      );
+      const { store, syncer } = makeSyncer(fakeUpstream());
+      const page = await createApp({ store, syncer, production: true, webDist: web }).request('/plans/deep-link');
+      expect(page.status).toBe(200);
+      const csp = page.headers.get('content-security-policy')!;
+      const hash = createHash('sha256').update(theme).digest('base64');
+      expect(csp).toContain(`script-src 'self' 'sha256-${hash}'`);
+      expect(csp.match(/sha256-/g)).toHaveLength(1);
+      expect(csp).toContain("frame-ancestors 'none'");
+      expect(page.headers.get('x-content-type-options')).toBe('nosniff');
+
+      const dev = createApp({ store, syncer, production: false });
+      expect((await dev.request('/api/health')).headers.get('content-security-policy')).toBeNull();
+    } finally {
+      rmSync(web, { recursive: true, force: true });
+    }
   });
 });

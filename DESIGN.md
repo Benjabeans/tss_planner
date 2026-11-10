@@ -2,7 +2,7 @@
 
 A WebReg-style weekly calendar planner for UC San Diego courses. It runs on public data from the Triton Student System (TSS) era. You plan here, then book in TSS (sis.ucsd.edu).
 
-Status: phases 1–5 implemented and phase 6 scaffolded (Docker/Caddy, not yet run on a VPS). Last revised 2026-11-09.
+Status: phases 1–5 implemented and phase 6 scaffolded (Docker/Caddy, not yet run on a VPS). Last revised 2026-11-09 (UI polish pass: §5).
 
 ---
 
@@ -158,9 +158,9 @@ CustomBlock { id, label, days: number[], start, end, color }
 ### 5.1 Layout (desktop ≥ 1024 px)
 ```
 +--------------------------------------------------------------------------+
-| TSS Planner  [Winter 2027 v]  [Plan A v][+]   16 units   [2 conflicts]   |
+| TSS Planner  [Winter 2027 v]  [Plan A v]     16 units  [2 conflicts] [...]|
 +-------------------------+------------------------------------------------+
-| Search: CSE 110, MATH 18| [Week | Finals]            synced 12 min ago   |
+| Search: CSE 110, MATH 18| [Week | Finals]  Previewing...  [Find a schedule]|
 | [x] Open seats only     |        Mon     Tue     Wed     Thu     Fri     |
 | [ ] Hide conflicting    |  9am  +-----+         +-----+         +-----+  |
 |-------------------------|       |MATH |         |MATH |         |MATH |  |
@@ -179,13 +179,26 @@ CustomBlock { id, label, days: number[], start, end, color }
 ```
 - **Search panel (left):** a query box, filters (open seats, hide conflicting, level, days, earliest and latest time), and results grouped by course. Expanding a course lists its **packages** as rows (components, days and times, instructor, seats). Each row shows a **conflict chip** when it overlaps the current plan.
 - **Hovering a package row** (or focusing it with the keyboard) draws it on the calendar as ghost blocks. Overlaps are hatched red. Clicking adds the package, and clicking a different package of a course already in the plan swaps it.
-- **Calendar (center):** Mon–Fri by default. Sat/Sun columns appear automatically when needed. The time range auto-fits from 8am–6pm and grows to cover planned blocks (minimum range 8am–5pm). Blocks show the course code, type and time. Clicking a block opens the detail popover (swap, color, status, remove).
+- **Calendar (center):** Mon–Fri by default. Sat/Sun columns appear automatically when needed. The time range auto-fits from 8am–6pm and grows to cover planned blocks (minimum range 8am–5pm). Blocks show the course code, type and time, top-aligned. Labels adapt to the block's own width (a container query): the full range when the block is wide, the start time when it is narrow (phones, conflict lanes), and type and range stacked when it is also tall. Clicking a block opens the course sheet (swap, color, status, remove), and that course's blocks stay highlighted while the sheet is open.
+- **Calendar toolbar:** the Week/Finals toggle, a preview line ("Previewing CSE 110"), and **Find a schedule**, the primary action, on the right. It is disabled until the plan has a non-backup course.
+- **Find a schedule (desktop):** opens in the left column in place of search. The search query is kept and `/` returns to it. Nothing covers the calendar, so options and the calendar sit side by side. The panel has the courses with lock toggles, rules (days off, time window, open seats only), a "Prefer" ranking and up to 10 options. Hovering an option previews it on the calendar. Clicking (or focusing) picks it: the card expands to list each section that moves, old → new (`ECON 1 DI  ~~M 5:00–5:50pm~~ → M 6:00–6:50pm`), and a **Use this schedule** button. Picked options stay previewed. While the finder is open, the toolbar shows a pager (‹ ›, a **Your plan | Option N** toggle, "of 10", Use this schedule) so you can step through options, or flip between an option and the plan as it is, while looking at the calendar. Applying closes the finder, with Undo in the toast. It can also be opened from the conflict center.
+- **Comparing with the plan as it is:**
+  - **Baseline card.** A dashed **Your plan** card sits above the options, with the same numbers (days on campus, time between classes, first start to last end, full/waitlisted) plus its conflict count, counted the way the header pill counts them. Hovering it shows the plan; clicking it pins the plan.
+  - **Differences on each option.** Each option card adds a line of differences from the plan, e.g. "fixes 2 conflicts · 1 fewer day on campus · 40m less between classes · starts 1h later". Improvements are green, regressions amber, and start/end shifts neutral, since earlier vs later is a matter of taste. The numbers come from the plan as it would be after applying the option (`shared/src/compare.ts`), so they never disagree with the header afterwards.
+  - **Calendar diff.** Sections an option keeps stay solid. Only sections that change are ghosts, and each section moving away leaves a dashed, struck-through outline where it is now. Outlines draw over solid blocks, because a section leaving a conflict sat on top of another class, but under the ghosts. The same diff applies to every preview, including hovering a search result for a course already in the plan.
+  - **Stable grid.** While the finder is open, the week view spans the hours of every option, so flipping doesn't change the calendar's height.
+- **Sheets** (course, conflict center, blocked time, settings) open over the left column, below the header, so the header and calendar stay visible. Opening one moves keyboard focus into it, and closing it returns focus.
 - **Finals view:** a toggle that replaces the weekly grid with finals-week columns (one per date, e.g. Sat Mar 13 – Sat Mar 20) showing only `final` meetings. Midterms and one-off events appear in a list under the calendar.
-- **Plan table (bottom):** one row per component, with copy buttons for section IDs (for booking in TSS), status badges, and a per-row conflict explanation.
-- **Header:** term, plan switcher (new, rename, duplicate, delete), a units total colored against the cap, and a conflict pill that opens the conflict center.
+- **Plan table (bottom):** the plan name and unit total, Copy all IDs, Block off time, then one row per component with copy buttons for section IDs (for booking in TSS), a status picker, and a per-course conflict explanation.
+- **Header:** term, plan switcher (new, duplicate, share link, rename, delete), a units total colored against the cap, a conflict pill that opens the conflict center, and a More menu (export .ics, print, block off time, settings). Menus work with the arrow keys.
+- **Toasts** sit at the bottom center of the main column (not over the search panel). Each carries Undo, plus Fix when the change created a conflict.
 
 ### 5.2 Mobile (< 1024 px)
-Three tabs: **Search · Calendar · Plan**. The calendar shows a day at a time with a swipe/segmented day picker. Previews become tap-to-preview, then confirm.
+Three bottom tabs: **Search · Calendar · Plan**. The header wraps to two rows, and the unit total moves into the plan header.
+- **Search:** tapping a section adds it, with Undo in the toast. There is no hover preview.
+- **Calendar:** the whole week (Mon–Fri) with a narrow hour gutter. Narrow blocks show the code, type and start time, e.g. "MATH 18 / LE 11:00". The toolbar holds Week/Finals and Find a schedule.
+- **Find a schedule:** a phone can't show the option list and the calendar at once. The list opens full screen, and tapping an option returns to the Calendar tab with that option previewed and a pager above the tab bar (Your plan | Option N toggle, the differences line, ‹ ›, All options, Use this schedule, close). Tapping the Your plan card shows the plan with the same pager. Leaving the Calendar tab ends the preview.
+- **Plan:** a stacked list instead of the wide table. Each section shows its type, code, time, instructor and seats, and its section ID is a tap-to-copy button.
 
 ### 5.3 Visual design tokens
 - **Concept:** a timetable on a clean desk. It's a quiet, dense, legible utility. All of the visual boldness goes into the course blocks and the conflict treatment. Nothing else is decorated.
@@ -271,7 +284,7 @@ Client-side, over an index built once per catalog:
 - Results render as a virtualized list and only expand sections on demand.
 
 ### 7.5 Schedule generator
-`generateSchedules({courses, fixed, constraints, preference})` runs a depth-first search over each course's packages. It starts with the course that has the fewest usable packages and prunes on hard conflicts: class, final and custom-block overlaps. Midterm and dated-meeting overlaps are allowed but noted. Locked and enrolled courses and custom blocks are passed in as `fixed`. Results are ranked by a weighted score covering days on campus, gap minutes, minutes before 10am and full/waitlisted packages. The preference (balanced, fewest days, fewest gaps, start later) picks the weights. The search stops after a node budget (150k) and reports that it did. When nothing fits, it explains why: either a course has no package that passes the filters (or avoids the fixed items), or it names the course pairs that can never coexist. For example, in WI27 every CSE 110 lab (Mon 3:00–5:50pm) overlaps CSE 100's only discussion (Mon 4:00–4:50pm).
+`generateSchedules({courses, fixed, constraints, preference})` runs a depth-first search over each course's packages. It starts with the course that has the fewest usable packages and prunes on hard conflicts: class, final and custom-block overlaps. Midterm and dated-meeting overlaps are allowed but noted. Locked and enrolled courses and custom blocks are passed in as `fixed`. Results are ranked by a weighted score covering days on campus, gap minutes, minutes before 10am and full/waitlisted packages. The score covers the whole week: locked courses count toward days and gaps, so "fewest days" ranks correctly when some courses are locked. The preference (balanced, fewest days, fewest gaps, start later) picks the weights. The search stops after a node budget (150k) and reports that it did. When nothing fits, it explains why: either a course has no package that passes the filters (or avoids the fixed items), or it names the course pairs that can never coexist. For example, in WI27 every CSE 110 lab (Mon 3:00–5:50pm) overlaps CSE 100's only discussion (Mon 4:00–4:50pm).
 
 ### 7.6 ICS export
 Each package's weekly class meetings become a `VEVENT` with `RRULE:FREQ=WEEKLY;BYDAY=…;UNTIL=<instruction end>`. The first occurrence is aligned to the first matching weekday on or after instruction begins, and holidays become `EXDATE`s. Finals and midterms are single events. Times use TZID `America/Los_Angeles` with a VTIMEZONE block.
@@ -297,8 +310,8 @@ Each package's weekly class meetings become a `VEVENT` with `RRULE:FREQ=WEEKLY;B
 | **3. Search and preview** | query parser, index, results, package rows, ghost preview, conflict chips, filters | Typing `CSE 110, MATH 18` and hovering previews instantly |
 | **4. Conflicts** | conflict engine wired up, header pill, toast with undo/fix, conflict center, backup status | All of §6 works |
 | **5. Plan management and export** | multiple plans, duplicate/rename, custom blocks, plan table, copy IDs, `.ics` export, print view | |
-| **6. Deploy** | Dockerfile, Caddy example (done); server-side plans in SQLite, accounts (todo) | Runs on the VPS |
-| **7. Later** | ~~schedule generator~~ (done: `shared/src/generate.ts` + "Find a schedule" sheet), seat-open alerts, share links, server-side plans | |
+| **6. Deploy** | Dockerfile with health check, Caddy example, capped logs, CSP and security headers (done); server-side plans in SQLite, accounts (todo) | Runs on the VPS |
+| **7. Later** | ~~schedule generator~~ (done: `shared/src/generate.ts` + the "Find a schedule" panel), seat-open alerts, share links, server-side plans | |
 
 ---
 

@@ -1,4 +1,6 @@
 import { Hono } from 'hono';
+import { secureHeaders } from 'hono/secure-headers';
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { serveStatic } from '@hono/node-server/serve-static';
@@ -16,8 +18,40 @@ export interface AppDeps {
 
 const TERM_RE = /^[A-Z0-9]{4}$/;
 
+/** CSP hashes for index.html's inline scripts (the theme script that runs before first paint). */
+export function inlineScriptHashes(html: string): string[] {
+  return [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(
+    (m) => `'sha256-${createHash('sha256').update(m[1] ?? '').digest('base64')}'`,
+  );
+}
+
 export function createApp({ store, syncer, production, webDist }: AppDeps): Hono {
   const app = new Hono();
+  const index = webDist && existsSync(webDist) ? readFileSync(path.join(webDist, 'index.html'), 'utf8') : null;
+
+  if (production) {
+    // Everything the page loads comes from this origin, so the policy can be strict.
+    app.use(
+      '*',
+      secureHeaders({
+        contentSecurityPolicy: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", ...(index ? inlineScriptHashes(index) : [])],
+          styleSrc: ["'self'"],
+          imgSrc: ["'self'", 'data:'],
+          // Vite inlines the smallest font subsets as data: URIs.
+          fontSrc: ["'self'", 'data:'],
+          connectSrc: ["'self'"],
+          objectSrc: ["'none'"],
+          baseUri: ["'self'"],
+          formAction: ["'self'"],
+          frameAncestors: ["'none'"],
+        },
+        xFrameOptions: 'DENY',
+        referrerPolicy: 'strict-origin-when-cross-origin',
+      }),
+    );
+  }
 
   app.get('/api/health', (c) => c.json({ ok: true }));
 
@@ -79,14 +113,13 @@ export function createApp({ store, syncer, production, webDist }: AppDeps): Hono
 
   app.all('/api/*', (c) => c.json({ error: 'Not found' }, 404));
 
-  if (webDist && existsSync(webDist)) {
+  if (webDist && index !== null) {
     const rel = path.relative(process.cwd(), webDist);
     app.use('/assets/*', async (c, next) => {
       await next();
       if (c.res.ok) c.header('Cache-Control', 'public, max-age=31536000, immutable');
     });
     app.use('/*', serveStatic({ root: rel }));
-    const index = readFileSync(path.join(webDist, 'index.html'), 'utf8');
     app.get('*', (c) => c.html(index));
   }
 

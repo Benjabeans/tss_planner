@@ -2,7 +2,7 @@ import { useMemo, type CSSProperties } from 'react';
 import { AlertTriangle, CalendarClock } from 'lucide-react';
 import type { Conflict, Severity, Slot } from '@shared/conflicts.ts';
 import { layoutLanes } from '@shared/layout.ts';
-import { DAY_ABBR, addDays, formatDate, formatHour, formatRange, weekdayOfDate } from '@shared/time.ts';
+import { DAY_ABBR, addDays, formatDate, formatHour, formatRange, formatTime, weekdayOfDate } from '@shared/time.ts';
 import { isSchedulable, packageSections } from '@shared/plan.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { useUi } from '../store/ui.ts';
@@ -25,12 +25,20 @@ interface Band {
   title: string;
 }
 
+/** Where a previewed course's section sits now; it moves away in the preview. */
+interface Outline {
+  id: string;
+  slot: Slot;
+  color: string;
+}
+
 interface Column {
   key: string;
   label: string;
   sub?: string;
   items: BlockItem[];
   bands: Band[];
+  removed: Outline[];
 }
 
 const HOUR = 60;
@@ -48,7 +56,8 @@ function worst(a: Severity | null, b: Severity): Severity {
   return a === null || rank[b] < rank[a] ? b : a;
 }
 
-function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorOf: (s: Slot) => string) {
+/** `same`: previewed slots that match the plan; they render solid since nothing changes there. */
+function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorOf: (s: Slot) => string, same?: Set<Slot>) {
   const sev = new Map<Slot, Severity>();
   for (const c of conflicts) {
     if (c.severity === 'info') continue;
@@ -63,10 +72,15 @@ function buildItems(slots: Slot[], ghosts: Slot[], conflicts: Conflict[], colorO
     status: s.status,
     severity: sev.get(s) ?? null,
   }));
-  ghosts.forEach((s, i) =>
-    items.push({ id: `g${i}`, slot: s, color: colorOf(s), ghost: true, severity: sev.get(s) ?? null }),
-  );
+  ghosts.forEach((s, i) => {
+    const kept = same?.has(s) ?? false;
+    items.push({ id: `g${i}`, slot: s, color: colorOf(s), ghost: !kept, status: kept ? s.status : undefined, severity: sev.get(s) ?? null });
+  });
   return items;
+}
+
+function outlinesOf(slots: Slot[], colorOf: (s: Slot) => string): Outline[] {
+  return slots.map((s, i) => ({ id: `w${i}`, slot: s, color: colorOf(s) }));
 }
 
 function bandsFor(conflicts: Conflict[]): Band[] {
@@ -75,10 +89,10 @@ function bandsFor(conflicts: Conflict[]): Band[] {
     .map((c) => ({ id: c.id, start: c.start, end: c.end, severity: c.severity, title: describeConflict(c) }));
 }
 
-function rangeOf(items: BlockItem[]): { start: number; end: number } {
+function rangeOf(items: { slot: Slot }[], extent?: { start: number; end: number } | null): { start: number; end: number } {
   let start = 8 * HOUR;
   let end = 18 * HOUR;
-  for (const it of items) {
+  for (const it of [...items, ...(extent ? [{ slot: extent }] : [])]) {
     start = Math.min(start, Math.floor(it.slot.start / HOUR) * HOUR);
     end = Math.max(end, Math.ceil(it.slot.end / HOUR) * HOUR);
   }
@@ -106,22 +120,27 @@ function WeekView() {
     const ghostSlots = preview && !preview.current ? preview.slots.filter((s) => !s.date) : [];
     const previewConflicts = preview && !preview.current ? preview.conflicts.filter((c) => !c.date) : [];
     const allConflicts = [...conflicts.filter((c) => !c.date && visible(c)), ...previewConflicts];
-    const items = buildItems(weekly, ghostSlots, allConflicts, colorOf);
+    const items = buildItems(weekly, ghostSlots, allConflicts, colorOf, preview?.same);
+    const removed = outlinesOf(preview && !preview.current ? preview.removed.filter((s) => !s.date) : [], colorOf);
     const days = [1, 2, 3, 4, 5];
-    if (items.some((i) => i.slot.day === 6)) days.push(6);
-    if (items.some((i) => i.slot.day === 0)) days.push(0);
+    const used = [...items, ...removed];
+    if (used.some((i) => i.slot.day === 6)) days.push(6);
+    if (used.some((i) => i.slot.day === 0)) days.push(0);
     return days.map((d) => ({
       key: String(d),
       label: DAY_ABBR[d]!,
       items: items.filter((i) => i.slot.day === d),
       bands: bandsFor(allConflicts.filter((c) => c.day === d)),
+      removed: removed.filter((o) => o.slot.day === d),
     }));
   }, [slots, conflicts, preview, plan, colorOf]);
 
+  const extent = useUi((s) => s.weekExtent);
   const empty = (plan?.picks.length ?? 0) === 0 && (plan?.blocks.length ?? 0) === 0 && !preview;
   return (
     <TimeGrid
       columns={columns}
+      extent={extent}
       empty={
         empty ? (
           <>
@@ -146,20 +165,22 @@ function FinalsView() {
       ...conflicts.filter((c) => c.kind === 'final' && !hidden.has(c.a.ownerId) && !hidden.has(c.b.ownerId)),
       ...(preview && !preview.current ? preview.conflicts.filter((c) => c.kind === 'final') : []),
     ];
-    const items = buildItems(finals, ghostSlots, finalConflicts, colorOf);
+    const items = buildItems(finals, ghostSlots, finalConflicts, colorOf, preview?.same);
+    const removed = outlinesOf(preview && !preview.current ? preview.removed.filter((s) => s.kind === 'final') : [], colorOf);
 
     let dates: string[] = [];
     if (termDates) {
       for (let d = termDates.finalsBegin; d <= termDates.finalsEnd; d = addDays(d, 1)) dates.push(d);
     }
-    for (const it of items) if (it.slot.date && !dates.includes(it.slot.date)) dates.push(it.slot.date);
-    dates = dates.sort().filter((d) => weekdayOfDate(d) !== 0 || items.some((i) => i.slot.date === d));
+    for (const it of [...items, ...removed]) if (it.slot.date && !dates.includes(it.slot.date)) dates.push(it.slot.date);
+    dates = dates.sort().filter((d) => weekdayOfDate(d) !== 0 || [...items, ...removed].some((i) => i.slot.date === d));
     return dates.map((date) => ({
       key: date,
       label: DAY_ABBR[weekdayOfDate(date)]!,
       sub: formatDate(date),
       items: items.filter((i) => i.slot.date === date),
       bands: bandsFor(finalConflicts.filter((c) => c.date === date)),
+      removed: removed.filter((o) => o.slot.date === date),
     }));
   }, [slots, conflicts, preview, termDates, plan, colorOf]);
 
@@ -179,15 +200,23 @@ function FinalsView() {
   );
 }
 
-function TimeGrid({ columns, empty }: { columns: Column[]; empty: React.ReactNode }) {
-  const range = useMemo(() => rangeOf(columns.flatMap((c) => c.items)), [columns]);
+function TimeGrid({
+  columns,
+  empty,
+  extent,
+}: {
+  columns: Column[];
+  empty: React.ReactNode;
+  extent?: { start: number; end: number } | null;
+}) {
+  const range = useMemo(() => rangeOf(columns.flatMap((c) => [...c.items, ...c.removed]), extent), [columns, extent]);
   const hours: number[] = [];
   for (let m = range.start; m < range.end; m += HOUR) hours.push(m);
   const span = (range.end - range.start) / HOUR;
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-rule bg-surface" role="grid" aria-label="Calendar">
-      <div className="grid" style={{ gridTemplateColumns: `3.25rem repeat(${columns.length}, minmax(0, 1fr))` }}>
+      <div className="grid" style={{ gridTemplateColumns: `var(--gutter) repeat(${columns.length}, minmax(0, 1fr))` }}>
         <div className="border-b border-rule" />
         {columns.map((c) => (
           <div key={c.key} className="border-b border-l border-rule px-2 py-2 text-center" role="columnheader">
@@ -200,7 +229,7 @@ function TimeGrid({ columns, empty }: { columns: Column[]; empty: React.ReactNod
           {hours.map((m, i) => (
             <div
               key={m}
-              className="tnum absolute right-1.5 -translate-y-1/2 text-[11px] text-faint"
+              className="tnum absolute right-1.5 -translate-y-1/2 text-[11px] text-muted"
               style={{ top: `calc(var(--hour-h) * ${i})` }}
             >
               {i === 0 ? '' : formatHour(m)}
@@ -241,6 +270,19 @@ function DayColumn({ column, range, span }: { column: Column; range: { start: nu
         backgroundSize: '100% var(--hour-h), 100% calc(var(--hour-h) / 2)',
       }}
     >
+      {/* Outlines sit behind the blocks and outside the lane layout: they show where a section is now. */}
+      {column.removed.map((o) => (
+        <div
+          key={o.id}
+          className="cal-was"
+          data-color={o.color}
+          style={pos(o.slot.start, o.slot.end)}
+          title={`Now: ${o.slot.label} · ${formatRange(o.slot.start, o.slot.end)} (moves in this preview)`}
+          aria-hidden
+        >
+          <span className="cal-was-label">{o.slot.label}</span>
+        </div>
+      ))}
       {column.items.map((it) => (
         <CalendarBlock key={it.id} item={it} style={{ ...pos(it.slot.start, it.slot.end), ...laneStyle(lanes.get(it.id)) }} />
       ))}
@@ -260,11 +302,14 @@ function laneStyle(p: { lane: number; lanes: number } | undefined): CSSPropertie
 function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties }) {
   const { preview } = usePlanner();
   const focusCourse = useUi((s) => s.focusCourse);
+  // The course whose sheet is open stays highlighted, so the sheet and its blocks read as one.
+  const sheetCourse = useUi((s) => (s.sheet?.kind === 'pick' ? s.sheet.courseKey : null));
   const pulse = useUi((s) => s.pulse);
   const fresh = useUi((s) => s.fresh);
   const { slot } = item;
-  const emphasis = !item.ghost && focusCourse && focusCourse === slot.ownerId ? 'focus' : undefined;
-  const short = slot.end - slot.start < 45;
+  const emphasis = !item.ghost && (focusCourse ?? sheetCourse) === slot.ownerId ? 'focus' : undefined;
+  const minutes = slot.end - slot.start;
+  const short = minutes < 45;
   const [code, type] = splitLabel(slot.label);
 
   const onClick = () => {
@@ -274,12 +319,18 @@ function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties 
     else ui.openSheet({ kind: 'pick', courseKey: slot.ownerId });
   };
 
-  const title = `${slot.label} · ${formatRange(slot.start, slot.end)}${item.ghost ? ' (preview — click to add)' : ''}`;
+  const title = `${slot.label} · ${formatRange(slot.start, slot.end)}${item.severity === 'error' ? ' · conflict' : ''}${
+    item.ghost ? ' (preview — click to add)' : ''
+  }`;
+  // Labels adapt to the block's own width (container queries in styles.css): full range when wide,
+  // start time when narrow, stacked lines when the block is tall enough to hold them.
   return (
     <button
       type="button"
-      className="cal-block text-left"
+      className="cal-block"
       data-color={item.color}
+      data-short={short || undefined}
+      data-tall={minutes >= 75 || undefined}
       data-ghost={item.ghost || undefined}
       data-status={item.status}
       data-emphasis={emphasis}
@@ -293,17 +344,21 @@ function CalendarBlock({ item, style }: { item: BlockItem; style: CSSProperties 
       onMouseEnter={() => useUi.getState().setFocusCourse(slot.ownerId)}
       onMouseLeave={() => useUi.getState().setFocusCourse(null)}
     >
-      <div className={`px-1 leading-tight sm:px-1.5 ${short ? 'py-0.5' : 'py-1'}`}>
-        <div className="flex items-start gap-1 text-[11.5px] font-semibold sm:text-[12.5px]">
-          <span className="min-w-0 break-words">{code}</span>
-          {item.severity === 'error' && <AlertTriangle className="mt-px ml-auto size-3 shrink-0 text-danger" aria-label="Conflict" />}
-        </div>
-        <div className="tnum truncate text-[11px] opacity-85 sm:text-[11.5px]">
-          {type && <span className="font-medium">{type}</span>}
-          {type && !short && ' · '}
-          {!short && formatRange(slot.start, slot.end)}
-        </div>
-      </div>
+      <span className="cal-code">
+        <span className="cal-code-text">{code}</span>
+        {item.severity === 'error' && <AlertTriangle className="cal-alert" aria-hidden />}
+      </span>
+      {(type || !short) && (
+        <span className="cal-meta tnum">
+          {type && <span className="cal-type">{type}</span>}
+          {!short && (
+            <>
+              <span className="cal-time">{formatRange(slot.start, slot.end)}</span>
+              <span className="cal-start">{formatTime(slot.start).slice(0, -2)}</span>
+            </>
+          )}
+        </span>
+      )}
     </button>
   );
 }

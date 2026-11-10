@@ -12,18 +12,22 @@ import { Calendar } from './components/Calendar.tsx';
 import { PlanTable } from './components/PlanTable.tsx';
 import { SheetHost } from './components/Sheets.tsx';
 import { Toasts } from './components/Toasts.tsx';
+import { FindButton, FinderPanel, FinderProvider, SchedulePager } from './components/Finder.tsx';
+import { useIsDesktop } from './lib/media.ts';
 
 export function App() {
   useBootstrap();
   return (
     <PlannerProvider>
-      <div className="flex h-dvh flex-col">
-        <Header />
-        <Body />
-        <MobileTabs />
-        <SheetHost />
-        <Toasts />
-      </div>
+      <FinderProvider>
+        <div className="flex h-dvh flex-col">
+          <Header />
+          <Body />
+          <MobileTabs />
+          <SheetHost />
+          <Toasts />
+        </div>
+      </FinderProvider>
     </PlannerProvider>
   );
 }
@@ -94,6 +98,8 @@ function Body() {
   const tab = useUi((s) => s.mobileTab);
   const view = useUi((s) => s.view);
   const setView = useUi((s) => s.setView);
+  const finder = useUi((s) => s.finder);
+  const desktop = useIsDesktop();
   const { data, termCode, finalsConflicts } = usePlanner();
   const termState = useCatalogStore((s) => (termCode ? s.byTerm[termCode] : undefined));
   const termsError = useCatalogStore((s) => s.termsError);
@@ -106,15 +112,26 @@ function Body() {
 
   const show = (t: MobileTab) => (tab === t ? 'flex' : 'hidden');
   return (
-    <main className="grid min-h-0 flex-1 lg:grid-cols-[minmax(340px,400px)_1fr]">
+    <main className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(340px,400px)_minmax(0,1fr)]">
+      {/* Left column: search, or the schedule finder in its place so the calendar stays in view. */}
       <aside className={`${show('search')} no-print min-h-0 flex-col border-r border-rule bg-surface pb-14 lg:flex lg:pb-0`} aria-label="Course search">
-        <SearchPanel />
+        <div className={finder && desktop ? 'hidden' : 'flex min-h-0 flex-1 flex-col'}>
+          <SearchPanel />
+        </div>
+        {finder && desktop && <FinderPanel />}
       </aside>
+      {/* Phones: the option list takes the screen; picking one goes back to the calendar with a pager. */}
+      {finder && !desktop && finder.list && (
+        <div className="no-print fixed inset-0 z-40 flex flex-col bg-surface" role="dialog" aria-modal="true" aria-labelledby="finder-title">
+          <FinderPanel />
+        </div>
+      )}
+      {finder && !desktop && !finder.list && tab === 'calendar' && <SchedulePager variant="mobile" />}
       <div className={`scroll-thin min-h-0 overflow-y-auto ${tab === 'search' ? 'hidden lg:block' : ''}`}>
-        <div className="mx-auto flex max-w-[1200px] flex-col gap-3 p-3 pb-24 sm:p-4 lg:pb-6">
+        <div className={`mx-auto flex max-w-[1200px] flex-col gap-3 p-3 sm:p-4 lg:pb-6 ${finder && !desktop ? 'pb-48' : 'pb-24'}`}>
           <div className={`${show('calendar')} flex-col gap-3 lg:flex`}>
             <div className="no-print flex items-center gap-2">
-              <div className="inline-flex rounded-lg border border-rule-strong bg-surface p-0.5" role="tablist" aria-label="Calendar view">
+              <div className="inline-flex h-9 shrink-0 rounded-lg border border-rule-strong bg-surface p-0.5" role="tablist" aria-label="Calendar view">
                 {(['week', 'finals'] as const).map((v) => (
                   <button
                     key={v}
@@ -122,7 +139,7 @@ function Body() {
                     role="tab"
                     aria-selected={view === v}
                     onClick={() => setView(v)}
-                    className={`rounded-md px-3 py-1 text-[13px] font-medium ${view === v ? 'bg-ink text-surface' : 'text-muted hover:text-ink'}`}
+                    className={`flex items-center rounded-md px-3 text-[13px] font-medium ${view === v ? 'bg-ink text-surface' : 'text-muted hover:text-ink'}`}
                   >
                     {v === 'week' ? 'Week' : 'Finals'}
                     {v === 'finals' && finalsConflicts.some((c) => c.severity === 'error') && (
@@ -131,7 +148,8 @@ function Body() {
                   </button>
                 ))}
               </div>
-              <PreviewHint />
+              <div className="min-w-0 flex-1">{finder ? desktop && <SchedulePager variant="toolbar" /> : <PreviewHint />}</div>
+              <FindButton />
             </div>
             <Calendar />
           </div>

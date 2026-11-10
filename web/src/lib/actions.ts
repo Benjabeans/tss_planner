@@ -98,7 +98,7 @@ export function applySchedule(choices: { course: Course; pkg: Package }[], label
     changed++;
   }
   const ui = useUi.getState();
-  ui.setSchedulePreview(null);
+  ui.closeFinder();
   ui.pushToast({
     tone: 'ok',
     message: changed ? `Applied ${label}: ${changed} course${changed === 1 ? '' : 's'} changed.` : `${label} matches your plan already.`,

@@ -18,8 +18,15 @@ const BAR: Record<string, string> = {
 export function Toasts() {
   const toasts = useUi((s) => s.toasts);
   const dismiss = useUi((s) => s.dismissToast);
+  // On phones the finder's pager sits above the tab bar; keep toasts clear of it.
+  const pager = useUi((s) => s.finder !== null && !s.finder.list);
   return (
-    <div className="no-print pointer-events-none fixed inset-x-0 bottom-16 z-[60] flex flex-col items-center gap-2 px-3 lg:bottom-4" aria-live="polite">
+    <div
+      className={`no-print pointer-events-none fixed inset-x-0 z-[60] flex flex-col items-center gap-2 px-3 lg:bottom-4 lg:left-[400px] ${
+        pager ? 'bottom-[10.5rem]' : 'bottom-16'
+      }`}
+      aria-live="polite"
+    >
       {toasts.map((t) => (
         <div
           key={t.id}

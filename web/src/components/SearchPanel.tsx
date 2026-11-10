@@ -8,6 +8,7 @@ import { findCrossConflicts } from '@shared/conflicts.ts';
 import { slotsForPackage } from '@shared/plan.ts';
 import { DAY_SHORT, formatTime } from '@shared/time.ts';
 import { usePlanner } from '../lib/planner.tsx';
+import { useUi } from '../store/ui.ts';
 import { relativeTime } from '../lib/describe.ts';
 import { CourseCard } from './CourseCard.tsx';
 
@@ -43,7 +44,13 @@ export function SearchPanel() {
       const t = e.target as HTMLElement;
       if (e.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(t.tagName)) {
         e.preventDefault();
-        inputRef.current?.focus();
+        // The finder takes this panel's place on desktop; going back to search closes it.
+        if (useUi.getState().finder) {
+          useUi.getState().closeFinder();
+          requestAnimationFrame(() => inputRef.current?.focus());
+        } else {
+          inputRef.current?.focus();
+        }
       }
     };
     window.addEventListener('keydown', onKey);
@@ -146,10 +153,10 @@ export function SearchPanel() {
       </div>
 
       {data && (
-        <div className="border-t border-rule px-3 py-2 text-xs text-muted">
-          {data.catalog.term.courseCount.toLocaleString()} courses · seats updated {relativeTime(data.catalog.term.syncedAt)} ·
-          confirm in TSS before booking
-        </div>
+        <p className="border-t border-rule px-3 py-2 text-xs text-muted">
+          {data.catalog.term.courseCount.toLocaleString()} courses · seats updated {relativeTime(data.catalog.term.syncedAt)}.{' '}
+          <span className="whitespace-nowrap">Confirm in TSS before booking.</span>
+        </p>
       )}
     </div>
   );

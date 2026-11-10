@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { AlertTriangle, ArrowRightLeft, Check, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { AlertTriangle, ArrowRightLeft, Check, Sparkles, X } from 'lucide-react';
 import type { Course, CustomBlock, PickStatus } from '@shared/types.ts';
 import type { ConflictGroup } from '@shared/conflicts.ts';
 import { alternativesFor, packageSections } from '@shared/plan.ts';
@@ -12,13 +12,14 @@ import { useUi } from '../store/ui.ts';
 import { addPackage, removeCourse, setStatus, undoRecord } from '../lib/actions.ts';
 import { describeConflict, seatText } from '../lib/describe.ts';
 import { STATUS_LABEL, PickHealth } from './PlanTable.tsx';
-import { GenerateSheet } from './GenerateSheet.tsx';
 import { CourseDetails } from './CourseCard.tsx';
 import { Pill } from './SearchPanel.tsx';
 
 export function SheetHost() {
   const sheet = useUi((s) => s.sheet);
   const close = () => useUi.getState().openSheet(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const kind = sheet?.kind;
 
   useEffect(() => {
     if (!sheet) return;
@@ -27,17 +28,30 @@ export function SheetHost() {
     return () => window.removeEventListener('keydown', onKey);
   }, [sheet]);
 
+  // Move keyboard focus into the sheet (unless a field inside took it), and give it back on close.
+  useEffect(() => {
+    if (!kind) return;
+    const before = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    if (!panel.current?.contains(document.activeElement)) panel.current?.focus();
+    return () => {
+      if (before && before.isConnected && !panel.current?.isConnected) before.focus({ preventScroll: true });
+    };
+  }, [kind]);
+
   if (!sheet) return null;
   return (
-    <div className="no-print fixed inset-0 z-50 flex justify-start" role="dialog" aria-modal="true">
-      {/* Sheets open over the search panel so calendar previews stay visible. */}
+    <div className="no-print fixed inset-0 z-50 flex justify-start lg:top-12" role="dialog" aria-modal="true">
+      {/* Sheets open over the search panel, below the header, so calendar previews stay visible. */}
       <button type="button" className="absolute inset-0 bg-ink/15 lg:bg-transparent" aria-label="Close panel" onClick={close} />
-      <div className="relative flex h-full w-full max-w-md flex-col border-r border-rule bg-surface shadow-[var(--shadow)] lg:max-w-[400px]">
+      <div
+        ref={panel}
+        tabIndex={-1}
+        className="relative flex h-full w-full max-w-md flex-col border-r border-rule bg-surface shadow-[var(--shadow)] outline-none lg:max-w-[400px]"
+      >
         {sheet.kind === 'pick' && <PickSheet courseKey={sheet.courseKey} onClose={close} />}
         {sheet.kind === 'conflicts' && <ConflictSheet focus={sheet.focus} onClose={close} />}
         {sheet.kind === 'block' && <BlockSheet blockId={sheet.blockId} onClose={close} />}
         {sheet.kind === 'settings' && <SettingsSheet onClose={close} />}
-        {sheet.kind === 'generate' && <GenerateSheet onClose={close} />}
       </div>
     </div>
   );
@@ -264,10 +278,14 @@ function ConflictSheet({ focus, onClose }: { focus?: string; onClose: () => void
       {real.length > 0 && (
         <button
           type="button"
-          onClick={() => useUi.getState().openSheet({ kind: 'generate' })}
-          className="mb-3 w-full rounded-lg border border-dashed border-rule-strong px-3 py-2 text-left text-[13px] hover:border-ink"
+          onClick={() => useUi.getState().openFinder()}
+          className="mb-3 flex w-full items-start gap-2 rounded-lg border border-rule-strong px-3 py-2 text-left text-[13px] hover:border-ink hover:bg-accent-soft/25"
         >
-          <b>Find a schedule</b> <span className="text-muted">tries every section combination for you</span>
+          <Sparkles className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+          <span>
+            <b className="font-semibold">Find a schedule</b>
+            <span className="block text-xs text-muted">Tries every section combination for you.</span>
+          </span>
         </button>
       )}
       <div className="space-y-3">
@@ -322,8 +340,8 @@ function ConflictCard({ group }: { group: ConflictGroup }) {
         {sides.map((s) =>
           s.course ? (
             <div key={s.id}>
+              <p className="mb-1 text-xs font-semibold">{s.course.displayCode}</p>
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className="mr-1 text-xs font-medium">{s.course.displayCode}:</span>
                 <ActionButton onClick={() => setOpen(open === s.id ? null : s.id)} active={open === s.id}>
                   Swap section
                 </ActionButton>
@@ -340,8 +358,8 @@ function ConflictCard({ group }: { group: ConflictGroup }) {
               )}
             </div>
           ) : (
-            <div key={s.id} className="flex flex-wrap items-center gap-1.5">
-              <span className="mr-1 text-xs font-medium">{s.block!.label}:</span>
+            <div key={s.id}>
+              <p className="mb-1 text-xs font-semibold">{s.block!.label}</p>
               <ActionButton onClick={() => useUi.getState().openSheet({ kind: 'block', blockId: s.id })}>Edit time</ActionButton>
             </div>
           ),
@@ -362,7 +380,7 @@ function ActionButton({ onClick, children, active, danger }: { onClick: () => vo
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-md border px-2 py-0.5 text-xs font-medium ${
+      className={`rounded-md border px-2.5 py-1 text-xs font-medium ${
         danger
           ? 'border-rule-strong text-danger hover:border-danger hover:bg-danger-soft'
           : active

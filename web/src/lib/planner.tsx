@@ -24,6 +24,10 @@ export interface PreviewData {
   conflicts: Conflict[];
   /** True when the preview is exactly what's already planned. */
   current: boolean;
+  /** Previewed slots that match a section already in the plan (drawn solid, not as ghosts). */
+  same: Set<Slot>;
+  /** Current slots of previewed courses that the preview would replace (drawn as outlines). */
+  removed: Slot[];
   label: string;
   /** Set when previewing a single section (search rows, swap lists). */
   single: { course: Course; pkg: Package } | null;
@@ -113,12 +117,21 @@ export function PlannerProvider({ children }: { children: ReactNode }) {
     );
     const others = base.slots.filter((s) => !courseKeys.has(s.ownerId) && s.status !== 'backup');
     const current = resolved.every(({ course, pkg }) => plan?.picks.find((p) => p.courseKey === course.key)?.packageId === pkg.id);
+    // Diff against the plan meeting by meeting: what stays, what moves in, what moves out.
+    const meetingKey = (s: Slot) => `${s.ownerId}|${s.sectionId}|${s.day}|${s.date ?? ''}|${s.start}|${s.end}`;
+    const before = base.slots.filter((s) => s.ownerKind === 'pick' && courseKeys.has(s.ownerId));
+    const beforeKeys = new Set(before.map(meetingKey));
+    const afterKeys = new Set(slots.map(meetingKey));
+    const same = new Set(slots.filter((s) => beforeKeys.has(meetingKey(s))));
+    const removed = before.filter((s) => !afterKeys.has(meetingKey(s)));
     const single = !scheduleRef && resolved.length === 1 ? resolved[0]! : null;
     return {
       courseKeys,
       slots,
       conflicts: findCrossConflicts(slots, others),
       current,
+      same,
+      removed,
       label: scheduleRef ? scheduleRef.label : resolved[0]!.course.displayCode,
       single,
       apply: () => (single ? addPackage(single.course, single.pkg) : applySchedule(resolved, scheduleRef?.label ?? 'schedule')),

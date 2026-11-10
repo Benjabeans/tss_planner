@@ -1,4 +1,4 @@
-import { AlertTriangle, CalendarDays, Check, ChevronDown, Copy, Download, Link2, MoreHorizontal, Pencil, Plus, Printer, Settings, Sparkles, Trash2 } from 'lucide-react';
+import { AlertTriangle, CalendarDays, Check, ChevronDown, Copy, Download, Link2, MoreHorizontal, Pencil, Plus, Printer, Settings, Trash2 } from 'lucide-react';
 import { buildIcs } from '@shared/ics.ts';
 import { usePlanner } from '../lib/planner.tsx';
 import { usePlanStore } from '../store/plans.ts';
@@ -9,7 +9,7 @@ import { shareUrl } from '../lib/share.ts';
 
 export function Header() {
   return (
-    <header className="no-print flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-rule bg-surface px-3 py-2 sm:px-4">
+    <header className="no-print flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-rule bg-surface px-3 py-2 sm:px-4 lg:h-12 lg:py-0">
       <div className="flex items-center gap-2 pr-1">
         <Logo />
         <span className="text-[15px] font-semibold tracking-tight">TSS Planner</span>
@@ -241,15 +241,6 @@ function MoreMenu() {
     >
       {(close) => (
         <>
-          <MenuItem
-            disabled={!plan || plan.picks.length === 0}
-            onClick={() => {
-              useUi.getState().openSheet({ kind: 'generate' });
-              close();
-            }}
-          >
-            <Sparkles className="size-3.5" /> Find a schedule…
-          </MenuItem>
           <MenuItem
             disabled={!plan || plan.picks.length === 0 || !termDates}
             onClick={() => {
